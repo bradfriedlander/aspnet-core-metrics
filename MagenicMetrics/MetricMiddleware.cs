@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace MagenicMetrics
 {
@@ -13,18 +14,25 @@ namespace MagenicMetrics
 			_logger = logger;
 		}
 
-		private readonly RequestDelegate _next;
 		private readonly ILogger _logger;
+		private readonly RequestDelegate _next;
 
-		public async Task Invoke(HttpContext httpContext)
+		public async Task Invoke(HttpContext httpContext, IMetric metric)
 		{
-			var startTime = DateTime.UtcNow;
-			var userName = httpContext.User.Identity.Name ?? "Unknown";
-			var requestPath = httpContext.Request.Path;
+			metric.StartTime = DateTime.UtcNow;
+			metric.UserName = httpContext.User.Identity.Name ?? "Unknown";
+			metric.RequestPath = httpContext.Request.Path;
+			httpContext.Items["metric"] = JsonConvert.SerializeObject(metric);
 			await _next(httpContext);
+			var resultMetric = httpContext.Items["metric"]?.ToString() ?? "";
+			if (!string.IsNullOrEmpty(resultMetric))
+			{
+				metric = JsonConvert.DeserializeObject<Metric>(resultMetric);
+			}
 			var endTime = DateTime.UtcNow;
-			var elpasedTime = Convert.ToInt32((endTime - startTime).TotalMilliseconds);
-			_logger.LogInformation($"User='{userName}', Path='{requestPath}', Start Time={startTime:yyy-y-MM-dd HH:mm:ss.000}, Elapsed Milliseconds={elpasedTime:#,##0}");
+			metric.ElpasedTime = Convert.ToInt32((endTime - metric.StartTime).TotalMilliseconds);
+			metric.ResultCode = httpContext.Response.StatusCode;
+			_logger.LogInformation(JsonConvert.SerializeObject(metric));
 		}
 	}
 }

@@ -2,9 +2,13 @@
 
 namespace MagenicMetrics
 {
-	public class Metric
+	public class Metric : IMetric
 	{
 		public string Details { get; set; }
+
+		public int ElpasedTime { get; set; }
+
+		public string ExceptionMessage { get; set; }
 
 		public string RequestPath { get; set; }
 
