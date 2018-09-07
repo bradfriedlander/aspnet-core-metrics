@@ -34,6 +34,11 @@ namespace demo4.Controllers
 			return View();
 		}
 
+		public IActionResult Abort()
+		{
+			throw new NotImplementedException();
+		}
+
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{

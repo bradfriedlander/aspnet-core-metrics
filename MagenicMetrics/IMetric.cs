@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MagenicMetrics
 {
 	public interface IMetric
 	{
 		string Details { get; set; }
+
+		int ElpasedTime { get; set; }
+
+		string ExceptionMessage { get; set; }
 
 		string RequestPath { get; set; }
 
