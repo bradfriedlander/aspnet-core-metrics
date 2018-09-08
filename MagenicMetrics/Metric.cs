@@ -14,6 +14,8 @@ namespace MagenicMetrics
 
 		public int ResultCode { get; set; }
 
+		public int ResultCount { get; set; }
+
 		public DateTime StartTime { get; set; }
 
 		public string UserName { get; set; }

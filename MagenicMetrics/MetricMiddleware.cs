@@ -23,7 +23,6 @@ namespace MagenicMetrics
 			metric.StartTime = DateTime.UtcNow;
 			metric.UserName = httpContext.User.Identity.Name ?? "Unknown";
 			metric.RequestPath = httpContext.Request.Path;
-			httpContext.Items["metric"] = JsonConvert.SerializeObject(metric);
 			try
 			{
 				await _next(httpContext);
@@ -35,11 +34,6 @@ namespace MagenicMetrics
 			}
 			finally
 			{
-				var resultMetric = httpContext.Items["metric"]?.ToString() ?? "";
-				if (!string.IsNullOrEmpty(resultMetric))
-				{
-					metric = JsonConvert.DeserializeObject<Metric>(resultMetric);
-				}
 				if (!string.IsNullOrEmpty(exceptionMessage) && string.IsNullOrEmpty(metric.ExceptionMessage))
 				{
 					metric.ExceptionMessage = exceptionMessage;
