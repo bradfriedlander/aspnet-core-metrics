@@ -19,20 +19,36 @@ namespace MagenicMetrics
 
 		public async Task Invoke(HttpContext httpContext, IMetric metric)
 		{
+			var exceptionMessage = string.Empty;
 			metric.StartTime = DateTime.UtcNow;
 			metric.UserName = httpContext.User.Identity.Name ?? "Unknown";
 			metric.RequestPath = httpContext.Request.Path;
 			httpContext.Items["metric"] = JsonConvert.SerializeObject(metric);
-			await _next(httpContext);
-			var resultMetric = httpContext.Items["metric"]?.ToString() ?? "";
-			if (!string.IsNullOrEmpty(resultMetric))
+			try
 			{
-				metric = JsonConvert.DeserializeObject<Metric>(resultMetric);
+				await _next(httpContext);
 			}
-			var endTime = DateTime.UtcNow;
-			metric.ElpasedTime = Convert.ToInt32((endTime - metric.StartTime).TotalMilliseconds);
-			metric.ResultCode = httpContext.Response.StatusCode;
-			_logger.LogInformation(JsonConvert.SerializeObject(metric));
+			catch (Exception genEx)
+			{
+				exceptionMessage = genEx.Message;
+				throw;
+			}
+			finally
+			{
+				var resultMetric = httpContext.Items["metric"]?.ToString() ?? "";
+				if (!string.IsNullOrEmpty(resultMetric))
+				{
+					metric = JsonConvert.DeserializeObject<Metric>(resultMetric);
+				}
+				if (!string.IsNullOrEmpty(exceptionMessage) && string.IsNullOrEmpty(metric.ExceptionMessage))
+				{
+					metric.ExceptionMessage = exceptionMessage;
+				}
+				var endTime = DateTime.UtcNow;
+				metric.ElpasedTime = Convert.ToInt32((endTime - metric.StartTime).TotalMilliseconds);
+				metric.ResultCode = httpContext.Response.StatusCode;
+				_logger.LogInformation(JsonConvert.SerializeObject(metric));
+			}
 		}
 	}
 }
