@@ -1,36 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using demo4.Models;
+using MagenicMetrics;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace demo4.Controllers
 {
 	public class HomeController : Controller
 	{
-		public IActionResult Index()
+		public HomeController(IMetric metric)
 		{
-			return View();
+			_metric = metric;
 		}
+
+		private readonly IMetric _metric;
 
 		public IActionResult About()
 		{
-			ViewData["Message"] = "Your application description page.";
-
-			return View();
-		}
-
-		public IActionResult Contact()
-		{
-			ViewData["Message"] = "Your contact page.";
-
-			return View();
-		}
-
-		public IActionResult Privacy()
-		{
+			_metric.ResultCount = 1;
+			ViewData["Message"] = $"Your application description page.<br />Metric:<br />{JsonConvert.SerializeObject(_metric)}";
 			return View();
 		}
 
@@ -44,10 +33,30 @@ namespace demo4.Controllers
 			return StatusCode(401);
 		}
 
+		public IActionResult Contact()
+		{
+			_metric.ResultCount = 2;
+			ViewData["Message"] = $"Your contact page.";
+
+			return View();
+		}
+
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+
+		public IActionResult Index()
+		{
+			_metric.ResultCount = 5;
+			return View();
+		}
+
+		public IActionResult Privacy()
+		{
+			_metric.ResultCount = 0;
+			return View();
 		}
 	}
 }
