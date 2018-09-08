@@ -34,9 +34,14 @@ namespace demo4.Controllers
 			return View();
 		}
 
-		public IActionResult Abort()
+		public IActionResult BadCode()
 		{
-			throw new NotImplementedException();
+			throw new NullReferenceException("Abort failed");
+		}
+
+		public IActionResult BadResult()
+		{
+			return StatusCode(401);
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
