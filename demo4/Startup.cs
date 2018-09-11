@@ -43,6 +43,7 @@ namespace demo4
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.Configure<MetricServiceOptions>(Configuration.GetSection("MetricServiceSettings"));
 			services.Configure<CookiePolicyOptions>(options =>
 			{
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -52,6 +53,7 @@ namespace demo4
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 			services.AddScoped<IMetric, Metric>();
+			services.AddScoped<IMetricService, MetricService>();
 		}
 	}
 }

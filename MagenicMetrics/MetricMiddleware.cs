@@ -8,13 +8,15 @@ namespace MagenicMetrics
 {
 	public class MetricMiddleware
 	{
-		public MetricMiddleware(RequestDelegate next, ILogger<MetricMiddleware> logger)
+		public MetricMiddleware(RequestDelegate next, ILogger<MetricMiddleware> logger/*, IMetricService metricService*/)
 		{
 			_next = next;
 			_logger = logger;
+			//_metricService = metricService;
 		}
 
 		private readonly ILogger _logger;
+		private readonly IMetricService _metricService;
 		private readonly RequestDelegate _next;
 
 		public async Task Invoke(HttpContext httpContext, IMetric metric)
@@ -23,6 +25,8 @@ namespace MagenicMetrics
 			metric.StartTime = DateTime.UtcNow;
 			metric.UserName = httpContext.User.Identity.Name ?? "Unknown";
 			metric.RequestPath = httpContext.Request.Path;
+			metric.ServerName = "Unknown";
+			metric.Application = AppDomain.CurrentDomain.FriendlyName;
 			try
 			{
 				await _next(httpContext);
