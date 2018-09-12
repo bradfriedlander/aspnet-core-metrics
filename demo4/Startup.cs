@@ -61,8 +61,7 @@ namespace demo4
 			});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-			services.AddScoped<IMetric, Metric>();
-			services.AddScoped<IMetricService, MetricService>();
+			services.AddMetrics();
 		}
 	}
 }
