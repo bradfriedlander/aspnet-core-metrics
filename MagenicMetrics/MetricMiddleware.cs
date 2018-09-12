@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -41,8 +42,9 @@ namespace MagenicMetrics
 			metric.StartTime = DateTime.UtcNow;
 			metric.UserName = httpContext.User.Identity.Name ?? "Unknown";
 			metric.RequestPath = httpContext.Request.Path;
-			metric.ServerName = "Unknown";
-			metric.Application = AppDomain.CurrentDomain.FriendlyName;
+			var process = Process.GetCurrentProcess();
+			metric.ServerName = process.ProcessName;
+			metric.Application = process.MainWindowTitle;
 			try
 			{
 				await _next(httpContext);
