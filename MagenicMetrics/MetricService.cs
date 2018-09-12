@@ -11,6 +11,7 @@ namespace MagenicMetrics
 			_logger = logger;
 			_options = options;
 			_logger.LogDebug($"'TableName' value is ''{options.Value.TableName}.");
+			_logger.LogDebug($"'MetricServiceConnection' value is '{options.Value.MetricServiceConnection}'.");
 		}
 
 		private readonly ILogger _logger;
