@@ -4,7 +4,9 @@ namespace MagenicMetrics
 {
 	public class Metric : IMetric
 	{
-		/// <summary>Gets or sets the name of current application.</summary>
+		/// <summary>
+		///     Gets or sets the name of current application.
+		/// </summary>
 		/// <value>This is the name of the application.</value>
 		public string Application { get; set; }
 
@@ -14,7 +16,7 @@ namespace MagenicMetrics
 
 		public string ExceptionMessage { get; set; }
 
-		public int Id { get; set; }
+		public int MetricId { get; set; }
 
 		public string RequestPath { get; set; }
 
@@ -22,7 +24,9 @@ namespace MagenicMetrics
 
 		public int ResultCount { get; set; }
 
-		/// <summary>Gets or sets the name of the server instance that responded to a request.</summary>
+		/// <summary>
+		///     Gets or sets the name of the server instance that responded to a request.
+		/// </summary>
 		/// <value>The name of the server instance.</value>
 		public string ServerName { get; set; }
 

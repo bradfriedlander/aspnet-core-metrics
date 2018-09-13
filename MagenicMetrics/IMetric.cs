@@ -16,7 +16,7 @@ namespace MagenicMetrics
 
 		string ExceptionMessage { get; set; }
 
-		int Id { get; set; }
+		int MetricId { get; set; }
 
 		string RequestPath { get; set; }
 
