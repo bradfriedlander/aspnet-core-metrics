@@ -66,7 +66,7 @@ namespace MagenicMetrics
 				//_logger.LogInformation(JsonConvert.SerializeObject(metric));
 				try
 				{
-					metricService.AddAndSave(metric);
+					await metricService.AddAndSave(metric);
 				}
 				catch (Exception metricServiceEx)
 				{

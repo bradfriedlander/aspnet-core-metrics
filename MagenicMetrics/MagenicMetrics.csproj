@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Brad M. Friedlander</Authors>
+    <Company>Magenic Technology</Company>
+    <Copyright>Copyright (C) 2018, all rights reserved.</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\TestDev\demoMetrics\MagenicMetrics\MagenicMetrics.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
