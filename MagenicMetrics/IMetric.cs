@@ -18,6 +18,8 @@ namespace MagenicMetrics
 
 		int MetricId { get; set; }
 
+		string Query { get; set; }
+
 		string RequestPath { get; set; }
 
 		int ResultCode { get; set; }
@@ -31,6 +33,8 @@ namespace MagenicMetrics
 		string ServerName { get; set; }
 
 		DateTime StartTime { get; set; }
+
+		string TraceId { get; set; }
 
 		string UserName { get; set; }
 	}
