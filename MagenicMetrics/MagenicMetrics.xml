@@ -34,6 +34,13 @@
             <param name="metric">The metric to be added to the persistence store.</param>
             <returns>This is the number of entries written to the persistent store.</returns>
         </member>
+        <member name="M:MagenicMetrics.IMetricService.GetLatest(System.Int32)">
+            <summary>
+                this method gets the <paramref name="count" /> most recent <see cref="T:MagenicMetrics.IMetric" /> records .
+            </summary>
+            <param name="count">This is the count of records to retrieve.</param>
+            <returns>This is a collection of the records.</returns>
+        </member>
         <member name="P:MagenicMetrics.Metric.Application">
             <summary>
                 Gets or sets the name of current application.
@@ -117,6 +124,13 @@
             </summary>
             <param name="metric">The metric to be added to the persistence store.</param>
             <returns>This is the number of entries written to the persistent store.</returns>
+        </member>
+        <member name="M:MagenicMetrics.MetricService.GetLatest(System.Int32)">
+            <summary>
+                this method gets the <paramref name="count" /> most recent <see cref="T:MagenicMetrics.IMetric" /> records .
+            </summary>
+            <param name="count">This is the count of records to retrieve.</param>
+            <returns>This is a collection of the records.</returns>
         </member>
         <member name="M:MagenicMetrics.MetricService.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>

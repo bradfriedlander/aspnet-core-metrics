@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -60,6 +62,18 @@ namespace MagenicMetrics
 				_logger.LogCritical(efEx, $"Unable to persist '{JsonConvert.SerializeObject(metric)}'.");
 				return 0;
 			}
+		}
+
+		/// <summary>
+		///     this method gets the <paramref name="count" /> most recent <see cref="IMetric" /> records .
+		/// </summary>
+		/// <param name="count">This is the count of records to retrieve.</param>
+		/// <returns>This is a collection of the records.</returns>
+		public async Task<IEnumerable<IMetric>> GetLatest(int count)
+		{
+			return Metrics
+				.OrderByDescending(m => m.StartTime)
+				.Take(count);
 		}
 
 		/// <summary>
