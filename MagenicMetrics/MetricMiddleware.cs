@@ -29,25 +29,28 @@ namespace MagenicMetrics
 		/// <summary>
 		///     Invokes the specified HTTP context.
 		/// </summary>
-		/// <param name="httpContext">This is the HTTP context for the request traversing the middleware pipeline.</param>
+		/// <param name="context">This is the HTTP context for the request traversing the middleware pipeline.</param>
 		/// <param name="metric">This is an instance of the metrics that are persisted.</param>
 		/// <param name="metricService">
 		///     This is the metric service. It is here (instead of being in the constructor) because middleware components can only have singleton
 		///     injected objects. This service must be scoped.
 		/// </param>
 		/// <returns></returns>
-		public async Task Invoke(HttpContext httpContext, IMetric metric, IMetricService metricService)
+		public async Task Invoke(HttpContext context, IMetric metric, IMetricService metricService)
 		{
 			var exceptionMessage = string.Empty;
 			metric.StartTime = DateTime.UtcNow;
-			metric.UserName = httpContext.User.Identity.Name ?? "Unknown";
-			metric.RequestPath = httpContext.Request.Path;
+			metric.UserName = context.User.Identity.Name ?? "Unknown";
+			metric.RequestPath = context.Request.Path;
+			metric.Query = context.Request.QueryString.Value;
+			metric.TraceId = context.TraceIdentifier;
 			var process = Process.GetCurrentProcess();
-			metric.ServerName = process.ProcessName;
-			metric.Application = process.MainWindowTitle;
+			metric.ServerName = process.MachineName;
+			var assembly = AppDomain.CurrentDomain;
+			metric.Application = assembly.FriendlyName;
 			try
 			{
-				await _next(httpContext);
+				await _next(context);
 			}
 			catch (Exception genEx)
 			{
@@ -62,8 +65,7 @@ namespace MagenicMetrics
 				}
 				var endTime = DateTime.UtcNow;
 				metric.ElpasedTime = Convert.ToInt32((endTime - metric.StartTime).TotalMilliseconds);
-				metric.ResultCode = httpContext.Response.StatusCode;
-				//_logger.LogInformation(JsonConvert.SerializeObject(metric));
+				metric.ResultCode = context.Response.StatusCode;
 				try
 				{
 					await metricService.AddAndSave(metric);

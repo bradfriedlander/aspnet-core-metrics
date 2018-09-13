@@ -62,7 +62,7 @@
             <summary>
                 Invokes the specified HTTP context.
             </summary>
-            <param name="httpContext">This is the HTTP context for the request traversing the middleware pipeline.</param>
+            <param name="context">This is the HTTP context for the request traversing the middleware pipeline.</param>
             <param name="metric">This is an instance of the metrics that are persisted.</param>
             <param name="metricService">
                 This is the metric service. It is here (instead of being in the constructor) because middleware components can only have singleton

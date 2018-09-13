@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 
 namespace demo4
 {
@@ -63,7 +63,7 @@ namespace demo4
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 			var metricConnectionString = Configuration.GetSection("MetricServiceSettings")["MetricServiceConnection"];
-			services.AddDbContext<MetricService>((serviceProvider, options) => options.UseSqlServer(metricConnectionString));
+			services.AddDbContext<MetricService>((serviceProvider, options) => options.UseSqlServer(metricConnectionString, ob => ob.MigrationsAssembly("demo4")));
 			services.AddMetrics();
 		}
 	}
