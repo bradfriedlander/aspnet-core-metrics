@@ -47,6 +47,11 @@ namespace demo4.Controllers
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 
+		public IActionResult ForceStatusCode(int code=401)
+		{
+			return StatusCode(code);
+		}
+
 		public IActionResult Index()
 		{
 			_metric.ResultCount = 5;
