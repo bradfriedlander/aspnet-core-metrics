@@ -1,4 +1,4 @@
-﻿using DataAnnotationsExtensions;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace demoWebApp.Models.InputBinding
 {
@@ -9,7 +9,7 @@ namespace demoWebApp.Models.InputBinding
     {
         /// <summary>Gets or sets the maximum number of records.</summary>
         /// <value>The count.</value>
-        [Min(1)]
+        [Range(1, int.MaxValue)]
         public int? Count { get; set; }
     }
 }
