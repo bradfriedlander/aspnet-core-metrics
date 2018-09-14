@@ -10,24 +10,22 @@ namespace demoWebApi.Controllers
     /// <summary>
     ///     This controller manages the APIs to add, delete, and retrieve database entries.
     /// </summary>
-    /// <seealso cref="ControllerBase" />
+    /// <seealso cref="BaseController" />
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ValuesController : BaseController
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ValuesController" /> class.
         /// </summary>
         /// <param name="metric">The metric.</param>
         /// <param name="context">The context.</param>
-        public ValuesController(IMetric metric, ApiContext context)
+        public ValuesController(IMetric metric, ApiContext context) : base(metric)
         {
-            _metric = metric;
             _context = context;
         }
 
         private readonly ApiContext _context;
-        private readonly IMetric _metric;
 
         /// <summary>
         ///     Deletes the specified identifier.
