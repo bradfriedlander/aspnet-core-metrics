@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>demoWebApi</name>
+    </assembly>
+    <members>
+        <member name="T:demoWebApi.Controllers.ValuesController">
+            <summary>This controller manages the APIs to add, delete, and retrieve database entries.</summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:demoWebApi.Controllers.ValuesController.Delete(System.Int32)">
+            <summary>
+                Deletes the specified identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+            <remarks>DELETE api/values/5</remarks>
+        </member>
+        <member name="M:demoWebApi.Controllers.ValuesController.Get">
+            <summary>
+                Gets this instance.
+            </summary>
+            <returns></returns>
+            <remarks>GET api/values</remarks>
+        </member>
+        <member name="M:demoWebApi.Controllers.ValuesController.Get(System.Int32)">
+            <summary>
+                Gets the specified identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+            <remarks>GET api/values/5</remarks>
+        </member>
+        <member name="M:demoWebApi.Controllers.ValuesController.Post(System.String)">
+            <summary>
+                Posts the specified value.
+            </summary>
+            <param name="value">The value.</param>
+            <remarks>POST api/values</remarks>
+        </member>
+        <member name="M:demoWebApi.Controllers.ValuesController.Put(System.Int32,System.String)">
+            <summary>
+                Puts the specified identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="value">The value.</param>
+            <returns></returns>
+            <remarks>PUT api/values/5</remarks>
+        </member>
+        <member name="T:demoWebApi.Services.ApiContext">
+            <summary>
+                This class implements a service to manage the database for the API.
+            </summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+        </member>
+        <member name="M:demoWebApi.Services.ApiContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{demoWebApi.Services.ApiContext})">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApi.Services.ApiContext" /> class.
+            </summary>
+            <param name="options">The options.</param>
+        </member>
+        <member name="P:demoWebApi.Services.ApiContext.Definitions">
+            <summary>
+                Gets or sets the definitions.
+            </summary>
+            <value>This is the collection of definitions.</value>
+        </member>
+    </members>
+</doc>

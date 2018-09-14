@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace demo4.Controllers
+namespace demoWebApp.Controllers
 {
 	public class AdminController : Controller
 	{

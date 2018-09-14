@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "demo4", "demo4\demo4.csproj", "{BAC32D69-1D9D-4A00-9C27-E5F8112EB7F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "demoWebApp", "demoWebApp\demoWebApp.csproj", "{BAC32D69-1D9D-4A00-9C27-E5F8112EB7F6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagenicMetrics", "MagenicMetrics\MagenicMetrics.csproj", "{F8BD1D1B-53C3-4076-94B7-FE27AB31C382}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "demoWebApi", "demoWebApi\demoWebApi.csproj", "{FB69869B-A648-4FC8-BDE2-2CAC8D4B797C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F8BD1D1B-53C3-4076-94B7-FE27AB31C382}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8BD1D1B-53C3-4076-94B7-FE27AB31C382}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8BD1D1B-53C3-4076-94B7-FE27AB31C382}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB69869B-A648-4FC8-BDE2-2CAC8D4B797C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB69869B-A648-4FC8-BDE2-2CAC8D4B797C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB69869B-A648-4FC8-BDE2-2CAC8D4B797C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB69869B-A648-4FC8-BDE2-2CAC8D4B797C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
