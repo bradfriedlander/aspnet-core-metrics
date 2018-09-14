@@ -5,8 +5,17 @@
     </assembly>
     <members>
         <member name="T:demoWebApi.Controllers.ValuesController">
-            <summary>This controller manages the APIs to add, delete, and retrieve database entries.</summary>
+            <summary>
+                This controller manages the APIs to add, delete, and retrieve database entries.
+            </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:demoWebApi.Controllers.ValuesController.#ctor(MagenicMetrics.IMetric,demoWebApi.Services.ApiContext)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApi.Controllers.ValuesController" /> class.
+            </summary>
+            <param name="metric">The metric.</param>
+            <param name="context">The context.</param>
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Delete(System.Int32)">
             <summary>
@@ -64,6 +73,31 @@
                 Gets or sets the definitions.
             </summary>
             <value>This is the collection of definitions.</value>
+        </member>
+        <member name="M:demoWebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApi.Startup" /> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <param name="env">This is the environment.</param>
+        </member>
+        <member name="P:demoWebApi.Startup.Configuration">
+            <summary>
+                This is the configuration for the application.
+            </summary>
+        </member>
+        <member name="M:demoWebApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+                This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="env">The environment.</param>
+        </member>
+        <member name="M:demoWebApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">The existing collection of services.</param>
         </member>
     </members>
 </doc>

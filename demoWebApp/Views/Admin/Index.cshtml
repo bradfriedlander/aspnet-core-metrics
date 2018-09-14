@@ -1,99 +1,105 @@
 ﻿@model IEnumerable<MagenicMetrics.IMetric>
-
 @{
-	ViewData["Title"] = "Metrics";
+    ViewData["Title"] = "Metrics";
 }
+@if (Model == null)
+{
+    <h2>Validation Errors</h2>
+    <p>@Html.ValidationSummary(false)</p>
+}
+else
+{
+    <h2>Last @ViewBag.Count</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MetricId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Application)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Details)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ElpasedTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExceptionMessage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestPath)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Query)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ResultCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ResultCount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ServerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TraceId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MetricId)
+                    </td>
+                    <td>
+                        @item.StartTime.ToString("yyyy-MM-dd HH:mm:ss.fff")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Application)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Details)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ElpasedTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExceptionMessage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestPath)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Query)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ResultCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ResultCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TraceId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<h2>Last @ViewBag.Count</h2>
-
-<table class="table">
-	<thead>
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.MetricId)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.StartTime)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Application)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Details)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ElpasedTime)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ExceptionMessage)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.RequestPath)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Query)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ResultCode)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ResultCount)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ServerName)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.TraceId)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.UserName)
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model)
-		{
-			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.MetricId)
-				</td>
-				<td>
-					@item.StartTime.ToString("yyyy-MM-dd HH:mm:ss.fff")
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Application)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Details)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ElpasedTime)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ExceptionMessage)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.RequestPath)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Query)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ResultCode)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ResultCount)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ServerName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.TraceId)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.UserName)
-				</td>
-			</tr>
-		}
-	</tbody>
-</table>
+}

@@ -4,5 +4,59 @@
         <name>demoWebApp</name>
     </assembly>
     <members>
+        <member name="T:demoWebApp.Controllers.AdminController">
+            <summary>
+                This controllers is used to display the latest metrics.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:demoWebApp.Controllers.AdminController.#ctor(MagenicMetrics.IMetric,MagenicMetrics.IMetricService)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApp.Controllers.AdminController" /> class.
+            </summary>
+            <param name="metric">The metric.</param>
+            <param name="metricService">The metric service.</param>
+        </member>
+        <member name="M:demoWebApp.Controllers.AdminController.Index(demoWebApp.Models.InputBinding.AdminIndex)">
+            <summary>
+                Retrieve the latest <see cref="T:MagenicMetrics.Metric" /> records. <paramref name="adminIndex.Count.Count" /> limits the number to return.
+            </summary>
+            <param name="adminIndex">This is the input for this action.</param>
+            <returns></returns>
+        </member>
+        <member name="T:demoWebApp.Models.InputBinding.AdminIndex">
+            <summary>
+            This is the input class for the Index action of the Admin controller.
+            </summary>
+        </member>
+        <member name="P:demoWebApp.Models.InputBinding.AdminIndex.Count">
+            <summary>Gets or sets the maximum number of records.</summary>
+            <value>The count.</value>
+        </member>
+        <member name="M:demoWebApp.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApp.Startup" /> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <param name="env">This is the environment.</param>
+        </member>
+        <member name="P:demoWebApp.Startup.Configuration">
+            <summary>
+                This is the configuration for the application.
+            </summary>
+        </member>
+        <member name="M:demoWebApp.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+                This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="env">The environment.</param>
+        </member>
+        <member name="M:demoWebApp.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">The existing collection of services.</param>
+        </member>
     </members>
 </doc>
