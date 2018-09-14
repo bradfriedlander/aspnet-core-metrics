@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using demo4.Models;
+using demoWebApp.Models;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace demo4.Controllers
+namespace demoWebApp.Controllers
 {
 	public class HomeController : Controller
 	{
