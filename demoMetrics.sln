@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "demo4", "demo4\demo4.csproj", "{BAC32D69-1D9D-4A00-9C27-E5F8112EB7F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "demo4", "demo4\demo4.csproj", "{BAC32D69-1D9D-4A00-9C27-E5F8112EB7F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagenicMetrics", "MagenicMetrics\MagenicMetrics.csproj", "{F8BD1D1B-53C3-4076-94B7-FE27AB31C382}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagenicMetrics", "MagenicMetrics\MagenicMetrics.csproj", "{F8BD1D1B-53C3-4076-94B7-FE27AB31C382}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
