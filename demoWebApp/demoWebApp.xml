@@ -8,7 +8,7 @@
             <summary>
                 This controllers is used to display the latest metrics.
             </summary>
-            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+            <seealso cref="T:demoWebApp.Controllers.BaseController" />
         </member>
         <member name="M:demoWebApp.Controllers.AdminController.#ctor(MagenicMetrics.IMetric,MagenicMetrics.IMetricService)">
             <summary>

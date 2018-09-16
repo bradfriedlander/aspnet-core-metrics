@@ -57,7 +57,7 @@ namespace demoWebApp.Controllers
                 return View();
             }
             _metric.ResultCount = 2;
-            ViewData["Message"] = $"Your contact page.";
+            ViewData["Message"] = "Your contact page.";
 
             return View();
         }
