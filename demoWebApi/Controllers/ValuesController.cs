@@ -28,7 +28,7 @@ namespace demoWebApi.Controllers
         private readonly ApiContext _context;
 
         /// <summary>
-        ///     Deletes the specified identifier.
+        ///     This deletes the record identified by <paramref name="id" />.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
@@ -36,6 +36,10 @@ namespace demoWebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
             var match = _context.Definitions.Find(id);
             if (match == null)
             {
@@ -46,7 +50,7 @@ namespace demoWebApi.Controllers
         }
 
         /// <summary>
-        ///     Gets this instance.
+        ///     This retrieves all records in the persistence store.
         /// </summary>
         /// <returns></returns>
         /// <remarks>GET api/values</remarks>
@@ -59,7 +63,7 @@ namespace demoWebApi.Controllers
         }
 
         /// <summary>
-        ///     Gets the specified identifier.
+        ///     This retrieves the record identified by <paramref name="id" />.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
@@ -67,6 +71,10 @@ namespace demoWebApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
             var match = _context.Definitions.Find(id);
             if (match == null)
             {
@@ -77,7 +85,7 @@ namespace demoWebApi.Controllers
         }
 
         /// <summary>
-        ///     Posts the specified value.
+        ///     This adds a new value tot he persistence store.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <remarks>POST api/values</remarks>
@@ -91,7 +99,7 @@ namespace demoWebApi.Controllers
         }
 
         /// <summary>
-        ///     Puts the specified identifier.
+        ///     This updates the record identified by <paramref name="id" />.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="value">The value.</param>
@@ -100,6 +108,10 @@ namespace demoWebApi.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] string value)
         {
+            if (id <= 0 || string.IsNullOrEmpty(value))
+            {
+                return BadRequest();
+            }
             var match = _context.Definitions.Find(id);
             if (match == null)
             {

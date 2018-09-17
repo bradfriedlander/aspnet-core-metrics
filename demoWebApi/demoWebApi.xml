@@ -19,7 +19,7 @@
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Delete(System.Int32)">
             <summary>
-                Deletes the specified identifier.
+                This deletes the record identified by <paramref name="id" />.
             </summary>
             <param name="id">The identifier.</param>
             <returns></returns>
@@ -27,14 +27,14 @@
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Get">
             <summary>
-                Gets this instance.
+                This retrieves all records in the persistence store.
             </summary>
             <returns></returns>
             <remarks>GET api/values</remarks>
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Get(System.Int32)">
             <summary>
-                Gets the specified identifier.
+                This retrieves the record identified by <paramref name="id" />.
             </summary>
             <param name="id">The identifier.</param>
             <returns></returns>
@@ -42,14 +42,14 @@
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Post(System.String)">
             <summary>
-                Posts the specified value.
+                This adds a new value tot he persistence store.
             </summary>
             <param name="value">The value.</param>
             <remarks>POST api/values</remarks>
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Put(System.Int32,System.String)">
             <summary>
-                Puts the specified identifier.
+                This updates the record identified by <paramref name="id" />.
             </summary>
             <param name="id">The identifier.</param>
             <param name="value">The value.</param>
