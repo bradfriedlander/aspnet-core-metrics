@@ -16,7 +16,7 @@ else
 {
     <h2>Page # @Model.PageNumber - @ViewBag.Count Records</h2>
     <form asp-action="Index" asp-controller="Admin" method="get">
-        <div class="form-actions no-color form-horizontal">
+        <div class="form-actions">
             <div class="form-group col-md-4">
                 <label asp-for="ApplicationFilter"></label>
                 <input class="form-control" asp-for="ApplicationFilter" />
