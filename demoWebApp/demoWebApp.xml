@@ -17,21 +17,47 @@
             <param name="metric">The metric.</param>
             <param name="metricService">The metric service.</param>
         </member>
-        <member name="M:demoWebApp.Controllers.AdminController.Index(demoWebApp.Models.InputBinding.AdminIndex)">
+        <member name="M:demoWebApp.Controllers.AdminController.Index(demoWebApp.Models.InputBinding.AdminIndexInput)">
             <summary>
                 Retrieve the latest <see cref="T:MagenicMetrics.Metric" /> records. <paramref name="adminIndex.Count.Count" /> limits the number to return.
             </summary>
             <param name="adminIndex">This is the input for this action.</param>
             <returns></returns>
         </member>
-        <member name="T:demoWebApp.Models.InputBinding.AdminIndex">
+        <member name="T:demoWebApp.Models.InputBinding.AdminIndexInput">
             <summary>
-            This is the input class for the Index action of the Admin controller.
+                This is the input class for the Index action of the Admin controller.
             </summary>
         </member>
-        <member name="P:demoWebApp.Models.InputBinding.AdminIndex.Count">
-            <summary>Gets or sets the maximum number of records.</summary>
+        <member name="P:demoWebApp.Models.InputBinding.AdminIndexInput.ApplicationFilter">
+            <summary>
+                Gets or sets the application name filter.
+            </summary>
+            <value>This is the application name filter (using T-SQL case-insensitive contains).</value>
+        </member>
+        <member name="P:demoWebApp.Models.InputBinding.AdminIndexInput.PageNumber">
+            <summary>
+                Gets or sets the page number.
+            </summary>
+            <value>This is the page number where <see cref="P:demoWebApp.Models.InputBinding.AdminIndexInput.PageSize" /> is the page size.</value>
+        </member>
+        <member name="P:demoWebApp.Models.InputBinding.AdminIndexInput.PageSize">
+            <summary>
+                Gets or sets the maximum number of records to be shown on a page.
+            </summary>
             <value>The count.</value>
+        </member>
+        <member name="T:demoWebApp.Models.ViewBinding.AdminIndexView">
+            <summary>
+                This is the view model for Admin Index.
+            </summary>
+            <seealso cref="T:demoWebApp.Models.InputBinding.AdminIndexInput" />
+        </member>
+        <member name="P:demoWebApp.Models.ViewBinding.AdminIndexView.Metrics">
+            <summary>
+                Gets or sets the metrics.
+            </summary>
+            <value>This is the set of metric to display metrics.</value>
         </member>
         <member name="M:demoWebApp.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
             <summary>
