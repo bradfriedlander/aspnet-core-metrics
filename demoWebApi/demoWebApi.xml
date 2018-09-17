@@ -8,7 +8,7 @@
             <summary>
                 This controller manages the APIs to add, delete, and retrieve database entries.
             </summary>
-            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+            <seealso cref="T:demoWebApi.Controllers.BaseController" />
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.#ctor(MagenicMetrics.IMetric,demoWebApi.Services.ApiContext)">
             <summary>
