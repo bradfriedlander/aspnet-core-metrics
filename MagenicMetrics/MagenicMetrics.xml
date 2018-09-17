@@ -34,12 +34,14 @@
             <param name="metric">The metric to be added to the persistence store.</param>
             <returns>This is the number of entries written to the persistent store.</returns>
         </member>
-        <member name="M:MagenicMetrics.IMetricService.GetLatest(System.Int32)">
+        <member name="M:MagenicMetrics.IMetricService.GetLatest(System.Int32,System.Int32,System.String)">
             <summary>
-                this method gets the <paramref name="count" /> most recent <see cref="T:MagenicMetrics.IMetric" /> records .
+                This method gets the most recent <see cref="T:MagenicMetrics.IMetric" /> records based on the provided filters.
             </summary>
-            <param name="count">This is the count of records to retrieve.</param>
-            <returns>This is a collection of the records.</returns>
+            <param name="pageSize">This is the maximum number of records to retrieve for a given page.</param>
+            <param name="pageNumber">This is the page number where <paramref name="pageSize" /> is the page size.</param>
+            <param name="applicationFilter">This is the filter for the application name.</param>
+            <returns>This is the matching collection of the records.</returns>
         </member>
         <member name="P:MagenicMetrics.Metric.Application">
             <summary>
@@ -125,12 +127,14 @@
             <param name="metric">The metric to be added to the persistence store.</param>
             <returns>This is the number of entries written to the persistent store.</returns>
         </member>
-        <member name="M:MagenicMetrics.MetricService.GetLatest(System.Int32)">
+        <member name="M:MagenicMetrics.MetricService.GetLatest(System.Int32,System.Int32,System.String)">
             <summary>
-                this method gets the <paramref name="count" /> most recent <see cref="T:MagenicMetrics.IMetric" /> records .
+                This method gets the most recent <see cref="T:MagenicMetrics.IMetric" /> records based on the provided filters.
             </summary>
-            <param name="count">This is the count of records to retrieve.</param>
-            <returns>This is a collection of the records.</returns>
+            <param name="pageSize">This is the maximum number of records to retrieve for a given page.</param>
+            <param name="pageNumber">This is the page number where <paramref name="pageSize" /> is the page size.</param>
+            <param name="applicationFilter">This is the filter for the application name.</param>
+            <returns>This is the matching collection of the records.</returns>
         </member>
         <member name="M:MagenicMetrics.MetricService.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>

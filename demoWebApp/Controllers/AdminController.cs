@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using demoWebApp.Models.InputBinding;
+using demoWebApp.Models.ViewBinding;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,17 +31,26 @@ namespace demoWebApp.Controllers
         /// </summary>
         /// <param name="adminIndex">This is the input for this action.</param>
         /// <returns></returns>
-        public async Task<IActionResult> Index(AdminIndex adminIndex)
+        public async Task<IActionResult> Index(AdminIndexInput adminIndex)
         {
+            var viewModel = new AdminIndexView
+            {
+                PageSize = adminIndex.PageSize,
+                PageNumber = adminIndex.PageNumber,
+                ApplicationFilter = adminIndex.ApplicationFilter
+            };
             if (!ModelState.IsValid)
             {
                 _metric.ResultCount = -1;
                 _metric.ExceptionMessage = GetValidationErrors();
-                return View();
+                viewModel.Metrics = new List<IMetric>();
+                return View(viewModel);
             }
-            var metricList = await _metricService.GetLatest(adminIndex.Count ?? 25);
-            ViewBag.Count = _metric.ResultCount = metricList.Count();
-            return View(metricList);
+            var results = await _metricService.GetLatest(adminIndex.PageSize, adminIndex.PageNumber, adminIndex.ApplicationFilter ?? string.Empty);
+            var metricList = results.ToList();
+            ViewBag.Count = _metric.ResultCount = metricList.Count;
+            viewModel.Metrics = metricList;
+            return View(viewModel);
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿@model IEnumerable<MagenicMetrics.IMetric>
+﻿@model demoWebApp.Models.ViewBinding.AdminIndexView
+@using MagenicMetrics
 @{
     ViewData["Title"] = "Metrics";
+    var metricList = Model.Metrics;
 }
 @if (Model == null)
 {
@@ -9,53 +11,63 @@
 }
 else
 {
-    <h2>Last @ViewBag.Count</h2>
+    <h2>Page # @Model.PageNumber - @ViewBag.Count Records</h2>
+    <form asp-page="/Admin/Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Application Name Filter: <input type="text" name="ApplicaitonFilter" value="@Model.ApplicationFilter" />
+                Page No: <input type="number" name="PageNumber" value="@Model.PageNumber" />
+                Page Size: <input type="number" name="PageSize" value="@Model.PageSize" />
+                <input type="submit" value="Search" class="btn btn-default" />
+            </p>
+        </div>
+    </form>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.MetricId)
+                    @Html.DisplayNameFor(model => model.Metrics[0].MetricId)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.StartTime)
+                    @Html.DisplayNameFor(model => model.Metrics[0].StartTime)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Application)
+                    @Html.DisplayNameFor(model => model.Metrics[0].Application)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Details)
+                    @Html.DisplayNameFor(model => model.Metrics[0].Details)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ElpasedTime)
+                    @Html.DisplayNameFor(model => model.Metrics[0].ElpasedTime)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ExceptionMessage)
+                    @Html.DisplayNameFor(model => model.Metrics[0].ExceptionMessage)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.RequestPath)
+                    @Html.DisplayNameFor(model => model.Metrics[0].RequestPath)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Query)
+                    @Html.DisplayNameFor(model => model.Metrics[0].Query)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ResultCode)
+                    @Html.DisplayNameFor(model => model.Metrics[0].ResultCode)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ResultCount)
+                    @Html.DisplayNameFor(model => model.Metrics[0].ResultCount)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ServerName)
+                    @Html.DisplayNameFor(model => model.Metrics[0].ServerName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.TraceId)
+                    @Html.DisplayNameFor(model => model.Metrics[0].TraceId)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.UserName)
+                    @Html.DisplayNameFor(model => model.Metrics[0].UserName)
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Metrics)
             {
                 <tr>
                     <td>
