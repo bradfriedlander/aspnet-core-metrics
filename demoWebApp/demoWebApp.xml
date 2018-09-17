@@ -59,6 +59,11 @@
             </summary>
             <value>This is the set of metric to display metrics.</value>
         </member>
+        <member name="T:demoWebApp.Startup">
+            <summary>
+                This is the <see cref="T:demoWebApp.Startup" /> class for the "demoWebApp" application.
+            </summary>
+        </member>
         <member name="M:demoWebApp.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
             <summary>
                 Initializes a new instance of the <see cref="T:demoWebApp.Startup" /> class.
