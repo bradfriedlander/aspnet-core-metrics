@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace demoWebApp
 {
+    /// <summary>
+    ///     This is the <see cref="Startup" /> class for the "demoWebApp" application.
+    /// </summary>
     public class Startup
     {
         /// <summary>
@@ -78,7 +81,7 @@ namespace demoWebApp
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             var metricConnectionString = Configuration.GetSection("MetricServiceSettings")["MetricServiceConnection"];
-            services.AddDbContext<MetricService>((serviceProvider, options) => options.UseSqlServer(metricConnectionString, ob => ob.MigrationsAssembly("demo4")));
+            services.AddDbContext<MetricService>((serviceProvider, options) => options.UseSqlServer(metricConnectionString, ob => ob.MigrationsAssembly("demoWebApp")));
             services.AddMetrics();
         }
     }
