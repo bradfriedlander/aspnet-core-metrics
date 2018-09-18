@@ -50,7 +50,7 @@
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Delete(System.Int32)">
             <summary>
-                This deletes the record identified by <paramref name="id" />.
+                This logically deletes the record identified by <paramref name="id" />.
             </summary>
             <param name="id">The identifier.</param>
             <returns></returns>
@@ -58,7 +58,7 @@
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Get">
             <summary>
-                This retrieves all records in the persistence store.
+                This retrieves all undeleted records from the persistence store.
             </summary>
             <returns></returns>
             <remarks>GET api/values</remarks>
@@ -71,11 +71,19 @@
             <returns></returns>
             <remarks>GET api/values/5</remarks>
         </member>
+        <member name="M:demoWebApi.Controllers.ValuesController.GetAll">
+            <summary>
+                This retrieves all records, including logically deleted records, in the persistence store.
+            </summary>
+            <returns></returns>
+            <remarks>GET api/values/GetAll</remarks>
+        </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Post(demoWebApi.InputModels.DefinitionInput)">
             <summary>
                 This adds a new definition to the persistence store.
             </summary>
             <param name="definition">This is the new definition.</param>
+            <returns>The newly added definition.</returns>
             <remarks>POST api/values?DefinitionInput</remarks>
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Put(demoWebApi.InputModels.DefinitionInput)">
@@ -83,8 +91,33 @@
                 This updates the record identified by <paramref name="definition" />.
             </summary>
             <param name="definition">This is the definition update.</param>
-            <returns></returns>
+            <returns>The updated definition.</returns>
             <remarks>PUT api/values?DefinitionInput</remarks>
+        </member>
+        <member name="M:demoWebApi.Controllers.ValuesController.Undelete(demoWebApi.InputModels.DefinitionInput)">
+            <summary>
+                This restores the record identified by <paramref name="definition" />.
+            </summary>
+            <param name="definition">This is the definition update.</param>
+            <returns>The restore definition.</returns>
+            <remarks>PUT api/values/Undelete?DefinitionInput</remarks>
+        </member>
+        <member name="T:demoWebApi.InputModels.DefinitionInput">
+            <summary>
+                This is the <see cref="T:demoWebApi.Models.Definition" /> binding model for requests.
+            </summary>
+        </member>
+        <member name="P:demoWebApi.InputModels.DefinitionInput.Id">
+            <summary>
+                Gets or sets the identifier.
+            </summary>
+            <value>This is the identifier.</value>
+        </member>
+        <member name="P:demoWebApi.InputModels.DefinitionInput.Name">
+            <summary>
+                Gets or sets the name.
+            </summary>
+            <value>The name.</value>
         </member>
         <member name="T:demoWebApi.Models.Definition">
             <summary>
@@ -96,6 +129,12 @@
                 Gets or sets the definition identifier.
             </summary>
             <value>This is the identity definition identifier.</value>
+        </member>
+        <member name="P:demoWebApi.Models.Definition.IsDeleted">
+            <summary>
+                Gets or sets a value indicating whether this instance is deleted.
+            </summary>
+            <value><c>true</c> if this instance is deleted; otherwise, <c>false</c>.</value>
         </member>
         <member name="P:demoWebApi.Models.Definition.Name">
             <summary>
@@ -120,6 +159,21 @@
                 Gets or sets the definitions.
             </summary>
             <value>This is the collection of definitions.</value>
+        </member>
+        <member name="M:demoWebApi.Services.ApiContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+                Override this method to further configure the model that was discovered by convention from the entity types exposed in <see
+                cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> properties on your derived context. The resulting model may be cached and re-used for
+                subsequent instances of your derived context.
+            </summary>
+            <param name="modelBuilder">
+                The builder being used to construct the model for this context. Databases (and other extensions) typically define extension methods on
+                this object that allow you to configure aspects of the model that are specific to a given database.
+            </param>
+            <remarks>
+                If a model is explicitly set on the options for this context (via <see
+                cref="M:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />) then this method will not be run.
+            </remarks>
         </member>
         <member name="M:demoWebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
             <summary>
