@@ -11,7 +11,6 @@ namespace demoWebApi.Controllers
     ///     This controller manages the APIs to add, delete, and retrieve database entries.
     /// </summary>
     /// <seealso cref="BaseController" />
-    [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : BaseController
     {

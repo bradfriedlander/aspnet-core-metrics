@@ -4,15 +4,34 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace demoWebApi.Controllers
 {
+    /// <summary>
+    ///     This is the base class for all API controllers.
+    /// </summary>
+    /// <remarks>
+    ///     <para>This class defines the standard route prefix ("api/[controller]") for all API controllers.</para>
+    /// </remarks>
+    /// <seealso cref="Controller" />
+    [Route("api/[controller]")]
     public class BaseController : Controller
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="BaseController" /> class.
+        /// </summary>
+        /// <param name="metric">The metric.</param>
         public BaseController(IMetric metric)
         {
             _metric = metric;
         }
 
+        /// <summary>
+        ///     The is the current <see cref="IMetric" /> instance.
+        /// </summary>
         public readonly IMetric _metric;
 
+        /// <summary>
+        ///     Gets the concatenated validation errors.
+        /// </summary>
+        /// <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
         protected string GetValidationErrors()
         {
             var validationErrors = new StringBuilder();
@@ -22,7 +41,7 @@ namespace demoWebApi.Controllers
                 {
                     if (validationErrors.Length != 0)
                     {
-                        validationErrors.Append("; ");
+                        validationErrors.Append("|");
                     }
                     validationErrors.Append(error.ErrorMessage);
                 }
