@@ -1,4 +1,5 @@
-﻿using demoWebApi.Models;
+﻿using System.Threading.Tasks;
+using demoWebApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace demoWebApi.Services
@@ -28,6 +29,17 @@ namespace demoWebApi.Services
         /// </summary>
         /// <value>This is the collection of definitions.</value>
         public DbSet<Definition> Definitions { get; set; }
+
+        /// <summary>
+        ///     Does the definition exist.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns><c>true</c> if there is a <see cref="Definition" /> with the matching <paramref name="id" />; otherwise, <c>false</c>.</returns>
+        public async Task<bool> DoesDefinitionExist(int id)
+        {
+            var match = await Definitions.IgnoreQueryFilters().FirstOrDefaultAsync(d => id == d.DefinitionId);
+            return  match != null;
+        }
 
         /// <summary>
         ///     Override this method to further configure the model that was discovered by convention from the entity types exposed in <see

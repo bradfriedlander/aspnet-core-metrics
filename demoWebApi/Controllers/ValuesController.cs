@@ -37,18 +37,10 @@ namespace demoWebApi.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         /// <remarks>DELETE api/values/5</remarks>
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), EnsureDefinitionExists]
         public IActionResult Delete(int id)
         {
-            if (id <= 0)
-            {
-                return BadRequest();
-            }
             var match = _context.Definitions.Find(id);
-            if (match == null)
-            {
-                return NotFound();
-            }
             match.IsDeleted = true;
             _metric.ResultCount = _context.SaveChanges();
             return Ok(match);
@@ -71,20 +63,12 @@ namespace demoWebApi.Controllers
         ///     This retrieves the record identified by <paramref name="id" />.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>The matching definition.</returns>
         /// <remarks>GET api/values/5</remarks>
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), EnsureDefinitionExists]
         public ActionResult<string> Get(int id)
         {
-            if (id <= 0)
-            {
-                return BadRequest();
-            }
             var match = _context.Definitions.Find(id);
-            if (match == null)
-            {
-                return NotFound();
-            }
             _metric.ResultCount = 1;
             return Ok(match);
         }
@@ -124,13 +108,9 @@ namespace demoWebApi.Controllers
         /// <param name="definition">This is the definition update.</param>
         /// <returns>The updated definition.</returns>
         /// <remarks>PUT api/values?DefinitionInput</remarks>
-        [HttpPut]
+        [HttpPut, EnsureDefinitionExists]
         public IActionResult Put(DefinitionInput definition)
         {
-            if (!definition.Id.HasValue)
-            {
-                return BadRequest();
-            }
             var match = _context.Definitions.Find(definition.Id);
             if (match == null)
             {
@@ -147,18 +127,10 @@ namespace demoWebApi.Controllers
         /// <param name="definition">This is the definition update.</param>
         /// <returns>The restore definition.</returns>
         /// <remarks>PUT api/values/Undelete?DefinitionInput</remarks>
-        [HttpPut("Undelete")]
+        [HttpPut("Undelete"), EnsureDefinitionExists]
         public IActionResult Undelete(DefinitionInput definition)
         {
-            if (!definition.Id.HasValue)
-            {
-                return BadRequest();
-            }
             var match = _context.Definitions.IgnoreQueryFilters().FirstOrDefault(d => d.DefinitionId == definition.Id);
-            if (match == null)
-            {
-                return NotFound();
-            }
             match.IsDeleted = false;
             _metric.ResultCount = _context.SaveChanges();
             return Ok(match);

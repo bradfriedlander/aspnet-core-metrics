@@ -30,6 +30,19 @@
             </summary>
             <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
         </member>
+        <member name="T:demoWebApi.Controllers.EnsureDefinitionExistsAttribute">
+            <summary>
+                This attribute ensure that the record id is valid and that there is a matching <see cref="T:demoWebApi.Models.Definition" /> record.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute" />
+        </member>
+        <member name="M:demoWebApi.Controllers.EnsureDefinitionExistsAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+                This method is executed before the action begins executing.
+            </summary>
+            <param name="context">This is the context for the action.</param>
+            <inheritdoc />
+        </member>
         <member name="T:demoWebApi.Controllers.ValuesController">
             <summary>
                 This controller manages the APIs to add, delete, and retrieve database entries.
@@ -68,7 +81,7 @@
                 This retrieves the record identified by <paramref name="id" />.
             </summary>
             <param name="id">The identifier.</param>
-            <returns></returns>
+            <returns>The matching definition.</returns>
             <remarks>GET api/values/5</remarks>
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.GetAll">
@@ -159,6 +172,13 @@
                 Gets or sets the definitions.
             </summary>
             <value>This is the collection of definitions.</value>
+        </member>
+        <member name="M:demoWebApi.Services.ApiContext.DoesDefinitionExist(System.Int32)">
+            <summary>
+                Does the definition exist.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns><c>true</c> if there is a <see cref="T:demoWebApi.Models.Definition" /> with the matching <paramref name="id" />; otherwise, <c>false</c>.</returns>
         </member>
         <member name="M:demoWebApi.Services.ApiContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
