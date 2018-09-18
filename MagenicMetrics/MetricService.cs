@@ -30,7 +30,7 @@ namespace MagenicMetrics
         public MetricService(IOptions<MetricServiceOptions> options, ILogger<MetricService> logger, DbContextOptions<MetricService> contextOptions) : base(contextOptions)
         {
             _logger = logger;
-            _options = options;
+            _options = options.Value;
             _logger.LogDebug($"'TableName' value is '{options.Value.TableName}'.");
             _logger.LogDebug($"'MetricServiceConnection' value is '{options.Value.MetricServiceConnection}'.");
         }
@@ -42,7 +42,7 @@ namespace MagenicMetrics
         public DbSet<Metric> Metrics { get; set; }
 
         private readonly ILogger _logger;
-        private readonly IOptions<MetricServiceOptions> _options;
+        private readonly MetricServiceOptions _options;
 
         /// <summary>
         ///     This method adds an instance of <paramref name="metric" /> to the persistence store and commits the addition.
@@ -95,7 +95,7 @@ namespace MagenicMetrics
         /// </remarks>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Metric>().ToTable(_options.Value.TableName);
+            modelBuilder.Entity<Metric>().ToTable(_options.TableName);
             modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.Application)).HasMaxLength(64).IsRequired();
             modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.Query)).HasMaxLength(128).IsRequired();
             modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.RequestMethod)).HasMaxLength(10).IsRequired();
