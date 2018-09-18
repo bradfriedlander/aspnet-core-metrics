@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using demoWebApi.InputModels;
 using demoWebApi.Models;
 using demoWebApi.Services;
 using MagenicMetrics;
@@ -24,6 +25,9 @@ namespace demoWebApi.Controllers
             _context = context;
         }
 
+        /// <summary>
+        ///     This is the context for the persistence store.
+        /// </summary>
         private readonly ApiContext _context;
 
         /// <summary>
@@ -58,7 +62,7 @@ namespace demoWebApi.Controllers
         {
             var results = _context.Definitions.ToList();
             _metric.ResultCount = results.Count;
-            return new JsonResult(results);
+            return Ok(results);
         }
 
         /// <summary>
@@ -84,39 +88,38 @@ namespace demoWebApi.Controllers
         }
 
         /// <summary>
-        ///     This adds a new value tot he persistence store.
+        ///     This adds a new definition to the persistence store.
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <remarks>POST api/values</remarks>
+        /// <param name="definition">This is the new definition.</param>
+        /// <remarks>POST api/values?DefinitionInput</remarks>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(DefinitionInput definition)
         {
             var nextId = _context.Definitions.Max(d => d.DefinitionId) + 1;
-            _context.Definitions.Add(new Definition() { DefinitionId = nextId, Name = value });
+            _context.Definitions.Add(new Definition() { DefinitionId = nextId, Name = definition.name });
             _context.SaveChanges();
             _metric.ResultCount = 1;
         }
 
         /// <summary>
-        ///     This updates the record identified by <paramref name="id" />.
+        ///     This updates the record identified by <paramref name="definition" />.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="value">The value.</param>
+        /// <param name="definition">This is the definition update.</param>
         /// <returns></returns>
-        /// <remarks>PUT api/values/5</remarks>
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] string value)
+        /// <remarks>PUT api/values?DefinitionInput</remarks>
+        [HttpPut]
+        public IActionResult Put(DefinitionInput definition)
         {
-            if (id <= 0 || string.IsNullOrEmpty(value))
+            if (!definition.id.HasValue || definition.id <= 0)
             {
                 return BadRequest();
             }
-            var match = _context.Definitions.Find(id);
+            var match = _context.Definitions.Find(definition.id);
             if (match == null)
             {
                 return NotFound();
             }
-            match.Name = value;
+            match.Name = definition.name;
             _metric.ResultCount = _context.SaveChanges();
             return Ok();
         }

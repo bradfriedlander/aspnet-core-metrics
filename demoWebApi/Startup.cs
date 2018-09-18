@@ -70,7 +70,9 @@ namespace demoWebApi
         {
             services.Configure<MetricServiceOptions>(Configuration.GetSection("MetricServiceSettings"));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddXmlSerializerFormatters();
             var metricConnectionString = Configuration.GetSection("MetricServiceSettings")["MetricServiceConnection"];
             services.AddDbContext<MetricService>((serviceProvider, options) => options.UseSqlServer(metricConnectionString, ob => ob.MigrationsAssembly("demo4")));
             services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase("SimpleDatabase"));

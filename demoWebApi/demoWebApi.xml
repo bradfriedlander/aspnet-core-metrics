@@ -4,6 +4,32 @@
         <name>demoWebApi</name>
     </assembly>
     <members>
+        <member name="T:demoWebApi.Controllers.BaseController">
+            <summary>
+                This is the base class for all API controllers.
+            </summary>
+            <remarks>
+                <para>This class defines the standard route prefix ("api/[controller]") for all API controllers.</para>
+            </remarks>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:demoWebApi.Controllers.BaseController.#ctor(MagenicMetrics.IMetric)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApi.Controllers.BaseController" /> class.
+            </summary>
+            <param name="metric">The metric.</param>
+        </member>
+        <member name="F:demoWebApi.Controllers.BaseController._metric">
+            <summary>
+                The is the current <see cref="T:MagenicMetrics.IMetric" /> instance.
+            </summary>
+        </member>
+        <member name="M:demoWebApi.Controllers.BaseController.GetValidationErrors">
+            <summary>
+                Gets the concatenated validation errors.
+            </summary>
+            <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
+        </member>
         <member name="T:demoWebApi.Controllers.ValuesController">
             <summary>
                 This controller manages the APIs to add, delete, and retrieve database entries.
@@ -47,14 +73,28 @@
             <param name="value">The value.</param>
             <remarks>POST api/values</remarks>
         </member>
-        <member name="M:demoWebApi.Controllers.ValuesController.Put(System.Int32,System.String)">
-            <summary>
-                This updates the record identified by <paramref name="id" />.
-            </summary>
-            <param name="id">The identifier.</param>
-            <param name="value">The value.</param>
+        <member name="M:demoWebApi.Controllers.ValuesController.Put(demoWebApi.InputModels.DefinitionInput)">
+            <summary>This updates the record identified by <paramref name="definition" />.</summary>
+            <param name="definition">This is the definition update.</param>
             <returns></returns>
             <remarks>PUT api/values/5</remarks>
+        </member>
+        <member name="T:demoWebApi.Models.Definition">
+            <summary>
+                This is the definition class that corresponds tot he database table.
+            </summary>
+        </member>
+        <member name="P:demoWebApi.Models.Definition.DefinitionId">
+            <summary>
+                Gets or sets the definition identifier.
+            </summary>
+            <value>This is the identity definition identifier.</value>
+        </member>
+        <member name="P:demoWebApi.Models.Definition.Name">
+            <summary>
+                Gets or sets the name for the definition.
+            </summary>
+            <value>This is the name.</value>
         </member>
         <member name="T:demoWebApi.Services.ApiContext">
             <summary>
