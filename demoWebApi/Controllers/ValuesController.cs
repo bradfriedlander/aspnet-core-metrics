@@ -48,8 +48,9 @@ namespace demoWebApi.Controllers
             {
                 return NotFound();
             }
-            _metric.ResultCount = -1;
-            return Ok();
+            _context.Definitions.Remove(match);
+            _metric.ResultCount = _context.SaveChanges();
+            return Ok(match);
         }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace demoWebApi.Controllers
                 return NotFound();
             }
             _metric.ResultCount = 1;
-            return new JsonResult(match);
+            return Ok(match);
         }
 
         /// <summary>
@@ -97,8 +98,7 @@ namespace demoWebApi.Controllers
         {
             var nextId = _context.Definitions.Max(d => d.DefinitionId) + 1;
             _context.Definitions.Add(new Definition() { DefinitionId = nextId, Name = definition.name });
-            _context.SaveChanges();
-            _metric.ResultCount = 1;
+            _metric.ResultCount = _context.SaveChanges();
         }
 
         /// <summary>
