@@ -5,6 +5,7 @@ using demoWebApi.Models;
 using demoWebApi.Services;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace demoWebApi.Controllers
 {
@@ -31,7 +32,7 @@ namespace demoWebApi.Controllers
         private readonly ApiContext _context;
 
         /// <summary>
-        ///     This deletes the record identified by <paramref name="id" />.
+        ///     This logically deletes the record identified by <paramref name="id" />.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
@@ -48,13 +49,13 @@ namespace demoWebApi.Controllers
             {
                 return NotFound();
             }
-            _context.Definitions.Remove(match);
+            match.IsDeleted = true;
             _metric.ResultCount = _context.SaveChanges();
             return Ok(match);
         }
 
         /// <summary>
-        ///     This retrieves all records in the persistence store.
+        ///     This retrieves all undeleted records from the persistence store.
         /// </summary>
         /// <returns></returns>
         /// <remarks>GET api/values</remarks>
@@ -89,39 +90,78 @@ namespace demoWebApi.Controllers
         }
 
         /// <summary>
+        ///     This retrieves all records, including logically deleted records, in the persistence store.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>GET api/values/GetAll</remarks>
+        [HttpGet("GetAll")]
+        public ActionResult<IEnumerable<string>> GetAll()
+        {
+            var results = _context.Definitions.IgnoreQueryFilters().ToList();
+            _metric.ResultCount = results.Count;
+            return Ok(results);
+        }
+
+        /// <summary>
         ///     This adds a new definition to the persistence store.
         /// </summary>
         /// <param name="definition">This is the new definition.</param>
+        /// <returns>The newly added definition.</returns>
         /// <remarks>POST api/values?DefinitionInput</remarks>
         [HttpPost]
-        public void Post(DefinitionInput definition)
+        public IActionResult Post(DefinitionInput definition)
         {
             var nextId = _context.Definitions.Max(d => d.DefinitionId) + 1;
-            _context.Definitions.Add(new Definition() { DefinitionId = nextId, Name = definition.name });
+            _context.Definitions.Add(new Definition() { DefinitionId = nextId, Name = definition.Name });
             _metric.ResultCount = _context.SaveChanges();
+            var match = _context.Definitions.Find(nextId);
+            return Ok(match);
         }
 
         /// <summary>
         ///     This updates the record identified by <paramref name="definition" />.
         /// </summary>
         /// <param name="definition">This is the definition update.</param>
-        /// <returns></returns>
+        /// <returns>The updated definition.</returns>
         /// <remarks>PUT api/values?DefinitionInput</remarks>
         [HttpPut]
         public IActionResult Put(DefinitionInput definition)
         {
-            if (!definition.id.HasValue || definition.id <= 0)
+            if (!definition.Id.HasValue)
             {
                 return BadRequest();
             }
-            var match = _context.Definitions.Find(definition.id);
+            var match = _context.Definitions.Find(definition.Id);
             if (match == null)
             {
                 return NotFound();
             }
-            match.Name = definition.name;
+            match.Name = definition.Name;
             _metric.ResultCount = _context.SaveChanges();
-            return Ok();
+            return Ok(match);
+        }
+
+        /// <summary>
+        ///     This restores the record identified by <paramref name="definition" />.
+        /// </summary>
+        /// <param name="definition">This is the definition update.</param>
+        /// <returns>The restore definition.</returns>
+        /// <remarks>PUT api/values/Undelete?DefinitionInput</remarks>
+        [HttpPut("Undelete")]
+        public IActionResult Undelete(DefinitionInput definition)
+        {
+            if (!definition.Id.HasValue)
+            {
+                return BadRequest();
+            }
+            var match = _context.Definitions.IgnoreQueryFilters().FirstOrDefault(d => d.DefinitionId == definition.Id);
+            if (match == null)
+            {
+                return NotFound();
+            }
+            match.IsDeleted = false;
+            _metric.ResultCount = _context.SaveChanges();
+            return Ok(match);
         }
     }
 }
