@@ -41,6 +41,7 @@ namespace MagenicMetrics
             var exceptionMessage = string.Empty;
             metric.StartTime = DateTime.UtcNow;
             metric.UserName = context.User.Identity.Name ?? "Unknown";
+            metric.RequestMethod = context.Request.HttpContext.Request.Method;
             var requestPath = metric.RequestPath = context.Request.Path;
             var query = metric.Query = context.Request.QueryString.Value;
             metric.TraceId = context.TraceIdentifier;

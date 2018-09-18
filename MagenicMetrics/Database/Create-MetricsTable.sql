@@ -6,6 +6,7 @@ CREATE TABLE [dbo].[Metrics]
 	[ExceptionMessage] [nvarchar](max) NULL,
 	[MetricId] [int] IDENTITY(1,1) NOT NULL,
 	[Query] [nvarchar](128) NOT NULL,
+	[RequestMethod] [nvarchar](10) NOT NULL,
 	[RequestPath] [nvarchar](128) NOT NULL,
 	[ResultCode] [int] NOT NULL,
 	[ResultCount] [int] NOT NULL,

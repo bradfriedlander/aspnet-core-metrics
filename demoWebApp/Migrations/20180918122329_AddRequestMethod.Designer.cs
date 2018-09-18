@@ -4,14 +4,16 @@ using MagenicMetrics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace demoWebApp.Migrations
 {
     [DbContext(typeof(MetricService))]
-    partial class MetricServiceModelSnapshot : ModelSnapshot
+    [Migration("20180918122329_AddRequestMethod")]
+    partial class AddRequestMethod
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +41,7 @@ namespace demoWebApp.Migrations
                         .IsRequired()
                         .HasMaxLength(128);
 
-                    b.Property<string>("RequestMethod")
-                        .IsRequired()
-                        .HasMaxLength(10);
+                    b.Property<string>("RequestMethod");
 
                     b.Property<string>("RequestPath")
                         .IsRequired()
