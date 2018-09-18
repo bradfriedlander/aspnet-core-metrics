@@ -43,6 +43,11 @@
             <param name="metric">The metric.</param>
             <param name="context">The context.</param>
         </member>
+        <member name="F:demoWebApi.Controllers.ValuesController._context">
+            <summary>
+                This is the context for the persistence store.
+            </summary>
+        </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Delete(System.Int32)">
             <summary>
                 This deletes the record identified by <paramref name="id" />.
@@ -66,18 +71,20 @@
             <returns></returns>
             <remarks>GET api/values/5</remarks>
         </member>
-        <member name="M:demoWebApi.Controllers.ValuesController.Post(System.String)">
+        <member name="M:demoWebApi.Controllers.ValuesController.Post(demoWebApi.InputModels.DefinitionInput)">
             <summary>
-                This adds a new value tot he persistence store.
+                This adds a new definition to the persistence store.
             </summary>
-            <param name="value">The value.</param>
-            <remarks>POST api/values</remarks>
+            <param name="definition">This is the new definition.</param>
+            <remarks>POST api/values?DefinitionInput</remarks>
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Put(demoWebApi.InputModels.DefinitionInput)">
-            <summary>This updates the record identified by <paramref name="definition" />.</summary>
+            <summary>
+                This updates the record identified by <paramref name="definition" />.
+            </summary>
             <param name="definition">This is the definition update.</param>
             <returns></returns>
-            <remarks>PUT api/values/5</remarks>
+            <remarks>PUT api/values?DefinitionInput</remarks>
         </member>
         <member name="T:demoWebApi.Models.Definition">
             <summary>

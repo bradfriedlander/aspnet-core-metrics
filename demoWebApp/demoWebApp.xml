@@ -24,6 +24,29 @@
             <param name="adminIndex">This is the input for this action.</param>
             <returns></returns>
         </member>
+        <member name="T:demoWebApp.Controllers.BaseController">
+            <summary>
+                This is the base class for all controllers.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:demoWebApp.Controllers.BaseController.#ctor(MagenicMetrics.IMetric)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApp.Controllers.BaseController" /> class.
+            </summary>
+            <param name="metric">The metric.</param>
+        </member>
+        <member name="F:demoWebApp.Controllers.BaseController._metric">
+            <summary>
+                The is the current <see cref="T:MagenicMetrics.IMetric" /> instance.
+            </summary>
+        </member>
+        <member name="M:demoWebApp.Controllers.BaseController.GetValidationErrors">
+            <summary>
+                Gets the concatenated validation errors.
+            </summary>
+            <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
+        </member>
         <member name="T:demoWebApp.Models.InputBinding.AdminIndexInput">
             <summary>
                 This is the input class for the Index action of the Admin controller.
