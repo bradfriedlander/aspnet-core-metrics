@@ -93,7 +93,7 @@ namespace demoWebApp.Controllers
                 _metric.ExceptionMessage = GetValidationErrors();
                 return View();
             }
-            _metric.ResultCount = 5;
+            _metric.ResultCount = 1;
             return View();
         }
 
@@ -105,7 +105,7 @@ namespace demoWebApp.Controllers
                 _metric.ExceptionMessage = GetValidationErrors();
                 return View();
             }
-            _metric.ResultCount = 0;
+            _metric.ResultCount = 1;
             return View();
         }
     }

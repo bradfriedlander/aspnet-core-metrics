@@ -67,6 +67,9 @@ else
                     @Html.DisplayNameFor(model => model.Metrics[0].ExceptionMessage)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].RequestMethod)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Metrics[0].RequestPath)
                 </th>
                 <th>
@@ -110,6 +113,9 @@ else
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ExceptionMessage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestMethod)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.RequestPath)
