@@ -32,11 +32,32 @@
         </member>
         <member name="T:demoWebApi.Controllers.EnsureDefinitionExistsAttribute">
             <summary>
-                This attribute ensure that the record id is valid and that there is a matching <see cref="T:demoWebApi.Models.Definition" /> record.
+                This attribute ensures that the record id is valid and that there is a matching <see cref="T:demoWebApi.Models.Definition" /> record.
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute" />
         </member>
-        <member name="M:demoWebApi.Controllers.EnsureDefinitionExistsAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+        <member name="M:demoWebApi.Controllers.EnsureDefinitionExistsAttribute.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:demoWebApi.Controllers.EnsureDefinitionExistsAttribute"/> class.</summary>
+        </member>
+        <member name="T:demoWebApi.Controllers.EnsureDefinitionExistsFilter">
+            <summary>
+                This filter ensures that the record id is valid and that there is a matching <see cref="!:Definition" /> record.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Filters.IActionFilter" />
+        </member>
+        <member name="M:demoWebApi.Controllers.EnsureDefinitionExistsFilter.#ctor(demoWebApi.Services.ApiContext)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApi.Controllers.EnsureDefinitionExistsFilter" /> class.
+            </summary>
+            <param name="apiContext">The API context.</param>
+        </member>
+        <member name="M:demoWebApi.Controllers.EnsureDefinitionExistsFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+                Called after the action executes, before the action result.
+            </summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext" />.</param>
+        </member>
+        <member name="M:demoWebApi.Controllers.EnsureDefinitionExistsFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
             <summary>
                 This method is executed before the action begins executing.
             </summary>
