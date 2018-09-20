@@ -2,6 +2,9 @@
 
 namespace MagenicMetrics
 {
+    /// <summary>
+    ///     This is the information persisted for every MVC action.
+    /// </summary>
     public interface IMetric
     {
         /// <summary>
@@ -14,15 +17,19 @@ namespace MagenicMetrics
 
         int ElpasedTime { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the exception message.
+        /// </summary>
+        /// <value>If an exception occurs, this is the exception message. Otherwise, it is a pipe delimited collection of validation messages.</value>
         string ExceptionMessage { get; set; }
 
         int MetricId { get; set; }
 
         string Query { get; set; }
 
-        string RequestPath { get; set; }
-
         string RequestMethod { get; set; }
+
+        string RequestPath { get; set; }
 
         int ResultCode { get; set; }
 

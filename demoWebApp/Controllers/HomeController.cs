@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Diagnostics;
 using demoWebApp.Models;
+using demoWebApp.Models.InputBinding;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace demoWebApp.Controllers
 {
+    /// <summary>
+    ///     This is the default controller for the application.
+    /// </summary>
+    /// <seealso cref="BaseController" />
     public class HomeController : BaseController
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="HomeController" /> class.
+        /// </summary>
+        /// <param name="metric">The metric.</param>
         public HomeController(IMetric metric) : base(metric)
         {
         }
@@ -17,8 +26,6 @@ namespace demoWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _metric.ResultCount = -1;
-                _metric.ExceptionMessage = GetValidationErrors();
                 return View();
             }
             _metric.ResultCount = 1;
@@ -30,8 +37,6 @@ namespace demoWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _metric.ResultCount = -1;
-                _metric.ExceptionMessage = GetValidationErrors();
                 return View();
             }
             throw new NullReferenceException("Abort failed");
@@ -41,8 +46,6 @@ namespace demoWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _metric.ResultCount = -1;
-                _metric.ExceptionMessage = GetValidationErrors();
                 return View();
             }
             return StatusCode(401);
@@ -52,8 +55,6 @@ namespace demoWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _metric.ResultCount = -1;
-                _metric.ExceptionMessage = GetValidationErrors();
                 return View();
             }
             _metric.ResultCount = 2;
@@ -67,20 +68,23 @@ namespace demoWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _metric.ResultCount = -1;
-                _metric.ExceptionMessage = GetValidationErrors();
                 return View();
             }
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult ForceStatusCode(int code = 401)
+        /// <summary>
+        ///     This action forces the status code to be set to <paramref name="code" />.
+        /// </summary>
+        /// <param name="model">This is the model containing status code.</param>
+        /// <returns></returns>
+        public IActionResult ForceStatusCode(HomeForceStatusCode model)
         {
-            if (!ModelState.IsValid)
+            var code = model.Code;
+            if (code < 200 || code > 599)
             {
-                _metric.ResultCount = -1;
-                _metric.ExceptionMessage = GetValidationErrors();
-                return View();
+                ModelState.AddModelError(nameof(code), $"The value '{code}' must be between 200 and 599.");
+                return View(model);
             }
             return StatusCode(code);
         }
@@ -89,8 +93,6 @@ namespace demoWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _metric.ResultCount = -1;
-                _metric.ExceptionMessage = GetValidationErrors();
                 return View();
             }
             _metric.ResultCount = 1;
@@ -101,8 +103,6 @@ namespace demoWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _metric.ResultCount = -1;
-                _metric.ExceptionMessage = GetValidationErrors();
                 return View();
             }
             _metric.ResultCount = 1;
