@@ -24,45 +24,17 @@
                 The is the current <see cref="T:MagenicMetrics.IMetric" /> instance.
             </summary>
         </member>
-        <member name="M:demoWebApi.Controllers.BaseController.GetValidationErrors">
+        <member name="M:demoWebApi.Controllers.BaseController.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+                Called after the action method is invoked.
+            </summary>
+            <param name="context">The action executed context.</param>
+        </member>
+        <member name="M:demoWebApi.Controllers.BaseController.GetValidationErrors(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
             <summary>
                 Gets the concatenated validation errors.
             </summary>
             <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
-        </member>
-        <member name="T:demoWebApi.Controllers.EnsureDefinitionExistsAttribute">
-            <summary>
-                This attribute ensures that the record id is valid and that there is a matching <see cref="T:demoWebApi.Models.Definition" /> record.
-            </summary>
-            <seealso cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute" />
-        </member>
-        <member name="M:demoWebApi.Controllers.EnsureDefinitionExistsAttribute.#ctor">
-            <summary>Initializes a new instance of the <see cref="T:demoWebApi.Controllers.EnsureDefinitionExistsAttribute"/> class.</summary>
-        </member>
-        <member name="T:demoWebApi.Controllers.EnsureDefinitionExistsFilter">
-            <summary>
-                This filter ensures that the record id is valid and that there is a matching <see cref="!:Definition" /> record.
-            </summary>
-            <seealso cref="T:Microsoft.AspNetCore.Mvc.Filters.IActionFilter" />
-        </member>
-        <member name="M:demoWebApi.Controllers.EnsureDefinitionExistsFilter.#ctor(demoWebApi.Services.ApiContext)">
-            <summary>
-                Initializes a new instance of the <see cref="T:demoWebApi.Controllers.EnsureDefinitionExistsFilter" /> class.
-            </summary>
-            <param name="apiContext">The API context.</param>
-        </member>
-        <member name="M:demoWebApi.Controllers.EnsureDefinitionExistsFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
-            <summary>
-                Called after the action executes, before the action result.
-            </summary>
-            <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext" />.</param>
-        </member>
-        <member name="M:demoWebApi.Controllers.EnsureDefinitionExistsFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
-            <summary>
-                This method is executed before the action begins executing.
-            </summary>
-            <param name="context">This is the context for the action.</param>
-            <inheritdoc />
         </member>
         <member name="T:demoWebApi.Controllers.ValuesController">
             <summary>
@@ -136,6 +108,42 @@
             <returns>The restore definition.</returns>
             <remarks>PUT api/values/Undelete?DefinitionInput</remarks>
         </member>
+        <member name="T:demoWebApi.Filters.EnsureDefinitionExistsAttribute">
+            <summary>
+                This attribute ensures that the record id is valid and that there is a matching <see cref="T:demoWebApi.Models.Definition" /> record.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute" />
+        </member>
+        <member name="M:demoWebApi.Filters.EnsureDefinitionExistsAttribute.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApi.Filters.EnsureDefinitionExistsAttribute" /> class.
+            </summary>
+        </member>
+        <member name="T:demoWebApi.Filters.EnsureDefinitionExistsFilter">
+            <summary>
+                This filter ensures that the record id is valid and that there is a matching <see cref="!:Definition" /> record.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Filters.IActionFilter" />
+        </member>
+        <member name="M:demoWebApi.Filters.EnsureDefinitionExistsFilter.#ctor(demoWebApi.Services.ApiContext)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApi.Filters.EnsureDefinitionExistsFilter" /> class.
+            </summary>
+            <param name="apiContext">The API context.</param>
+        </member>
+        <member name="M:demoWebApi.Filters.EnsureDefinitionExistsFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+                Called after the action executes, before the action result.
+            </summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext" />.</param>
+        </member>
+        <member name="M:demoWebApi.Filters.EnsureDefinitionExistsFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+                This method is executed before the action begins executing.
+            </summary>
+            <param name="context">This is the context for the action.</param>
+            <inheritdoc />
+        </member>
         <member name="T:demoWebApi.InputModels.DefinitionInput">
             <summary>
                 This is the <see cref="T:demoWebApi.Models.Definition" /> binding model for requests.
@@ -175,6 +183,24 @@
                 Gets or sets the name for the definition.
             </summary>
             <value>This is the name.</value>
+        </member>
+        <member name="T:demoWebApi.Program">
+            <summary>
+                This is the starting class for the WebApi demo.
+            </summary>
+        </member>
+        <member name="M:demoWebApi.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+                Creates the web host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApi.Program.Main(System.String[])">
+            <summary>
+                This is the entry point for the application.
+            </summary>
+            <param name="args">This is the command line arguments.</param>
         </member>
         <member name="T:demoWebApi.Services.ApiContext">
             <summary>

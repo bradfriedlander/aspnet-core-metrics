@@ -4,11 +4,22 @@
         <name>MagenicMetrics</name>
     </assembly>
     <members>
+        <member name="T:MagenicMetrics.IMetric">
+            <summary>
+                This is the information persisted for every MVC action.
+            </summary>
+        </member>
         <member name="P:MagenicMetrics.IMetric.Application">
             <summary>
                 Gets or sets the name of current application.
             </summary>
             <value>This is the name of the application.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.ExceptionMessage">
+            <summary>
+                Gets or sets the exception message.
+            </summary>
+            <value>If an exception occurs, this is the exception message. Otherwise, it is a pipe delimited collection of validation messages.</value>
         </member>
         <member name="P:MagenicMetrics.IMetric.ServerName">
             <summary>
@@ -43,11 +54,23 @@
             <param name="applicationFilter">This is the filter for the application name.</param>
             <returns>This is the matching collection of the records.</returns>
         </member>
+        <member name="T:MagenicMetrics.Metric">
+            <summary>
+            This is the information persisted for every MVC action.
+            </summary>
+            <seealso cref="T:MagenicMetrics.IMetric" />
+        </member>
         <member name="P:MagenicMetrics.Metric.Application">
             <summary>
                 Gets or sets the name of current application.
             </summary>
             <value>This is the name of the application.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.ExceptionMessage">
+            <summary>Gets or sets the exception message.</summary>
+            <value>
+            If an exception occurs, this is the exception message. Otherwise, it is a pipe delimited collection of validation messages.
+            </value>
         </member>
         <member name="P:MagenicMetrics.Metric.ServerName">
             <summary>

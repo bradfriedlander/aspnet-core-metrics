@@ -41,11 +41,36 @@
                 The is the current <see cref="T:MagenicMetrics.IMetric" /> instance.
             </summary>
         </member>
-        <member name="M:demoWebApp.Controllers.BaseController.GetValidationErrors">
+        <member name="M:demoWebApp.Controllers.BaseController.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+                Called after the action method is invoked.
+            </summary>
+            <param name="context">The action executed context.</param>
+        </member>
+        <member name="M:demoWebApp.Controllers.BaseController.GetValidationErrors(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
             <summary>
                 Gets the concatenated validation errors.
             </summary>
             <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
+        </member>
+        <member name="T:demoWebApp.Controllers.HomeController">
+            <summary>
+                This is the default controller for the application.
+            </summary>
+            <seealso cref="T:demoWebApp.Controllers.BaseController" />
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.#ctor(MagenicMetrics.IMetric)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApp.Controllers.HomeController" /> class.
+            </summary>
+            <param name="metric">The metric.</param>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.ForceStatusCode(demoWebApp.Models.InputBinding.HomeForceStatusCode)">
+            <summary>
+                This action forces the status code to be set to <paramref name="code" />.
+            </summary>
+            <param name="model">This is the model containing status code.</param>
+            <returns></returns>
         </member>
         <member name="T:demoWebApp.Models.InputBinding.AdminIndexInput">
             <summary>
@@ -81,6 +106,24 @@
                 Gets or sets the metrics.
             </summary>
             <value>This is the set of metric to display metrics.</value>
+        </member>
+        <member name="T:demoWebApp.Program">
+            <summary>
+                This is the starting class for the WebApp demo.
+            </summary>
+        </member>
+        <member name="M:demoWebApp.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+                Creates the web host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Program.Main(System.String[])">
+            <summary>
+                This is the entry point for the application.
+            </summary>
+            <param name="args">This is the command line arguments.</param>
         </member>
         <member name="T:demoWebApp.Startup">
             <summary>

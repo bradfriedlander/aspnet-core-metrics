@@ -41,8 +41,6 @@ namespace demoWebApp.Controllers
             };
             if (!ModelState.IsValid)
             {
-                _metric.ResultCount = -1;
-                _metric.ExceptionMessage = GetValidationErrors();
                 viewModel.Metrics = new List<IMetric>();
                 return View(viewModel);
             }
