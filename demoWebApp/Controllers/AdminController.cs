@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using demoWebApp.Models.InputBinding;
 using demoWebApp.Models.ViewBinding;
 using MagenicMetrics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace demoWebApp.Controllers
@@ -12,6 +13,7 @@ namespace demoWebApp.Controllers
     ///     This controllers is used to display the latest metrics.
     /// </summary>
     /// <seealso cref="BaseController" />
+    [Authorize]
     public class AdminController : BaseController
     {
         /// <summary>
