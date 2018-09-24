@@ -100,7 +100,7 @@
             <returns>The updated definition.</returns>
             <remarks>PUT api/values?DefinitionInput</remarks>
         </member>
-        <member name="M:demoWebApi.Controllers.ValuesController.Undelete(demoWebApi.InputModels.DefinitionInput)">
+        <member name="M:demoWebApi.Controllers.ValuesController.Undelete(System.Int32)">
             <summary>
                 This restores the record identified by <paramref name="definition" />.
             </summary>
