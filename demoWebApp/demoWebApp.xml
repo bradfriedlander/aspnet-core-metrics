@@ -125,6 +125,18 @@
             </summary>
             <param name="args">This is the command line arguments.</param>
         </member>
+        <member name="T:demoWebApp.Services.ApplicationDbContext">
+            <summary>
+                This is the identify service database context.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext" />
+        </member>
+        <member name="M:demoWebApp.Services.ApplicationDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{demoWebApp.Services.ApplicationDbContext})">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApp.Services.ApplicationDbContext" /> class.
+            </summary>
+            <param name="options">The options.</param>
+        </member>
         <member name="T:demoWebApp.Startup">
             <summary>
                 This is the <see cref="T:demoWebApp.Startup" /> class for the "demoWebApp" application.
