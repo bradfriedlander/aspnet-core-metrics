@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using System.Net;
 
 namespace demoWebApp
 {
@@ -13,9 +16,22 @@ namespace demoWebApp
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns></returns>
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            var hostingConfig = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddUserSecrets<Startup>()
+                .AddEnvironmentVariables()
+                .Build();
+            return WebHost.CreateDefaultBuilder(args)
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Loopback, 5100);
+                        //options.Listen(IPAddress.Loopback, 5101, listenOptions => { listenOptions.UseHttps("localhost.pfx", "magenic"); });
+                        options.Listen(IPAddress.Loopback, 5101, listenOptions => { listenOptions.UseHttps(hostingConfig["Https:File"], hostingConfig["Https:Password"]); });
+                    })
+                    .UseStartup<Startup>();
+        }
 
         /// <summary>
         ///     This is the entry point for the application.
