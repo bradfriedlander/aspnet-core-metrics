@@ -3,6 +3,7 @@ using System.Diagnostics;
 using demoWebApp.Models;
 using demoWebApp.Models.InputBinding;
 using MagenicMetrics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -12,6 +13,7 @@ namespace demoWebApp.Controllers
     ///     This is the default controller for the application.
     /// </summary>
     /// <seealso cref="BaseController" />
+    [Authorize]
     public class HomeController : BaseController
     {
         /// <summary>
