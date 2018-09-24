@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using demoWebApi.Filters;
+﻿using demoWebApi.Filters;
 using demoWebApi.InputModels;
 using demoWebApi.Models;
 using demoWebApi.Services;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace demoWebApi.Controllers
 {
@@ -99,6 +100,7 @@ namespace demoWebApi.Controllers
             var nextId = _context.Definitions.Max(d => d.DefinitionId) + 1;
             _context.Definitions.Add(new Definition() { DefinitionId = nextId, Name = definition.Name });
             _metric.ResultCount = _context.SaveChanges();
+            _metric.Details = JsonConvert.SerializeObject(definition);
             var match = _context.Definitions.Find(nextId);
             return Ok(match);
         }
@@ -123,15 +125,15 @@ namespace demoWebApi.Controllers
         }
 
         /// <summary>
-        ///     This restores the record identified by <paramref name="definition" />.
+        ///     This restores the record identified by <paramref name="id" />.
         /// </summary>
-        /// <param name="definition">This is the definition update.</param>
-        /// <returns>The restore definition.</returns>
-        /// <remarks>PUT api/values/Undelete?DefinitionInput</remarks>
+        /// <param name="id">This is the record to logically restore.</param>
+        /// <returns>The restored definition.</returns>
+        /// <remarks>PUT api/values/Undelete?id</remarks>
         [HttpPut("Undelete"), EnsureDefinitionExists]
-        public IActionResult Undelete(DefinitionInput definition)
+        public IActionResult Undelete(int id)
         {
-            var match = _context.Definitions.IgnoreQueryFilters().FirstOrDefault(d => d.DefinitionId == definition.Id);
+            var match = _context.Definitions.IgnoreQueryFilters().FirstOrDefault(d => d.DefinitionId == id);
             match.IsDeleted = false;
             _metric.ResultCount = _context.SaveChanges();
             return Ok(match);

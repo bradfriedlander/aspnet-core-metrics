@@ -1,7 +1,10 @@
-﻿using demoWebApi.InputModels;
+﻿using demoWebApi.Controllers;
+using demoWebApi.InputModels;
 using demoWebApi.Services;
+using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Newtonsoft.Json;
 
 namespace demoWebApi.Filters
 {
@@ -38,13 +41,18 @@ namespace demoWebApi.Filters
         public async void OnActionExecuting(ActionExecutingContext context)
         {
             var definitionId = 0;
+            DefinitionInput definitionInput;
+            var metric = ((BaseController)(context.Controller))._metric;
             if (context.ActionArguments.Keys.Contains("id"))
             {
                 definitionId = (int)context.ActionArguments["id"];
+                definitionInput = new DefinitionInput { Id = definitionId };
+                metric.Details = JsonConvert.SerializeObject(definitionInput);
             }
             else if (context.ActionArguments.Keys.Contains("definition"))
             {
-                var definitionInput = (DefinitionInput)context.ActionArguments["definition"];
+                definitionInput = (DefinitionInput)context.ActionArguments["definition"];
+                metric.Details = JsonConvert.SerializeObject(definitionInput);
                 if (!definitionInput.Id.HasValue)
                 {
                     context.ModelState.AddModelError(nameof(definitionInput.Id), $"No value provided for {nameof(DefinitionInput.Id)}");
