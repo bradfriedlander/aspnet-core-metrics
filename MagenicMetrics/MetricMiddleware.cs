@@ -81,7 +81,7 @@ namespace MagenicMetrics
                 }
                 catch (Exception metricServiceEx)
                 {
-                    _logger.LogError(metricServiceEx, $"Failed to save '{JsonConvert.SerializeObject(metric)}'.");
+                    _logger.LogError(metricServiceEx, "Failed to save '{SerializeObject}'.", JsonConvert.SerializeObject(metric));
                 }
             }
         }
