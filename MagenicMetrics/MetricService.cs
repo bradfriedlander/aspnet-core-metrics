@@ -31,8 +31,8 @@ namespace MagenicMetrics
         {
             _logger = logger;
             _options = options.Value;
-            _logger.LogDebug($"'TableName' value is '{options.Value.TableName}'.");
-            _logger.LogDebug($"'MetricServiceConnection' value is '{options.Value.MetricServiceConnection}'.");
+            _logger.LogDebug("'TableName' value is '{TableName}'.", options.Value.TableName);
+            _logger.LogDebug("'MetricServiceConnection' value is '{MetricServiceConnection}'.", options.Value.MetricServiceConnection);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace MagenicMetrics
             }
             catch (Exception efEx)
             {
-                _logger.LogCritical(efEx, $"Unable to persist '{JsonConvert.SerializeObject(metric)}'.");
+                _logger.LogError(efEx, "Unable to persist '{metricObject}'.", JsonConvert.SerializeObject(metric));
                 return 0;
             }
         }
@@ -73,11 +73,12 @@ namespace MagenicMetrics
         public async Task<IQueryable<IMetric>> GetLatest(int pageSize, int pageNumber, string applicationFilter)
         {
             var skipCount = (pageNumber - 1) * pageSize;
-            return Metrics
+            var pageOfMetrics = await Metrics
                 .OrderByDescending(m => m.StartTime)
                 .Where(m => m.Application.Contains(applicationFilter))
                 .Skip(skipCount)
-                .Take(pageSize);
+                .Take(pageSize).ToListAsync();
+            return pageOfMetrics.AsQueryable();
         }
 
         /// <summary>
