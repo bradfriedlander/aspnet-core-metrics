@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Collections.Generic;
+using System.Text;
 
 namespace demoWebApi
 {
@@ -51,6 +54,16 @@ namespace demoWebApi
             {
                 app.UseHsts();
             }
+            app.Map("/healthcheck", branch =>
+            {
+                branch.Run(context =>
+                {
+                    var resultObject = JsonConvert.SerializeObject(new List<string> { "Good" });
+                    var data = Encoding.UTF8.GetBytes(resultObject);
+                    context.Response.ContentType = "application/json";
+                    return context.Response.Body.WriteAsync(data, 0, data.Length);
+                });
+            });
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
