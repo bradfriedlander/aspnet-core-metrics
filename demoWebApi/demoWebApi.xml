@@ -13,11 +13,12 @@
             </remarks>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:demoWebApi.Controllers.BaseController.#ctor(MagenicMetrics.IMetric)">
+        <member name="M:demoWebApi.Controllers.BaseController.#ctor(MagenicMetrics.IMetric,demoWebApi.Models.IHealthCheckStatus)">
             <summary>
-                Initializes a new instance of the <see cref="T:demoWebApi.Controllers.BaseController" /> class.
+            Initializes a new instance of the <see cref="T:demoWebApi.Controllers.BaseController" /> class.
             </summary>
             <param name="metric">The metric.</param>
+            <param name="healthCheckStatus">The health check status.</param>
         </member>
         <member name="F:demoWebApi.Controllers.BaseController._metric">
             <summary>
@@ -42,7 +43,7 @@
             </summary>
             <seealso cref="T:demoWebApi.Controllers.BaseController" />
         </member>
-        <member name="M:demoWebApi.Controllers.ValuesController.#ctor(MagenicMetrics.IMetric,demoWebApi.Services.ApiContext,demoWebApi.Models.HealthCheckStatus)">
+        <member name="M:demoWebApi.Controllers.ValuesController.#ctor(MagenicMetrics.IMetric,demoWebApi.Services.ApiContext,demoWebApi.Models.IHealthCheckStatus)">
             <summary>
                 Initializes a new instance of the <see cref="T:demoWebApi.Controllers.ValuesController" /> class.
             </summary>
@@ -184,6 +185,79 @@
                 Gets or sets the name for the definition.
             </summary>
             <value>This is the name.</value>
+        </member>
+        <member name="T:demoWebApi.Models.HealthCheckStatus">
+            <summary>
+                Class for all health check status data.
+            </summary>
+            <seealso cref="T:demoWebApi.Models.IHealthCheckStatus" />
+        </member>
+        <member name="M:demoWebApi.Models.HealthCheckStatus.#ctor(System.DateTime)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApi.Models.HealthCheckStatus" /> class.
+            </summary>
+            <param name="startTime">The start time.</param>
+        </member>
+        <member name="P:demoWebApi.Models.HealthCheckStatus.AliveSeconds">
+            <summary>
+                Gets the alive seconds.
+            </summary>
+            <value>The alive seconds.</value>
+        </member>
+        <member name="P:demoWebApi.Models.HealthCheckStatus.RequestsProcessed">
+            <summary>
+                Gets the requests processed.
+            </summary>
+            <value>The requests processed.</value>
+        </member>
+        <member name="P:demoWebApi.Models.HealthCheckStatus.StartTime">
+            <summary>
+                Gets the start time.
+            </summary>
+            <value>The start time.</value>
+        </member>
+        <member name="M:demoWebApi.Models.HealthCheckStatus.IncrementRequestsProcessed">
+            <summary>
+                Increments the requests processed.
+            </summary>
+        </member>
+        <member name="M:demoWebApi.Models.HealthCheckStatus.UpdateAliveSeconds">
+            <summary>
+                Updates the alive seconds.
+            </summary>
+        </member>
+        <member name="T:demoWebApi.Models.IHealthCheckStatus">
+            <summary>
+                Interface for all health check status data.
+            </summary>
+        </member>
+        <member name="P:demoWebApi.Models.IHealthCheckStatus.AliveSeconds">
+            <summary>
+                Gets the alive seconds.
+            </summary>
+            <value>The alive seconds.</value>
+        </member>
+        <member name="P:demoWebApi.Models.IHealthCheckStatus.RequestsProcessed">
+            <summary>
+                Gets the requests processed.
+            </summary>
+            <value>The requests processed.</value>
+        </member>
+        <member name="P:demoWebApi.Models.IHealthCheckStatus.StartTime">
+            <summary>
+                Gets the start time.
+            </summary>
+            <value>The start time.</value>
+        </member>
+        <member name="M:demoWebApi.Models.IHealthCheckStatus.IncrementRequestsProcessed">
+            <summary>
+                Increments the requests processed.
+            </summary>
+        </member>
+        <member name="M:demoWebApi.Models.IHealthCheckStatus.UpdateAliveSeconds">
+            <summary>
+                Updates the alive seconds.
+            </summary>
         </member>
         <member name="T:demoWebApi.Program">
             <summary>

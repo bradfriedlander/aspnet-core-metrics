@@ -40,7 +40,7 @@ namespace demoWebApi
         /// </summary>
         public IConfiguration Configuration { get; }
 
-        private HealthCheckStatus healthCheckStatus;
+        private IHealthCheckStatus healthCheckStatus;
 
         /// <summary>
         ///     This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +61,7 @@ namespace demoWebApi
             {
                 branch.Run(context =>
                 {
-                    healthCheckStatus.AliveSeconds = Convert.ToInt32((DateTime.UtcNow - healthCheckStatus.StartTime).TotalSeconds);
+                    healthCheckStatus.UpdateAliveSeconds();
                     var resultObject = JsonConvert.SerializeObject(healthCheckStatus);
                     var data = Encoding.UTF8.GetBytes(resultObject);
                     context.Response.ContentType = "application/json";
@@ -106,9 +106,9 @@ namespace demoWebApi
         /// <param name="services">The services.</param>
         private void CreateHealthCheckStatusSingleton(IServiceCollection services)
         {
-            services.AddSingleton(new HealthCheckStatus(DateTime.UtcNow));
+            services.AddSingleton<IHealthCheckStatus>(new HealthCheckStatus(DateTime.UtcNow));
             var sp = services.BuildServiceProvider();
-            healthCheckStatus = sp.GetService<HealthCheckStatus>();
+            healthCheckStatus = sp.GetService<IHealthCheckStatus>();
         }
     }
 }
