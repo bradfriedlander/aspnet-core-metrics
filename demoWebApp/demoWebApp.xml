@@ -17,6 +17,12 @@
             <param name="metric">The metric.</param>
             <param name="metricService">The metric service.</param>
         </member>
+        <member name="M:demoWebApp.Controllers.AdminController.Index">
+            <summary>
+                Retrieve the latest <see cref="T:MagenicMetrics.Metric" /> records.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:demoWebApp.Controllers.AdminController.Index(demoWebApp.Models.InputBinding.AdminIndexInput)">
             <summary>
                 Retrieve the latest <see cref="T:MagenicMetrics.Metric" /> records. <paramref name="adminIndex.Count.Count" /> limits the number to return.
