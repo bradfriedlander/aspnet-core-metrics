@@ -1,11 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using demoWebApp.Models;
+﻿using demoWebApp.Models;
 using demoWebApp.Models.InputBinding;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
+using System.Diagnostics;
 
 namespace demoWebApp.Controllers
 {
@@ -76,19 +76,30 @@ namespace demoWebApp.Controllers
         }
 
         /// <summary>
+        ///     This display the input form to forces the status code value.
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult ForceStatusCode()
+        {
+            var initialModel = new HomeForceStatusCode { };
+            return View(initialModel);
+        }
+
+        /// <summary>
         ///     This action forces the status code to be set to <paramref name="code" />.
         /// </summary>
         /// <param name="model">This is the model containing status code.</param>
         /// <returns></returns>
+        [HttpPost]
         public IActionResult ForceStatusCode(HomeForceStatusCode model)
         {
-            var code = model.Code;
-            if (code < 200 || code > 599)
+            if (!ModelState.IsValid)
             {
-                ModelState.AddModelError(nameof(code), $"The value '{code}' must be between 200 and 599.");
+                _metric.ResultCount = -1;
                 return View(model);
             }
-            return StatusCode(code);
+            _metric.ResultCount = 0;
+            return StatusCode(model.Code);
         }
 
         public IActionResult Index()
