@@ -1,7 +1,8 @@
-﻿using System.Text;
+﻿using demoWebApi.Models;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Text;
 
 namespace demoWebApi.Controllers
 {
@@ -19,9 +20,11 @@ namespace demoWebApi.Controllers
         ///     Initializes a new instance of the <see cref="BaseController" /> class.
         /// </summary>
         /// <param name="metric">The metric.</param>
-        public BaseController(IMetric metric)
+        /// <param name="healthCheckStatus">The health check status.</param>
+        public BaseController(IMetric metric, IHealthCheckStatus healthCheckStatus)
         {
             _metric = metric;
+            healthCheckStatus.IncrementRequestsProcessed();
         }
 
         /// <summary>
