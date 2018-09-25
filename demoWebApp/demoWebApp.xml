@@ -71,6 +71,12 @@
             </summary>
             <param name="metric">The metric.</param>
         </member>
+        <member name="M:demoWebApp.Controllers.HomeController.ForceStatusCode">
+            <summary>
+                This display the input form to forces the status code value.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:demoWebApp.Controllers.HomeController.ForceStatusCode(demoWebApp.Models.InputBinding.HomeForceStatusCode)">
             <summary>
                 This action forces the status code to be set to <paramref name="code" />.
