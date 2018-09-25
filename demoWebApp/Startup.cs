@@ -43,8 +43,16 @@ namespace demoWebApp
         /// <summary>
         ///     This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
-        /// <param name="app">The application.</param>
-        /// <param name="env">The environment.</param>
+        /// <param name="app">This is the application builder.</param>
+        /// <param name="env">This is the hosting environment.</param>
+        /// <remarks>
+        ///     <para>
+        ///         Note 1: Per "https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-2.1&amp;tabs=aspnetcore2x"
+        ///         the default <see cref="CookiePolicyOptions" /> for <see cref="CookieSecurePolicy" /> is <see
+        ///         cref="CookieSecurePolicy.SameAsRequest" />. Using <see cref="CookieSecurePolicy.Always" /> is more secure and works if the site
+        ///         only allows HTTPS requests.
+        ///     </para>
+        /// </remarks>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -59,7 +67,8 @@ namespace demoWebApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            // Note 1
+            app.UseCookiePolicy(new CookiePolicyOptions { Secure = CookieSecurePolicy.Always });
             app.UseAuthentication();
             app.UseMetrics();
             app.UseMvc(routes =>
