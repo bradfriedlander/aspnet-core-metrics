@@ -21,14 +21,14 @@
             <summary>
                 Retrieve the latest <see cref="T:MagenicMetrics.Metric" /> records.
             </summary>
-            <returns></returns>
+            <returns>This is the default list of metrics.</returns>
         </member>
         <member name="M:demoWebApp.Controllers.AdminController.Index(demoWebApp.Models.InputBinding.AdminIndexInput)">
             <summary>
                 Retrieve the latest <see cref="T:MagenicMetrics.Metric" /> records. <paramref name="adminIndex.Count.Count" /> limits the number to return.
             </summary>
             <param name="adminIndex">This is the input for this action.</param>
-            <returns></returns>
+            <returns>This is the list of metrics satisfying the <paramref name="adminIndex" /> constraints.</returns>
         </member>
         <member name="T:demoWebApp.Controllers.BaseController">
             <summary>
@@ -171,8 +171,16 @@
             <summary>
                 This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
             </summary>
-            <param name="app">The application.</param>
-            <param name="env">The environment.</param>
+            <param name="app">This is the application builder.</param>
+            <param name="env">This is the hosting environment.</param>
+            <remarks>
+                <para>
+                    Note 1: Per "https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-2.1&amp;tabs=aspnetcore2x"
+                    the default <see cref="T:Microsoft.AspNetCore.Builder.CookiePolicyOptions" /> for <see cref="T:Microsoft.AspNetCore.Http.CookieSecurePolicy" /> is <see
+                    cref="F:Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest" />. Using <see cref="F:Microsoft.AspNetCore.Http.CookieSecurePolicy.Always" /> is more secure and works if the site
+                    only allows HTTPS requests.
+                </para>
+            </remarks>
         </member>
         <member name="M:demoWebApp.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
