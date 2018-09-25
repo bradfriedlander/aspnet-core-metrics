@@ -42,12 +42,13 @@
             </summary>
             <seealso cref="T:demoWebApi.Controllers.BaseController" />
         </member>
-        <member name="M:demoWebApi.Controllers.ValuesController.#ctor(MagenicMetrics.IMetric,demoWebApi.Services.ApiContext)">
+        <member name="M:demoWebApi.Controllers.ValuesController.#ctor(MagenicMetrics.IMetric,demoWebApi.Services.ApiContext,demoWebApi.Models.HealthCheckStatus)">
             <summary>
                 Initializes a new instance of the <see cref="T:demoWebApi.Controllers.ValuesController" /> class.
             </summary>
             <param name="metric">The metric.</param>
             <param name="context">The context.</param>
+            <param name="healthCheckStatus">The health check status.</param>
         </member>
         <member name="F:demoWebApi.Controllers.ValuesController._context">
             <summary>
@@ -280,6 +281,12 @@
                 This method gets called by the runtime. Use this method to add services to the container.
             </summary>
             <param name="services">The existing collection of services.</param>
+        </member>
+        <member name="M:demoWebApi.Startup.CreateHealthCheckStatusSingleton(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                Creates the health check status singleton.
+            </summary>
+            <param name="services">The services.</param>
         </member>
     </members>
 </doc>

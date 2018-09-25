@@ -23,9 +23,11 @@ namespace demoWebApi.Controllers
         /// </summary>
         /// <param name="metric">The metric.</param>
         /// <param name="context">The context.</param>
-        public ValuesController(IMetric metric, ApiContext context) : base(metric)
+        /// <param name="healthCheckStatus">The health check status.</param>
+        public ValuesController(IMetric metric, ApiContext context, HealthCheckStatus healthCheckStatus) : base(metric)
         {
             _context = context;
+            healthCheckStatus.RequestsProcessed++;
         }
 
         /// <summary>
