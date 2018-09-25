@@ -107,6 +107,17 @@
             </summary>
             <value>The count.</value>
         </member>
+        <member name="T:demoWebApp.Models.InputBinding.HomeForceStatusCode">
+            <summary>
+                This is the input and binding model for status code input.
+            </summary>
+        </member>
+        <member name="P:demoWebApp.Models.InputBinding.HomeForceStatusCode.Code">
+            <summary>
+                Gets or sets the status code value.
+            </summary>
+            <value>This is the status code value.</value>
+        </member>
         <member name="T:demoWebApp.Models.ViewBinding.AdminIndexView">
             <summary>
                 This is the view model for Admin Index.
