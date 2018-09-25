@@ -1,4 +1,5 @@
-﻿using demoWebApi.Services;
+﻿using demoWebApi.Models;
+using demoWebApi.Services;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
-using System.Collections.Generic;
+using System;
 using System.Text;
 
 namespace demoWebApi
@@ -39,6 +40,8 @@ namespace demoWebApi
         /// </summary>
         public IConfiguration Configuration { get; }
 
+        private HealthCheckStatus healthCheckStatus;
+
         /// <summary>
         ///     This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
@@ -58,7 +61,8 @@ namespace demoWebApi
             {
                 branch.Run(context =>
                 {
-                    var resultObject = JsonConvert.SerializeObject(new List<string> { "Good" });
+                    healthCheckStatus.AliveSeconds = Convert.ToInt32((DateTime.UtcNow - healthCheckStatus.StartTime).TotalSeconds);
+                    var resultObject = JsonConvert.SerializeObject(healthCheckStatus);
                     var data = Encoding.UTF8.GetBytes(resultObject);
                     context.Response.ContentType = "application/json";
                     return context.Response.Body.WriteAsync(data, 0, data.Length);
@@ -81,8 +85,8 @@ namespace demoWebApi
         /// <param name="services">The existing collection of services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            CreateHealthCheckStatusSingleton(services);
             services.Configure<MetricServiceOptions>(Configuration.GetSection("MetricServiceSettings"));
-
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddXmlSerializerFormatters();
@@ -94,6 +98,17 @@ namespace demoWebApi
             {
                 c.SwaggerDoc("v1", new Info { Title = "Demo API", Version = "v1" });
             });
+        }
+
+        /// <summary>
+        ///     Creates the health check status singleton.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        private void CreateHealthCheckStatusSingleton(IServiceCollection services)
+        {
+            services.AddSingleton(new HealthCheckStatus(DateTime.UtcNow));
+            var sp = services.BuildServiceProvider();
+            healthCheckStatus = sp.GetService<HealthCheckStatus>();
         }
     }
 }
