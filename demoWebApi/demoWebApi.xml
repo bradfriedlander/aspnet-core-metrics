@@ -196,11 +196,25 @@
             <param name="args">The arguments.</param>
             <returns></returns>
         </member>
+        <member name="M:demoWebApi.Program.CreateWebHostBuilder(System.String[],Microsoft.Extensions.Configuration.IConfigurationRoot)">
+            <summary>
+                Creates the web host builder.
+            </summary>
+            <param name="args">These are the command line arguments.</param>
+            <param name="hostingConfig">This is the hosting configuration.</param>
+            <returns></returns>
+        </member>
         <member name="M:demoWebApi.Program.Main(System.String[])">
             <summary>
                 This is the entry point for the application.
             </summary>
             <param name="args">This is the command line arguments.</param>
+        </member>
+        <member name="M:demoWebApi.Program.GetHostingConfiguration(System.String[])">
+            <summary>
+                Gets the hosting configuration.
+            </summary>
+            <returns>This is the hosting configuration information.</returns>
         </member>
         <member name="T:demoWebApi.Services.ApiContext">
             <summary>
