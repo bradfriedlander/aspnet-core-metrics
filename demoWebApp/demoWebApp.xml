@@ -59,11 +59,66 @@
             </summary>
             <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
         </member>
-        <member name="M:demoWebApp.Controllers.DefinitionController.#ctor(MagenicMetrics.IMetric)">
+        <member name="M:demoWebApp.Controllers.DefinitionController.#ctor(MagenicMetrics.IMetric,Microsoft.Extensions.Logging.ILogger{demoWebApp.Controllers.DefinitionController})">
             <summary>
                 Initializes a new instance of the <see cref="T:demoWebApp.Controllers.DefinitionController" /> class.
             </summary>
             <param name="metric">The metric.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Create">
+            <summary>
+                Creates new <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Create(demoWebApp.Models.ViewBinding.DefinitionIndexView)">
+            <summary>
+                Creates the specified new definition.
+            </summary>
+            <param name="newDefinition">The new definition.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Delete(System.Int32)">
+            <summary>
+                Deletes the specified <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Details(System.Int32)">
+            <summary>
+                Shows the details of the specified <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Edit(System.Int32)">
+            <summary>
+                Edits the specified <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Edit(demoWebApp.Models.ViewBinding.DefinitionIndexView)">
+            <summary>
+                Edits the specified <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <param name="definition">The definition.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Index">
+            <summary>
+                Get all <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" /> records.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Undelete(System.Int32)">
+            <summary>
+                Undeletes the specified <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
         </member>
         <member name="T:demoWebApp.Controllers.HomeController">
             <summary>

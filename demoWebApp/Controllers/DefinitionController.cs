@@ -1,9 +1,11 @@
-﻿using demoWebApp.Models.ViewBinding;
+﻿using demoWebApp.HttpHelpers;
+using demoWebApp.Models.ViewBinding;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace demoWebApp.Controllers
 {
@@ -13,23 +15,40 @@ namespace demoWebApp.Controllers
         ///     Initializes a new instance of the <see cref="DefinitionController" /> class.
         /// </summary>
         /// <param name="metric">The metric.</param>
-        public DefinitionController(IMetric metric) : base(metric)
+        /// <param name="logger">The logger.</param>
+        public DefinitionController(IMetric metric, ILogger<DefinitionController> logger) : base(metric)
         {
+            _logger = logger;
             if (definitions == null)
             {
-                definitions = new List<DefinitionIndexView>() { new DefinitionIndexView { DefinitionId = 1, IsDeleted = false, Name = "Definition 1" } };
+                definitions = new List<DefinitionIndexView>() /*{ new DefinitionIndexView { DefinitionId = 1, IsDeleted = false, Name = "Definition 1" } }*/;
             }
         }
 
+        // TODO: Get this from configuration - use options
+        private const string baseUri = "https://localhost:5001/api/values";
+
         private static List<DefinitionIndexView> definitions;
+        private readonly ILogger _logger;
 
-        // GET: Definition/Create
-        public ActionResult Create() => View(new DefinitionIndexView());
+        /// <summary>
+        ///     Creates new <see cref="DefinitionIndexView" />.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Create()
+        {
+            _metric.ResultCount = 0;
+            return View(new DefinitionIndexView());
+        }
 
-        // POST: Definition/Create
+        /// <summary>
+        ///     Creates the specified new definition.
+        /// </summary>
+        /// <param name="newDefinition">The new definition.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(DefinitionIndexView newDefinition)
+        public async Task<IActionResult> Create(DefinitionIndexView newDefinition)
         {
             try
             {
@@ -37,9 +56,15 @@ namespace demoWebApp.Controllers
                 {
                     return View(newDefinition);
                 }
-                var nextId = definitions.Max(d => d.DefinitionId) + 1;
-                newDefinition.DefinitionId = nextId;
-                definitions.Add(newDefinition);
+                var requestUri = $"{baseUri}";
+                var response = await HttpRequestFactory.Post(requestUri, newDefinition);
+                if (!response.IsSuccessStatusCode)
+                {
+                    _metric.ResultCode = (int)response.StatusCode;
+                    ModelState.AddModelError("", $"Could not create new definition, status code: '{response.StatusCode}'.");
+                    return View(newDefinition);
+                }
+                _metric.ResultCount = 1;
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception genEx)
@@ -49,16 +74,24 @@ namespace demoWebApp.Controllers
             }
         }
 
-        public IActionResult Delete(int id)
+        /// <summary>
+        ///     Deletes the specified <see cref="DefinitionIndexView" />.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                var itemToDelete = definitions.FirstOrDefault(d => id == d.DefinitionId);
-                if (itemToDelete == null)
+                var requestUri = $"{baseUri}/{id}";
+                var response = await HttpRequestFactory.Delete(requestUri);
+                if (!response.IsSuccessStatusCode)
                 {
-                    return NotFound();
+                    _metric.ResultCode = (int)response.StatusCode;
+                    ModelState.AddModelError("", $"Could not delete definition {id}, status code: '{response.StatusCode}'.");
+                    return RedirectToAction(nameof(Index));
                 }
-                itemToDelete.IsDeleted = true;
+                _metric.ResultCount = 1;
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception genEx)
@@ -67,18 +100,54 @@ namespace demoWebApp.Controllers
             }
         }
 
-        // GET: Definition/Details/5
-        public ActionResult Details(int id)
+        /// <summary>
+        ///     Shows the details of the specified <see cref="DefinitionIndexView" />.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Details(int id)
         {
-            var itemToView = definitions.FirstOrDefault(d => id == d.DefinitionId);
-            return itemToView == null ? NotFound() : (ActionResult)View(itemToView);
+            var requestUri = $"{baseUri}/{id}";
+            var response = await HttpRequestFactory.Get(requestUri);
+            if (!response.IsSuccessStatusCode)
+            {
+                _metric.ResultCode = (int)response.StatusCode;
+                ModelState.AddModelError("", $"Could not get definition {id}, status code: '{response.StatusCode}'.");
+                return View(new DefinitionIndexView());
+            }
+            var outputModel = response.ContentAsType<DefinitionIndexView>();
+            _metric.ResultCount = 1;
+            return View(outputModel);
         }
 
-        public ActionResult Edit(int id) => View(definitions.Find(d => d.DefinitionId == id));
+        /// <summary>
+        ///     Edits the specified <see cref="DefinitionIndexView" />.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Edit(int id)
+        {
+            var requestUri = $"{baseUri}/{id}";
+            var response = await HttpRequestFactory.Get(requestUri);
+            if (!response.IsSuccessStatusCode)
+            {
+                _metric.ResultCode = (int)response.StatusCode;
+                ModelState.AddModelError("", $"Could not get definition {id}, status code: '{response.StatusCode}'.");
+                return View(new DefinitionIndexView());
+            }
+            var outputModel = response.ContentAsType<DefinitionIndexView>();
+            _metric.ResultCount = 1;
+            return View(outputModel);
+        }
 
+        /// <summary>
+        ///     Edits the specified <see cref="DefinitionIndexView" />.
+        /// </summary>
+        /// <param name="definition">The definition.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(DefinitionIndexView definition)
+        public async Task<IActionResult> Edit(DefinitionIndexView definition)
         {
             try
             {
@@ -86,8 +155,9 @@ namespace demoWebApp.Controllers
                 {
                     return View(definition);
                 }
-                var editedItem = definitions.Find(d => d.DefinitionId == definition.DefinitionId);
-                editedItem.Name = definition.Name;
+                var requestUri = $"{baseUri}";
+                var response = await HttpRequestFactory.Put(requestUri, definition);
+                _metric.ResultCount = 1;
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception genEx)
@@ -97,23 +167,43 @@ namespace demoWebApp.Controllers
             }
         }
 
-        // GET: Definition
-        public ActionResult Index() => View(definitions);
+        /// <summary>
+        ///     Get all <see cref="DefinitionIndexView" /> records.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Index()
+        {
+            var requestUri = $"{baseUri}/GetAll";
+            var response = await HttpRequestFactory.Get(requestUri);
+            if (!response.IsSuccessStatusCode)
+            {
+                _metric.ResultCode = (int)response.StatusCode;
+                ModelState.AddModelError("", $"Could not retrieve definitions, status code: '{response.StatusCode}'.");
+                return View(definitions);
+            }
+            definitions = response.ContentAsType<List<DefinitionIndexView>>();
+            _metric.ResultCount = definitions.Count;
+            return View(definitions);
+        }
 
-        public IActionResult Undelete(int id)
+        /// <summary>
+        ///     Undeletes the specified <see cref="DefinitionIndexView" />.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Undelete(int id)
         {
             try
             {
-                var itemToUndelete = definitions.FirstOrDefault(d => id == d.DefinitionId);
-                if (itemToUndelete == null)
+                var requestUri = $"{baseUri}/Undelete?id={id}";
+                var response = await HttpRequestFactory.Put(requestUri, string.Empty);
+                if (!response.IsSuccessStatusCode)
                 {
-                    return NotFound();
+                    _metric.ResultCode = (int)response.StatusCode;
+                    ModelState.AddModelError("", $"Could not undelete definition {id}, status code: '{response.StatusCode}'.");
+                    return RedirectToAction(nameof(Index));
                 }
-                if (!itemToUndelete.IsDeleted)
-                {
-                    return BadRequest("Item not deleted");
-                }
-                itemToUndelete.IsDeleted = false;
+                _metric.ResultCount = 1;
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception genEx)

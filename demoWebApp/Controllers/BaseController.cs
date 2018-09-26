@@ -1,7 +1,7 @@
-﻿using System.Text;
-using MagenicMetrics;
+﻿using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Text;
 
 namespace demoWebApp.Controllers
 {
@@ -18,6 +18,7 @@ namespace demoWebApp.Controllers
         public BaseController(IMetric metric)
         {
             _metric = metric;
+            _metric.ResultCount = -1;
         }
 
         /// <summary>
@@ -34,7 +35,6 @@ namespace demoWebApp.Controllers
             if (!context.ModelState.IsValid)
             {
                 _metric.ExceptionMessage = GetValidationErrors(context);
-                _metric.ResultCount = -1;
             }
         }
 
