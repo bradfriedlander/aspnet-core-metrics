@@ -56,6 +56,7 @@ namespace demoWebApp.Controllers
                 {
                     return View(newDefinition);
                 }
+                newDefinition.DefinitionId = 1;
                 var requestUri = $"{baseUri}";
                 var response = await HttpRequestFactory.Post(requestUri, newDefinition);
                 if (!response.IsSuccessStatusCode)
@@ -157,6 +158,12 @@ namespace demoWebApp.Controllers
                 }
                 var requestUri = $"{baseUri}";
                 var response = await HttpRequestFactory.Put(requestUri, definition);
+                if (!response.IsSuccessStatusCode)
+                {
+                    _metric.ResultCode = (int)response.StatusCode;
+                    ModelState.AddModelError("", $"Could not edit definition {definition.DefinitionId}, status code: '{response.StatusCode}'.");
+                    return View(definitions);
+                }
                 _metric.ResultCount = 1;
                 return RedirectToAction(nameof(Index));
             }

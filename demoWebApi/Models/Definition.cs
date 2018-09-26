@@ -1,7 +1,7 @@
 ﻿namespace demoWebApi.Models
 {
     /// <summary>
-    ///     This is the definition class that corresponds tot he database table.
+    ///     This is the definition class that corresponds to the database table.
     /// </summary>
     public class Definition
     {
