@@ -95,7 +95,6 @@ namespace demoWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _metric.ResultCount = -1;
                 return View(model);
             }
             _metric.ResultCount = 0;
