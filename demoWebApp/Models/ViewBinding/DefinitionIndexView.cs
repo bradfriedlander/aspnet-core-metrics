@@ -11,6 +11,7 @@ namespace demoWebApp.Models.ViewBinding
         ///     Gets or sets the definition identifier.
         /// </summary>
         /// <value>This is the identity definition identifier.</value>
+        [Display(Name = "Id")]
         public int DefinitionId { get; set; }
 
         /// <summary>

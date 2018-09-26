@@ -2,7 +2,7 @@ CREATE TABLE [dbo].[Metrics]
 (
 	[Application] [nvarchar](64) NOT NULL,
 	[Details] [nvarchar](max) NULL,
-	[ElpasedTime] [int] NOT NULL,
+	[ElapsedTime] [int] NOT NULL,
 	[ExceptionMessage] [nvarchar](max) NULL,
 	[MetricId] [int] IDENTITY(1,1) NOT NULL,
 	[Query] [nvarchar](128) NOT NULL,

@@ -115,7 +115,7 @@ namespace demoWebApi.Controllers
         [HttpPut, EnsureDefinitionExists]
         public IActionResult Put(DefinitionInput definition)
         {
-            var match = _context.Definitions.Find(definition.Id);
+            var match = _context.Definitions.Find(definition.DefinitionId);
             if (match == null)
             {
                 return NotFound();

@@ -151,11 +151,17 @@
                 This is the <see cref="T:demoWebApi.Models.Definition" /> binding model for requests.
             </summary>
         </member>
-        <member name="P:demoWebApi.InputModels.DefinitionInput.Id">
+        <member name="P:demoWebApi.InputModels.DefinitionInput.DefinitionId">
             <summary>
                 Gets or sets the identifier.
             </summary>
             <value>This is the identifier.</value>
+        </member>
+        <member name="P:demoWebApi.InputModels.DefinitionInput.IsDeleted">
+            <summary>
+                Gets or sets a value indicating whether this instance is deleted.
+            </summary>
+            <value><c>true</c> if this instance is deleted; otherwise, <c>false</c>.</value>
         </member>
         <member name="P:demoWebApi.InputModels.DefinitionInput.Name">
             <summary>
@@ -165,7 +171,7 @@
         </member>
         <member name="T:demoWebApi.Models.Definition">
             <summary>
-                This is the definition class that corresponds tot he database table.
+                This is the definition class that corresponds to the database table.
             </summary>
         </member>
         <member name="P:demoWebApi.Models.Definition.DefinitionId">

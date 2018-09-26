@@ -45,19 +45,20 @@ namespace demoWebApi.Filters
             if (context.ActionArguments.Keys.Contains("id"))
             {
                 definitionId = (int)context.ActionArguments["id"];
-                definitionInput = new DefinitionInput { Id = definitionId };
+                definitionInput = new DefinitionInput { DefinitionId = definitionId };
                 metric.Details = JsonConvert.SerializeObject(definitionInput);
             }
             else if (context.ActionArguments.Keys.Contains("definition"))
             {
                 definitionInput = (DefinitionInput)context.ActionArguments["definition"];
                 metric.Details = JsonConvert.SerializeObject(definitionInput);
-                if (!definitionInput.Id.HasValue)
+                if (!definitionInput.DefinitionId.HasValue)
                 {
-                    context.ModelState.AddModelError(nameof(definitionInput.Id), $"No value provided for {nameof(DefinitionInput.Id)}");
+                    context.ModelState.AddModelError(nameof(definitionInput.DefinitionId), $"No value provided for {nameof(DefinitionInput.DefinitionId)}");
                     context.Result = new BadRequestResult();
+                    return;
                 }
-                definitionId = (int)definitionInput.Id;
+                definitionId = (int)definitionInput.DefinitionId;
             }
             else
             {
@@ -67,13 +68,13 @@ namespace demoWebApi.Filters
             }
             if (definitionId <= 0)
             {
-                context.ModelState.AddModelError(nameof(DefinitionInput.Id), $"{nameof(DefinitionInput.Id)} must be > 0");
+                context.ModelState.AddModelError(nameof(DefinitionInput.DefinitionId), $"{nameof(DefinitionInput.DefinitionId)} must be > 0");
                 context.Result = new BadRequestResult();
                 return;
             }
             if (!await _apiContext.DoesDefinitionExist(definitionId))
             {
-                context.ModelState.AddModelError(nameof(DefinitionInput.Id), $"'{definitionId}' does not exist in persistent store.");
+                context.ModelState.AddModelError(nameof(DefinitionInput.DefinitionId), $"'{definitionId}' does not exist in persistent store.");
                 context.Result = new NotFoundResult();
             }
         }
