@@ -38,18 +38,12 @@
                     @Html.DisplayFor(modelItem => item.IsDeleted)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.DefinitionId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.DefinitionId }) |
-                    @if (item.IsDeleted)
-                    {
-                        @Html.ActionLink("Undelete", "Undelete", new { id = item.DefinitionId })
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.DefinitionId })
-                    }
+                    @Html.ActionLink("Edit", "Edit", new { id = item.DefinitionId }) |&nbsp;
+                    @Html.ActionLink("Details", "Details", new { id = item.DefinitionId }) |&nbsp;
+                    <a asp-action="Undelete" asp-if="@item.IsDeleted" asp-route-id="@item.DefinitionId">Undelete</a>
+                    <a asp-action="Delete" asp-if="@(!item.IsDeleted)" asp-route-id="@item.DefinitionId">Delete</a>
                 </td>
             </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
