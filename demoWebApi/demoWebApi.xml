@@ -15,7 +15,7 @@
         </member>
         <member name="M:demoWebApi.Controllers.BaseController.#ctor(MagenicMetrics.IMetric,demoWebApi.Models.IHealthCheckStatus)">
             <summary>
-            Initializes a new instance of the <see cref="T:demoWebApi.Controllers.BaseController" /> class.
+                Initializes a new instance of the <see cref="T:demoWebApi.Controllers.BaseController" /> class.
             </summary>
             <param name="metric">The metric.</param>
             <param name="healthCheckStatus">The health check status.</param>
@@ -123,7 +123,7 @@
         </member>
         <member name="T:demoWebApi.Filters.EnsureDefinitionExistsFilter">
             <summary>
-                This filter ensures that the record id is valid and that there is a matching <see cref="!:Definition" /> record.
+                This filter ensures that the record id is valid and that there is a matching <see cref="T:demoWebApi.InputModels.DefinitionInput" /> record.
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Filters.IActionFilter" />
         </member>
@@ -330,6 +330,11 @@
                 If a model is explicitly set on the options for this context (via <see
                 cref="M:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />) then this method will not be run.
             </remarks>
+        </member>
+        <member name="T:demoWebApi.Startup">
+            <summary>
+            This is the ASP.NET Core <see cref="T:Microsoft.AspNetCore.Hosting.IStartup"/> implementation for this application.
+            </summary>
         </member>
         <member name="M:demoWebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
             <summary>

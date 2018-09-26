@@ -14,6 +14,9 @@ using System.Text;
 
 namespace demoWebApi
 {
+    /// <summary>
+    /// This is the ASP.NET Core <see cref="IStartup"/> implementation for this application.
+    /// </summary>
     public class Startup
     {
         /// <summary>

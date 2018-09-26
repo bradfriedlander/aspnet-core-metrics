@@ -59,6 +59,12 @@
             </summary>
             <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
         </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.#ctor(MagenicMetrics.IMetric)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApp.Controllers.DefinitionController" /> class.
+            </summary>
+            <param name="metric">The metric.</param>
+        </member>
         <member name="T:demoWebApp.Controllers.HomeController">
             <summary>
                 This is the default controller for the application.
@@ -129,6 +135,29 @@
                 Gets or sets the metrics.
             </summary>
             <value>This is the set of metric to display metrics.</value>
+        </member>
+        <member name="T:demoWebApp.Models.ViewBinding.DefinitionIndexView">
+            <summary>
+                This is the view model for the retrieved definitions.
+            </summary>
+        </member>
+        <member name="P:demoWebApp.Models.ViewBinding.DefinitionIndexView.DefinitionId">
+            <summary>
+                Gets or sets the definition identifier.
+            </summary>
+            <value>This is the identity definition identifier.</value>
+        </member>
+        <member name="P:demoWebApp.Models.ViewBinding.DefinitionIndexView.IsDeleted">
+            <summary>
+                Gets or sets a value indicating whether this instance is deleted.
+            </summary>
+            <value><c>true</c> if this instance is deleted; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:demoWebApp.Models.ViewBinding.DefinitionIndexView.Name">
+            <summary>
+                Gets or sets the name for the definition.
+            </summary>
+            <value>This is the name.</value>
         </member>
         <member name="T:demoWebApp.Program">
             <summary>

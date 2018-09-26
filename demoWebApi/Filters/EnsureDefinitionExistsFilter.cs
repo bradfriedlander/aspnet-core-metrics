@@ -1,7 +1,6 @@
 ﻿using demoWebApi.Controllers;
 using demoWebApi.InputModels;
 using demoWebApi.Services;
-using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
@@ -9,7 +8,7 @@ using Newtonsoft.Json;
 namespace demoWebApi.Filters
 {
     /// <summary>
-    ///     This filter ensures that the record id is valid and that there is a matching <see cref="Definition" /> record.
+    ///     This filter ensures that the record id is valid and that there is a matching <see cref="DefinitionInput" /> record.
     /// </summary>
     /// <seealso cref="IActionFilter" />
     public class EnsureDefinitionExistsFilter : IActionFilter

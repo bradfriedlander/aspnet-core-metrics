@@ -61,7 +61,7 @@ namespace MagenicMetrics
             finally
             {
                 var endTime = DateTime.UtcNow;
-                metric.ElpasedTime = Convert.ToInt32((endTime - metric.StartTime).TotalMilliseconds);
+                metric.ElapsedTime = Convert.ToInt32((endTime - metric.StartTime).TotalMilliseconds);
                 if (!string.IsNullOrEmpty(exceptionMessage) && string.IsNullOrEmpty(metric.ExceptionMessage))
                 {
                     metric.ExceptionMessage = exceptionMessage;
