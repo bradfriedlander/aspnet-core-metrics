@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagenicMetrics", "src\Magen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "demoWebApi", "sample\demoWebApi\demoWebApi.csproj", "{FB69869B-A648-4FC8-BDE2-2CAC8D4B797C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagenicMetrics.Tests", "test\MagenicMetrics.Tests\MagenicMetrics.Tests.csproj", "{F5BAE1DB-6392-4779-82CC-1258C98320AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{FB69869B-A648-4FC8-BDE2-2CAC8D4B797C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB69869B-A648-4FC8-BDE2-2CAC8D4B797C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB69869B-A648-4FC8-BDE2-2CAC8D4B797C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5BAE1DB-6392-4779-82CC-1258C98320AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5BAE1DB-6392-4779-82CC-1258C98320AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5BAE1DB-6392-4779-82CC-1258C98320AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5BAE1DB-6392-4779-82CC-1258C98320AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
