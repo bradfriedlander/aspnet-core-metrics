@@ -4,14 +4,16 @@ using MagenicMetrics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace demoWebApp.Migrations
 {
     [DbContext(typeof(MetricService))]
-    partial class MetricServiceModelSnapshot : ModelSnapshot
+    [Migration("20180927160303_UpdateElapsedTime")]
+    partial class UpdateElapsedTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +33,7 @@ namespace demoWebApp.Migrations
 
                     b.Property<string>("Details");
 
-                    b.Property<int>("ElpasedTime");
+                    b.Property<int>("ElapsedTime");
 
                     b.Property<string>("ExceptionMessage");
 

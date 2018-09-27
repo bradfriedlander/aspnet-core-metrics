@@ -6,7 +6,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <DocumentationFile>C:\TestDev\demoMetrics\demoWebApp\demoWebApp.xml</DocumentationFile>
+	  <DocumentationFile>C:\TestDev\demoMetrics\sample\demoWebApp\demoWebApp.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -19,6 +19,7 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
 		<PackageReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" />
 		<PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
