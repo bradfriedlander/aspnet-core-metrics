@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MagenicMetrics\MagenicMetrics.csproj" />
+    <ProjectReference Include="..\..\src\MagenicMetrics\MagenicMetrics.csproj" />
   </ItemGroup>
 
 </Project>
