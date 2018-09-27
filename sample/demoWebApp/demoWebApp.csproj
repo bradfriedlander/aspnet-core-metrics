@@ -24,7 +24,7 @@
 		<PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\MagenicMetrics\MagenicMetrics.csproj" />
+		<ProjectReference Include="..\..\src\MagenicMetrics\MagenicMetrics.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Migrations\" />
