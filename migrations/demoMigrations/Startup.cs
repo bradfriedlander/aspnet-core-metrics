@@ -1,4 +1,5 @@
-﻿using MagenicMetrics;
+﻿using demoMigrations.Services;
+using MagenicMetrics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -55,6 +56,9 @@ namespace demoMigrations
             services.Configure<MetricServiceOptions>(Configuration.GetSection("MetricServiceSettings"));
             var metricConnectionString = Configuration.GetSection("MetricServiceSettings")["MetricServiceConnection"];
             services.AddDbContext<MetricService>((serviceProvider, options) => options.UseSqlServer(metricConnectionString, ob => ob.MigrationsAssembly("demoMigrations")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
         }
     }
 }
