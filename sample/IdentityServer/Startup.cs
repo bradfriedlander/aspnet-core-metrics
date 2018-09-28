@@ -28,7 +28,7 @@ namespace IdentityServer
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
-                app.UseDatabaseErrorPage();
+                //app.UseDatabaseErrorPage();
             }
             else
             {

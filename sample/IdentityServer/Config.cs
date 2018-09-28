@@ -60,8 +60,8 @@ namespace IdentityServer
                     {
                         new Secret("secret".Sha256())
                     },
-                    RedirectUris = { "http://localhost:5002/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
+                    RedirectUris = { "https://localhost:5101/signin-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:5101/signout-callback-oidc" },
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,

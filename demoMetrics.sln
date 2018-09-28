@@ -5,6 +5,7 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "demoWebApp", "sample\demoWebApp\demoWebApp.csproj", "{BAC32D69-1D9D-4A00-9C27-E5F8112EB7F6}"
 	ProjectSection(ProjectDependencies) = postProject
+		{E981251F-4F2B-4631-8054-8E1CEC528756} = {E981251F-4F2B-4631-8054-8E1CEC528756}
 		{FB69869B-A648-4FC8-BDE2-2CAC8D4B797C} = {FB69869B-A648-4FC8-BDE2-2CAC8D4B797C}
 	EndProjectSection
 EndProject
@@ -17,6 +18,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "demoMigrations", "migrations\demoMigrations\demoMigrations.csproj", "{29B0ED5D-DEAC-4C02-81FE-03506CF44E16}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "sample\IdentityServer\IdentityServer.csproj", "{E981251F-4F2B-4631-8054-8E1CEC528756}"
+	ProjectSection(ProjectDependencies) = postProject
+		{29B0ED5D-DEAC-4C02-81FE-03506CF44E16} = {29B0ED5D-DEAC-4C02-81FE-03506CF44E16}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
