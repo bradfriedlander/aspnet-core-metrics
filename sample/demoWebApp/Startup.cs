@@ -82,32 +82,44 @@ namespace demoWebApp
         /// <summary>
         ///     This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
-        /// <param name="services">The existing collection of services.</param>
+        /// <param name="services">This is the existing collection of services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<MetricServiceOptions>(Configuration.GetSection("MetricServiceSettings"));
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            ConfigureAuthentication(services);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             ConfigureMetrics(services);
         }
 
+        /// <summary>
+        ///     This method configures authentication for this application.
+        /// </summary>
+        /// <param name="services">This is the existing collection of services.</param>
+        private void ConfigureAuthentication(IServiceCollection services)
+        {
+            services
+                .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))
+                .AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+        }
+
+        /// <summary>
+        ///     This method configures the metric middleware and its supporting services.
+        /// </summary>
+        /// <param name="services">This is the existing collection of services.</param>
         private void ConfigureMetrics(IServiceCollection services)
         {
-            var metricConnectionString = Configuration.GetSection("MetricServiceSettings")["MetricServiceConnection"];
-            services.AddDbContext<MetricService>((serviceProvider, options) => options.UseSqlServer(metricConnectionString, ob => ob.MigrationsAssembly("demoWebApp")));
-            services.AddMetrics();
+            var metricServiceSettings = Configuration.GetSection("MetricServiceSettings");
+            var metricConnectionString = metricServiceSettings["MetricServiceConnection"];
+            services
+                .Configure<MetricServiceOptions>(metricServiceSettings)
+                .AddDbContext<MetricService>((serviceProvider, options) => options.UseSqlServer(metricConnectionString, ob => ob.MigrationsAssembly("demoMetrics")))
+                .AddMetrics();
         }
     }
 }
