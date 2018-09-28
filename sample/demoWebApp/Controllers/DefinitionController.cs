@@ -1,6 +1,7 @@
 ﻿using demoWebApp.HttpHelpers;
 using demoWebApp.Models.ViewBinding;
 using MagenicMetrics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,6 +10,11 @@ using System.Threading.Tasks;
 
 namespace demoWebApp.Controllers
 {
+    /// <summary>
+    ///     This controller manages the creation, editing, and deletion of definitions.
+    /// </summary>
+    /// <seealso cref="demoWebApp.Controllers.BaseController" />
+    [Authorize]
     public class DefinitionController : BaseController
     {
         /// <summary>
@@ -16,20 +22,19 @@ namespace demoWebApp.Controllers
         /// </summary>
         /// <param name="metric">The metric.</param>
         /// <param name="logger">The logger.</param>
-        public DefinitionController(IMetric metric, ILogger<DefinitionController> logger) : base(metric)
+        public DefinitionController(IMetric metric, ILogger<DefinitionController> logger/*, IOptions<DefinitionServiceSettings> options*/) : base(metric)
         {
             _logger = logger;
-            if (definitions == null)
-            {
-                definitions = new List<DefinitionIndexView>() /*{ new DefinitionIndexView { DefinitionId = 1, IsDeleted = false, Name = "Definition 1" } }*/;
-            }
+            //baseUri = $"{options.Value.BaseUrl}/api/values";
+            definitions = new List<DefinitionIndexView>();
         }
 
-        // TODO: Get this from configuration - use options
-        private const string baseUri = "https://localhost:5001/api/values";
-
         private static List<DefinitionIndexView> definitions;
+
         private readonly ILogger _logger;
+
+        // TODO: Get this from configuration - use options
+        private readonly string baseUri = "https://localhost:5001/api/values";
 
         /// <summary>
         ///     Creates new <see cref="DefinitionIndexView" />.

@@ -1,4 +1,5 @@
-﻿using demoWebApp.Services;
+﻿using demoWebApp.Models.Settings;
+using demoWebApp.Services;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace demoWebApp
 {
@@ -85,12 +87,8 @@ namespace demoWebApp
         /// <param name="services">This is the existing collection of services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            services.AddOptions();
+            services.Configure<DefinitionServiceSettings>(Configuration.GetSection("DefinitionServiceSettings"));
             ConfigureAuthentication(services);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             ConfigureMetrics(services);
@@ -102,6 +100,39 @@ namespace demoWebApp
         /// <param name="services">This is the existing collection of services.</param>
         private void ConfigureAuthentication(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            var identitySettings = Configuration.GetSection("IdentitySettings");
+            var useIdentityServer = bool.Parse(identitySettings["UseIdentityServer"]);
+            if (useIdentityServer)
+            {
+                JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+                services
+                    .AddAuthentication(options =>
+                    {
+                        options.DefaultScheme = "Cookies";
+                        options.DefaultChallengeScheme = "oidc";
+                    })
+                    .AddCookie("Cookies")
+                    .AddOpenIdConnect("oidc", options =>
+                    {
+                        // https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.openidconnect.openidconnectoptions?view=aspnetcore-2.1
+                        options.SignInScheme = "Cookies";
+                        options.Authority = identitySettings["IdentityServer"];
+                        options.RequireHttpsMetadata = true;
+                        options.ClientId = "mvc";
+                        options.ClientSecret = "secret";
+                        options.ResponseType = "code id_token";
+                        options.SaveTokens = true;
+                        options.GetClaimsFromUserInfoEndpoint = true;
+                        options.Scope.Add("api1");
+                        options.Scope.Add("offline_access");
+                    });
+            }
             services
                 .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))
                 .AddDefaultIdentity<IdentityUser>()

@@ -59,6 +59,12 @@
             </summary>
             <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
         </member>
+        <member name="T:demoWebApp.Controllers.DefinitionController">
+            <summary>
+                This controller manages the creation, editing, and deletion of definitions.
+            </summary>
+            <seealso cref="T:demoWebApp.Controllers.BaseController" />
+        </member>
         <member name="M:demoWebApp.Controllers.DefinitionController.#ctor(MagenicMetrics.IMetric,Microsoft.Extensions.Logging.ILogger{demoWebApp.Controllers.DefinitionController})">
             <summary>
                 Initializes a new instance of the <see cref="T:demoWebApp.Controllers.DefinitionController" /> class.
