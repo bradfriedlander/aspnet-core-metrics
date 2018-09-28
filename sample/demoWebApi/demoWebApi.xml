@@ -339,7 +339,7 @@
         </member>
         <member name="T:demoWebApi.Startup">
             <summary>
-            This is the ASP.NET Core <see cref="T:Microsoft.AspNetCore.Hosting.IStartup"/> implementation for this application.
+                This is the ASP.NET Core <see cref="T:Microsoft.AspNetCore.Hosting.IStartup" /> implementation for this application.
             </summary>
         </member>
         <member name="M:demoWebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
@@ -366,6 +366,12 @@
                 This method gets called by the runtime. Use this method to add services to the container.
             </summary>
             <param name="services">The existing collection of services.</param>
+        </member>
+        <member name="M:demoWebApi.Startup.ConfigureMetrics(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                This method configures the metric middleware and its supporting services.
+            </summary>
+            <param name="services">This is the existing collection of services.</param>
         </member>
         <member name="M:demoWebApi.Startup.CreateHealthCheckStatusSingleton(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>

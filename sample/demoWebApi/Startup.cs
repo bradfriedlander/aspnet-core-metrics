@@ -15,7 +15,7 @@ using System.Text;
 namespace demoWebApi
 {
     /// <summary>
-    /// This is the ASP.NET Core <see cref="IStartup"/> implementation for this application.
+    ///     This is the ASP.NET Core <see cref="IStartup" /> implementation for this application.
     /// </summary>
     public class Startup
     {
@@ -60,14 +60,18 @@ namespace demoWebApi
             {
                 app.UseHsts();
             }
+            app.UseHttpsRedirection();
+            app.UseMetrics();
             app.Map("/healthcheck", branch =>
             {
                 branch.Run(context =>
                 {
                     healthCheckStatus.UpdateAliveSeconds();
-                    var resultObject = JsonConvert.SerializeObject(healthCheckStatus);
-                    var data = Encoding.UTF8.GetBytes(resultObject);
+                    var metric = context.RequestServices.GetService<IMetric>();
+                    metric.Details = JsonConvert.SerializeObject(healthCheckStatus);
+                    metric.ResultCount = 1;
                     context.Response.ContentType = "application/json";
+                    var data = Encoding.UTF8.GetBytes(metric.Details);
                     return context.Response.Body.WriteAsync(data, 0, data.Length);
                 });
             });
@@ -77,8 +81,6 @@ namespace demoWebApi
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo Web API V1");
                 c.RoutePrefix = string.Empty;
             });
-            app.UseHttpsRedirection();
-            app.UseMetrics();
             app.UseMvc();
         }
 
@@ -89,18 +91,29 @@ namespace demoWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             CreateHealthCheckStatusSingleton(services);
-            services.Configure<MetricServiceOptions>(Configuration.GetSection("MetricServiceSettings"));
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddXmlSerializerFormatters();
-            var metricConnectionString = Configuration.GetSection("MetricServiceSettings")["MetricServiceConnection"];
-            services.AddDbContext<MetricService>((serviceProvider, options) => options.UseSqlServer(metricConnectionString, ob => ob.MigrationsAssembly("demo4")));
+            ConfigureMetrics(services);
             services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase("SimpleDatabase"));
-            services.AddMetrics();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Demo API", Version = "v1" });
             });
+        }
+
+        /// <summary>
+        ///     This method configures the metric middleware and its supporting services.
+        /// </summary>
+        /// <param name="services">This is the existing collection of services.</param>
+        private void ConfigureMetrics(IServiceCollection services)
+        {
+            var metricServiceSettings = Configuration.GetSection("MetricServiceSettings");
+            var metricConnectionString = metricServiceSettings["MetricServiceConnection"];
+            services
+                .Configure<MetricServiceOptions>(metricServiceSettings)
+                .AddDbContext<MetricService>((serviceProvider, options) => options.UseSqlServer(metricConnectionString, ob => ob.MigrationsAssembly("demoMetrics")))
+                .AddMetrics();
         }
 
         /// <summary>

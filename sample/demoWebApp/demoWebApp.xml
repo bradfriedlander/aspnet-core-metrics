@@ -287,7 +287,19 @@
             <summary>
                 This method gets called by the runtime. Use this method to add services to the container.
             </summary>
-            <param name="services">The existing collection of services.</param>
+            <param name="services">This is the existing collection of services.</param>
+        </member>
+        <member name="M:demoWebApp.Startup.ConfigureAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                This method configures authentication for this application.
+            </summary>
+            <param name="services">This is the existing collection of services.</param>
+        </member>
+        <member name="M:demoWebApp.Startup.ConfigureMetrics(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                This method configures the metric middleware and its supporting services.
+            </summary>
+            <param name="services">This is the existing collection of services.</param>
         </member>
         <member name="T:demoWebApp.TagHelpers.IfTagHelper">
             <summary>
