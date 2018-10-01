@@ -180,6 +180,11 @@
             </summary>
             <seealso cref="T:MagenicMetrics.IMetric" />
         </member>
+        <member name="M:MagenicMetrics.Metric.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:MagenicMetrics.Metric" /> class.
+            </summary>
+        </member>
         <member name="P:MagenicMetrics.Metric.Application">
             <summary>
                 Gets or sets the name of current application.

@@ -43,6 +43,7 @@ namespace MagenicMetrics.Controllers
             {
                 _metric.ExceptionMessage = GetValidationErrors(context);
             }
+            SerializeDetails();
         }
 
         /// <summary>
