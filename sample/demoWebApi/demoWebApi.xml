@@ -4,44 +4,27 @@
         <name>demoWebApi</name>
     </assembly>
     <members>
-        <member name="T:demoWebApi.Controllers.BaseController">
+        <member name="T:demoWebApi.Controllers.ApiBaseController">
             <summary>
                 This is the base class for all API controllers.
             </summary>
             <remarks>
                 <para>This class defines the standard route prefix ("api/[controller]") for all API controllers.</para>
             </remarks>
-            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+            <seealso cref="T:MagenicMetrics.Controllers.MetricsBaseController" />
         </member>
-        <member name="M:demoWebApi.Controllers.BaseController.#ctor(MagenicMetrics.IMetric,demoWebApi.Models.IHealthCheckStatus)">
+        <member name="M:demoWebApi.Controllers.ApiBaseController.#ctor(MagenicMetrics.IMetric,demoWebApi.Models.IHealthCheckStatus)">
             <summary>
-                Initializes a new instance of the <see cref="T:demoWebApi.Controllers.BaseController" /> class.
+                Initializes a new instance of the <see cref="T:demoWebApi.Controllers.ApiBaseController" /> class.
             </summary>
             <param name="metric">The metric.</param>
             <param name="healthCheckStatus">The health check status.</param>
-        </member>
-        <member name="F:demoWebApi.Controllers.BaseController._metric">
-            <summary>
-                The is the current <see cref="T:MagenicMetrics.IMetric" /> instance.
-            </summary>
-        </member>
-        <member name="M:demoWebApi.Controllers.BaseController.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
-            <summary>
-                Called after the action method is invoked.
-            </summary>
-            <param name="context">The action executed context.</param>
-        </member>
-        <member name="M:demoWebApi.Controllers.BaseController.GetValidationErrors(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
-            <summary>
-                Gets the concatenated validation errors.
-            </summary>
-            <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
         </member>
         <member name="T:demoWebApi.Controllers.ValuesController">
             <summary>
                 This controller manages the APIs to add, delete, and retrieve database entries.
             </summary>
-            <seealso cref="T:demoWebApi.Controllers.BaseController" />
+            <seealso cref="T:demoWebApi.Controllers.ApiBaseController" />
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.#ctor(MagenicMetrics.IMetric,demoWebApi.Services.ApiContext,demoWebApi.Models.IHealthCheckStatus)">
             <summary>

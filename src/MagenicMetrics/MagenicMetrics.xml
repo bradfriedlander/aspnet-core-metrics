@@ -16,11 +16,11 @@
             </summary>
             <param name="metric">The metric.</param>
         </member>
-        <member name="P:MagenicMetrics.Controllers.MetricsBaseController.Details">
+        <member name="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails">
             <summary>
-                Gets the Details.
+                Gets the <see cref="T:MagenicMetrics.IMetric" /> Details.
             </summary>
-            <value>This is the Details.</value>
+            <value>This is the <see cref="T:MagenicMetrics.IMetric" /> Details.</value>
         </member>
         <member name="F:MagenicMetrics.Controllers.MetricsBaseController._metric">
             <summary>
@@ -39,9 +39,9 @@
             </summary>
             <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
         </member>
-        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.SetDetails(System.Object)">
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.SetMetricDetails(System.Object)">
             <summary>
-                Sets the details.
+                Sets the <see cref="T:MagenicMetrics.IMetric" /> details.
             </summary>
             <param name="details">This is the details to serialize into <see cref="P:MagenicMetrics.IMetric.Details" />.</param>
         </member>
@@ -50,12 +50,14 @@
                 This method sets the value of <see cref="P:MagenicMetrics.IMetric.Details" />.
             </summary>
             <remarks>
-                <para>This method takes no action if <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.Details" /> is <c>null</c> or <see cref="P:MagenicMetrics.IMetric.Details" /> already has a value.</para>
                 <para>
-                    If <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.Details" /> is a <see cref="T:System.String" /> or <see cref="P:System.Type.IsPrimitive" />, <see cref="P:MagenicMetrics.IMetric.Details" /> is set to a
-                    simple string representation of <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.Details" />.
+                    This method takes no action if <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails" /> is <c>null</c> or <see cref="P:MagenicMetrics.IMetric.Details" /> already has a value.
                 </para>
-                <para>Otherwise, <see cref="P:MagenicMetrics.IMetric.Details" /> is set to a JSON serialization of <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.Details" />.</para>
+                <para>
+                    If <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails" /> is a <see cref="T:System.String" /> or <see cref="P:System.Type.IsPrimitive" />, <see cref="P:MagenicMetrics.IMetric.Details" /> is
+                    set to a simple string representation of <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails" />.
+                </para>
+                <para>Otherwise, <see cref="P:MagenicMetrics.IMetric.Details" /> is set to a JSON serialization of <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails" />.</para>
             </remarks>
         </member>
         <member name="T:MagenicMetrics.IMetric">

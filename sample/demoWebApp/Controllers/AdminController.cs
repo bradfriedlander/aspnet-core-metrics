@@ -1,6 +1,7 @@
 ﻿using demoWebApp.Models.InputBinding;
 using demoWebApp.Models.ViewBinding;
 using MagenicMetrics;
+using MagenicMetrics.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace demoWebApp.Controllers
     /// <summary>
     ///     This controllers is used to display the latest metrics.
     /// </summary>
-    /// <seealso cref="BaseController" />
+    /// <seealso cref="MetricsBaseController" />
     [Authorize]
-    public class AdminController : BaseController
+    public class AdminController : MetricsBaseController
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="AdminController" /> class.
@@ -56,6 +57,7 @@ namespace demoWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(AdminIndexInput adminIndex)
         {
+            SetMetricDetails(adminIndex);
             var viewModel = new AdminIndexView
             {
                 PageSize = adminIndex.PageSize,

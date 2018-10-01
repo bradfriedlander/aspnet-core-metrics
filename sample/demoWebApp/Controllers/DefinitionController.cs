@@ -1,6 +1,7 @@
 ﻿using demoWebApp.HttpHelpers;
 using demoWebApp.Models.ViewBinding;
 using MagenicMetrics;
+using MagenicMetrics.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,9 +14,9 @@ namespace demoWebApp.Controllers
     /// <summary>
     ///     This controller manages the creation, editing, and deletion of definitions.
     /// </summary>
-    /// <seealso cref="demoWebApp.Controllers.BaseController" />
+    /// <seealso cref="MetricsBaseController" />
     [Authorize]
-    public class DefinitionController : BaseController
+    public class DefinitionController : MetricsBaseController
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="DefinitionController" /> class.
@@ -55,12 +56,13 @@ namespace demoWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DefinitionIndexView newDefinition)
         {
+            SetMetricDetails(newDefinition);
+            if (!ModelState.IsValid)
+            {
+                return View(newDefinition);
+            }
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(newDefinition);
-                }
                 newDefinition.DefinitionId = 1;
                 var requestUri = $"{baseUri}";
                 var response = await HttpRequestFactory.Post(requestUri, newDefinition);
@@ -157,6 +159,7 @@ namespace demoWebApp.Controllers
         {
             try
             {
+                SetMetricDetails(definition);
                 if (!ModelState.IsValid)
                 {
                     return View(definition);
