@@ -4,6 +4,60 @@
         <name>MagenicMetrics</name>
     </assembly>
     <members>
+        <member name="T:MagenicMetrics.Controllers.MetricsBaseController">
+            <summary>
+                This is a base class for all controllers that use <see cref="T:MagenicMetrics.MetricMiddleware" />.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.#ctor(MagenicMetrics.IMetric)">
+            <summary>
+                Initializes a new instance of the <see cref="T:MagenicMetrics.Controllers.MetricsBaseController" /> class.
+            </summary>
+            <param name="metric">The metric.</param>
+        </member>
+        <member name="P:MagenicMetrics.Controllers.MetricsBaseController.Details">
+            <summary>
+                Gets the Details.
+            </summary>
+            <value>This is the Details.</value>
+        </member>
+        <member name="F:MagenicMetrics.Controllers.MetricsBaseController._metric">
+            <summary>
+                The is the current <see cref="T:MagenicMetrics.IMetric" /> instance.
+            </summary>
+        </member>
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+                Called after the action method is invoked.
+            </summary>
+            <param name="context">The action executed context.</param>
+        </member>
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.GetValidationErrors(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+                Gets the concatenated validation errors.
+            </summary>
+            <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
+        </member>
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.SetDetails(System.Object)">
+            <summary>
+                Sets the details.
+            </summary>
+            <param name="details">This is the details to serialize into <see cref="P:MagenicMetrics.IMetric.Details" />.</param>
+        </member>
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.SerializeDetails">
+            <summary>
+                This method sets the value of <see cref="P:MagenicMetrics.IMetric.Details" />.
+            </summary>
+            <remarks>
+                <para>This method takes no action if <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.Details" /> is <c>null</c> or <see cref="P:MagenicMetrics.IMetric.Details" /> already has a value.</para>
+                <para>
+                    If <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.Details" /> is a <see cref="T:System.String" /> or <see cref="P:System.Type.IsPrimitive" />, <see cref="P:MagenicMetrics.IMetric.Details" /> is set to a
+                    simple string representation of <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.Details" />.
+                </para>
+                <para>Otherwise, <see cref="P:MagenicMetrics.IMetric.Details" /> is set to a JSON serialization of <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.Details" />.</para>
+            </remarks>
+        </member>
         <member name="T:MagenicMetrics.IMetric">
             <summary>
                 This is the information persisted for every MVC action.
