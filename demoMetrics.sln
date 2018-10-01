@@ -22,6 +22,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "sample\Id
 		{29B0ED5D-DEAC-4C02-81FE-03506CF44E16} = {29B0ED5D-DEAC-4C02-81FE-03506CF44E16}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2782A2C8-7B01-46C8-8556-8819100699FD}"
+	ProjectSection(SolutionItems) = preProject
+		documentation\Metric.md = documentation\Metric.md
+		documentation\MetricBaseController.md = documentation\MetricBaseController.md
+		documentation\MetricMiddleware.md = documentation\MetricMiddleware.md
+		documentation\MetricService.md = documentation\MetricService.md
+		ReadMe.md = ReadMe.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
