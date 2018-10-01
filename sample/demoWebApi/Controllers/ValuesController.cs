@@ -5,7 +5,6 @@ using demoWebApi.Services;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,9 +13,9 @@ namespace demoWebApi.Controllers
     /// <summary>
     ///     This controller manages the APIs to add, delete, and retrieve database entries.
     /// </summary>
-    /// <seealso cref="BaseController" />
+    /// <seealso cref="ApiBaseController" />
     [ApiController]
-    public class ValuesController : BaseController
+    public class ValuesController : ApiBaseController
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ValuesController" /> class.
@@ -98,10 +97,10 @@ namespace demoWebApi.Controllers
         [HttpPost]
         public IActionResult Post(DefinitionInput definition)
         {
+            SetMetricDetails(definition);
             var nextId = _context.Definitions.Max(d => d.DefinitionId) + 1;
             _context.Definitions.Add(new Definition() { DefinitionId = nextId, Name = definition.Name });
             _metric.ResultCount = _context.SaveChanges();
-            _metric.Details = JsonConvert.SerializeObject(definition);
             var match = _context.Definitions.Find(nextId);
             return Ok(match);
         }
@@ -115,6 +114,7 @@ namespace demoWebApi.Controllers
         [HttpPut, EnsureDefinitionExists]
         public IActionResult Put(DefinitionInput definition)
         {
+            SetMetricDetails(definition);
             var match = _context.Definitions.Find(definition.DefinitionId);
             if (match == null)
             {

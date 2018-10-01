@@ -8,7 +8,7 @@
             <summary>
                 This controllers is used to display the latest metrics.
             </summary>
-            <seealso cref="T:demoWebApp.Controllers.BaseController" />
+            <seealso cref="T:MagenicMetrics.Controllers.MetricsBaseController" />
         </member>
         <member name="M:demoWebApp.Controllers.AdminController.#ctor(MagenicMetrics.IMetric,MagenicMetrics.IMetricService)">
             <summary>
@@ -30,40 +30,11 @@
             <param name="adminIndex">This is the input for this action.</param>
             <returns>This is the list of metrics satisfying the <paramref name="adminIndex" /> constraints.</returns>
         </member>
-        <member name="T:demoWebApp.Controllers.BaseController">
-            <summary>
-                This is the base class for all controllers.
-            </summary>
-            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
-        </member>
-        <member name="M:demoWebApp.Controllers.BaseController.#ctor(MagenicMetrics.IMetric)">
-            <summary>
-                Initializes a new instance of the <see cref="T:demoWebApp.Controllers.BaseController" /> class.
-            </summary>
-            <param name="metric">The metric.</param>
-        </member>
-        <member name="F:demoWebApp.Controllers.BaseController._metric">
-            <summary>
-                The is the current <see cref="T:MagenicMetrics.IMetric" /> instance.
-            </summary>
-        </member>
-        <member name="M:demoWebApp.Controllers.BaseController.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
-            <summary>
-                Called after the action method is invoked.
-            </summary>
-            <param name="context">The action executed context.</param>
-        </member>
-        <member name="M:demoWebApp.Controllers.BaseController.GetValidationErrors(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
-            <summary>
-                Gets the concatenated validation errors.
-            </summary>
-            <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
-        </member>
         <member name="T:demoWebApp.Controllers.DefinitionController">
             <summary>
                 This controller manages the creation, editing, and deletion of definitions.
             </summary>
-            <seealso cref="T:demoWebApp.Controllers.BaseController" />
+            <seealso cref="T:MagenicMetrics.Controllers.MetricsBaseController" />
         </member>
         <member name="M:demoWebApp.Controllers.DefinitionController.#ctor(MagenicMetrics.IMetric,Microsoft.Extensions.Logging.ILogger{demoWebApp.Controllers.DefinitionController})">
             <summary>
@@ -130,13 +101,44 @@
             <summary>
                 This is the default controller for the application.
             </summary>
-            <seealso cref="T:demoWebApp.Controllers.BaseController" />
+            <seealso cref="T:MagenicMetrics.Controllers.MetricsBaseController" />
         </member>
         <member name="M:demoWebApp.Controllers.HomeController.#ctor(MagenicMetrics.IMetric)">
             <summary>
                 Initializes a new instance of the <see cref="T:demoWebApp.Controllers.HomeController" /> class.
             </summary>
             <param name="metric">The metric.</param>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.About">
+            <summary>
+                This controller action shows the about information.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.BadCode">
+            <summary>
+                This controller action forces <see langword="abstract" /><see cref="T:System.NullReferenceException" />.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.NullReferenceException">Abort failed</exception>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.BadResult">
+            <summary>
+                This controller action forces a <see cref="T:Microsoft.AspNetCore.Mvc.ConflictResult" />.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.Contact">
+            <summary>
+                This controller action shows the contact information.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.Error">
+            <summary>
+                This controller action shows the error information.
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:demoWebApp.Controllers.HomeController.ForceStatusCode">
             <summary>
@@ -149,6 +151,18 @@
                 This action forces the status code to be set to <paramref name="code" />.
             </summary>
             <param name="model">This is the model containing status code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.Index">
+            <summary>
+                This is the default display for this controller.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.Privacy">
+            <summary>
+                This controller action shows the privacy information.
+            </summary>
             <returns></returns>
         </member>
         <member name="T:demoWebApp.Models.InputBinding.AdminIndexInput">

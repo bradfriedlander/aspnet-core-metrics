@@ -1,6 +1,7 @@
 ﻿using demoWebApp.Models;
 using demoWebApp.Models.InputBinding;
 using MagenicMetrics;
+using MagenicMetrics.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -12,9 +13,9 @@ namespace demoWebApp.Controllers
     /// <summary>
     ///     This is the default controller for the application.
     /// </summary>
-    /// <seealso cref="BaseController" />
+    /// <seealso cref="MetricsBaseController" />
     [Authorize]
-    public class HomeController : BaseController
+    public class HomeController : MetricsBaseController
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="HomeController" /> class.
@@ -24,6 +25,10 @@ namespace demoWebApp.Controllers
         {
         }
 
+        /// <summary>
+        ///     This controller action shows the about information.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult About()
         {
             if (!ModelState.IsValid)
@@ -35,6 +40,11 @@ namespace demoWebApp.Controllers
             return View();
         }
 
+        /// <summary>
+        ///     This controller action forces <see langword="abstract" /><see cref="NullReferenceException" />.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException">Abort failed</exception>
         public IActionResult BadCode()
         {
             if (!ModelState.IsValid)
@@ -44,15 +54,23 @@ namespace demoWebApp.Controllers
             throw new NullReferenceException("Abort failed");
         }
 
+        /// <summary>
+        ///     This controller action forces a <see cref="ConflictResult" />.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult BadResult()
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
-            return StatusCode(401);
+            return new ConflictResult();
         }
 
+        /// <summary>
+        ///     This controller action shows the contact information.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Contact()
         {
             if (!ModelState.IsValid)
@@ -65,6 +83,10 @@ namespace demoWebApp.Controllers
             return View();
         }
 
+        /// <summary>
+        ///     This controller action shows the error information.
+        /// </summary>
+        /// <returns></returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -93,6 +115,7 @@ namespace demoWebApp.Controllers
         [HttpPost]
         public IActionResult ForceStatusCode(HomeForceStatusCode model)
         {
+            SetMetricDetails(model);
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -101,6 +124,10 @@ namespace demoWebApp.Controllers
             return StatusCode(model.Code);
         }
 
+        /// <summary>
+        ///     This is the default display for this controller.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             if (!ModelState.IsValid)
@@ -111,6 +138,10 @@ namespace demoWebApp.Controllers
             return View();
         }
 
+        /// <summary>
+        ///     This controller action shows the privacy information.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Privacy()
         {
             if (!ModelState.IsValid)

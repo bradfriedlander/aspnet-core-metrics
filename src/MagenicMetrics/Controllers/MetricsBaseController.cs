@@ -19,14 +19,13 @@ namespace MagenicMetrics.Controllers
         public MetricsBaseController(IMetric metric)
         {
             _metric = metric;
-            _metric.ResultCount = -1;
         }
 
         /// <summary>
-        ///     Gets the Details.
+        ///     Gets the <see cref="IMetric" /> Details.
         /// </summary>
-        /// <value>This is the Details.</value>
-        public object Details { get; private set; }
+        /// <value>This is the <see cref="IMetric" /> Details.</value>
+        public object MetricDetails { get; private set; }
 
         /// <summary>
         ///     The is the current <see cref="IMetric" /> instance.
@@ -68,33 +67,35 @@ namespace MagenicMetrics.Controllers
         }
 
         /// <summary>
-        ///     Sets the details.
+        ///     Sets the <see cref="IMetric" /> details.
         /// </summary>
         /// <param name="details">This is the details to serialize into <see cref="IMetric.Details" />.</param>
-        protected void SetDetails(object details) => Details = details;
+        protected void SetMetricDetails(object details) => MetricDetails = details;
 
         /// <summary>
         ///     This method sets the value of <see cref="IMetric.Details" />.
         /// </summary>
         /// <remarks>
-        ///     <para>This method takes no action if <see cref="Details" /> is <c>null</c> or <see cref="IMetric.Details" /> already has a value.</para>
         ///     <para>
-        ///         If <see cref="Details" /> is a <see cref="string" /> or <see cref="Type.IsPrimitive" />, <see cref="IMetric.Details" /> is set to a
-        ///         simple string representation of <see cref="Details" />.
+        ///         This method takes no action if <see cref="MetricDetails" /> is <c>null</c> or <see cref="IMetric.Details" /> already has a value.
         ///     </para>
-        ///     <para>Otherwise, <see cref="IMetric.Details" /> is set to a JSON serialization of <see cref="Details" />.</para>
+        ///     <para>
+        ///         If <see cref="MetricDetails" /> is a <see cref="string" /> or <see cref="Type.IsPrimitive" />, <see cref="IMetric.Details" /> is
+        ///         set to a simple string representation of <see cref="MetricDetails" />.
+        ///     </para>
+        ///     <para>Otherwise, <see cref="IMetric.Details" /> is set to a JSON serialization of <see cref="MetricDetails" />.</para>
         /// </remarks>
         private void SerializeDetails()
         {
-            if (Details == null || !string.IsNullOrEmpty(_metric.Details))
+            if (MetricDetails == null || !string.IsNullOrEmpty(_metric.Details))
             {
                 return;
             }
-            _metric.Details = Details is string
-                ? Details as string
-                : Details.GetType().IsPrimitive
-                    ? Details.ToString()
-                    : JsonConvert.SerializeObject(Details);
+            _metric.Details = MetricDetails is string
+                ? MetricDetails as string
+                : MetricDetails.GetType().IsPrimitive
+                    ? MetricDetails.ToString()
+                    : JsonConvert.SerializeObject(MetricDetails);
         }
     }
 }
