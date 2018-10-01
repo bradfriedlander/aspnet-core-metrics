@@ -89,6 +89,7 @@ namespace demoWebApp.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Delete(int id)
         {
+            SetMetricDetails(id);
             try
             {
                 var requestUri = $"{baseUri}/{id}";
@@ -115,6 +116,7 @@ namespace demoWebApp.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Details(int id)
         {
+            SetMetricDetails(id);
             var requestUri = $"{baseUri}/{id}";
             var response = await HttpRequestFactory.Get(requestUri);
             if (!response.IsSuccessStatusCode)
@@ -135,6 +137,7 @@ namespace demoWebApp.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Edit(int id)
         {
+            SetMetricDetails(id);
             var requestUri = $"{baseUri}/{id}";
             var response = await HttpRequestFactory.Get(requestUri);
             if (!response.IsSuccessStatusCode)
@@ -208,6 +211,7 @@ namespace demoWebApp.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Undelete(int id)
         {
+            SetMetricDetails(id);
             try
             {
                 var requestUri = $"{baseUri}/Undelete?id={id}";

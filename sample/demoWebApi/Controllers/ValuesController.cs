@@ -42,6 +42,7 @@ namespace demoWebApi.Controllers
         [HttpDelete("{id}"), EnsureDefinitionExists]
         public IActionResult Delete(int id)
         {
+            SetMetricDetails(id);
             var match = _context.Definitions.Find(id);
             match.IsDeleted = true;
             _metric.ResultCount = _context.SaveChanges();
@@ -70,6 +71,7 @@ namespace demoWebApi.Controllers
         [HttpGet("{id}"), EnsureDefinitionExists]
         public ActionResult<string> Get(int id)
         {
+            SetMetricDetails(id);
             var match = _context.Definitions.Find(id);
             _metric.ResultCount = 1;
             return Ok(match);
@@ -134,6 +136,7 @@ namespace demoWebApi.Controllers
         [HttpPut("Undelete"), EnsureDefinitionExists]
         public IActionResult Undelete(int id)
         {
+            SetMetricDetails(id);
             var match = _context.Definitions.IgnoreQueryFilters().FirstOrDefault(d => d.DefinitionId == id);
             match.IsDeleted = false;
             _metric.ResultCount = _context.SaveChanges();
