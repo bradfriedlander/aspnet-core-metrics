@@ -9,6 +9,15 @@ namespace MagenicMetrics
     public class Metric : IMetric
     {
         /// <summary>
+        ///     Initializes a new instance of the <see cref="Metric" /> class.
+        /// </summary>
+        public Metric()
+        {
+            StartTime = DateTime.UtcNow;
+            ResultCount = -1;
+        }
+
+        /// <summary>
         ///     Gets or sets the name of current application.
         /// </summary>
         /// <value>This is the name of the application.</value>

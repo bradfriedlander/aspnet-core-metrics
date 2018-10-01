@@ -39,7 +39,7 @@ namespace MagenicMetrics
         public async Task Invoke(HttpContext context, IMetric metric, IMetricService metricService)
         {
             var exceptionMessage = string.Empty;
-            metric.StartTime = DateTime.UtcNow;
+            //metric.StartTime = DateTime.UtcNow;
             metric.UserName = context.User.Identity.Name ?? "Unknown";
             metric.RequestMethod = context.Request.HttpContext.Request.Method;
             var requestPath = metric.RequestPath = context.Request.Path;
