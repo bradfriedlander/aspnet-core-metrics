@@ -148,7 +148,7 @@
         </member>
         <member name="M:demoWebApp.Controllers.HomeController.ForceStatusCode(demoWebApp.Models.InputBinding.HomeForceStatusCode)">
             <summary>
-                This action forces the status code to be set to <paramref name="code" />.
+                This action forces the status code to be set to <paramref name="model" />.
             </summary>
             <param name="model">This is the model containing status code.</param>
             <returns></returns>
@@ -164,6 +164,23 @@
                 This controller action shows the privacy information.
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:demoWebApp.Models.ErrorViewModel">
+            <summary>
+                This is the view model for errors.
+            </summary>
+        </member>
+        <member name="P:demoWebApp.Models.ErrorViewModel.RequestId">
+            <summary>
+                Gets or sets the request identifier.
+            </summary>
+            <value>The request identifier.</value>
+        </member>
+        <member name="P:demoWebApp.Models.ErrorViewModel.ShowRequestId">
+            <summary>
+                Gets a value indicating if the request identifier should be shown.
+            </summary>
+            <value><c>true</c> if the request identifier should be shown; otherwise, <c>false</c>.</value>
         </member>
         <member name="T:demoWebApp.Models.InputBinding.AdminIndexInput">
             <summary>
@@ -198,6 +215,17 @@
                 Gets or sets the status code value.
             </summary>
             <value>This is the status code value.</value>
+        </member>
+        <member name="T:demoWebApp.Models.Settings.DefinitionServiceSettings">
+            <summary>
+                This class contains the setting options for the <see cref="T:demoWebApp.Controllers.DefinitionController" />.
+            </summary>
+        </member>
+        <member name="P:demoWebApp.Models.Settings.DefinitionServiceSettings.BaseUrl">
+            <summary>
+                Gets or sets the base URL for the Definition WEB API.
+            </summary>
+            <value>The base URL.</value>
         </member>
         <member name="T:demoWebApp.Models.ViewBinding.AdminIndexView">
             <summary>

@@ -9,6 +9,9 @@
 	  <DocumentationFile>C:\TestDev\demoMetrics\sample\demoWebApp\demoWebApp.xml</DocumentationFile>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	</PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
 		<PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />

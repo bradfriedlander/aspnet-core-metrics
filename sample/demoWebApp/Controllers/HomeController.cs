@@ -109,7 +109,7 @@ namespace demoWebApp.Controllers
         }
 
         /// <summary>
-        ///     This action forces the status code to be set to <paramref name="code" />.
+        ///     This action forces the status code to be set to <paramref name="model" />.
         /// </summary>
         /// <param name="model">This is the model containing status code.</param>
         /// <returns></returns>
