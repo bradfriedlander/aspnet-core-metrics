@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		documentation\MetricMiddleware.md = documentation\MetricMiddleware.md
 		documentation\MetricService.md = documentation\MetricService.md
 		ReadMe.md = ReadMe.md
+		UnusedCode.ruleset = UnusedCode.ruleset
 	EndProjectSection
 EndProject
 Global

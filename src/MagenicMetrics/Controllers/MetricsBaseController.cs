@@ -102,5 +102,10 @@ namespace MagenicMetrics.Controllers
                     ? MetricDetails.ToString()
                     : JsonConvert.SerializeObject(MetricDetails);
         }
+
+        private void xxx()
+        {
+
+        }
     }
 }
