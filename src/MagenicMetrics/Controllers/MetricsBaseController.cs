@@ -54,7 +54,7 @@ namespace MagenicMetrics.Controllers
         ///     <para>This method can be invoked from any action that inherits from <see cref="MetricsBaseController" />.</para>
         ///     <para>Since <see cref="MetricDetailsAttribute" /> uses this method, it must be <c>public</c> instead of <c>protected</c>.</para>
         /// </remarks>
-        public void SetMetricDetails(object details) => MetricDetails = details;
+        internal void SetMetricDetails(object details) => MetricDetails = details;
 
         /// <summary>
         ///     Gets the concatenated validation errors.

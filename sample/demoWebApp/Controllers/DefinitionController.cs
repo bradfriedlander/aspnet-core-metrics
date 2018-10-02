@@ -2,6 +2,7 @@
 using demoWebApp.Models.ViewBinding;
 using MagenicMetrics;
 using MagenicMetrics.Controllers;
+using MagenicMetrics.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -54,9 +55,9 @@ namespace demoWebApp.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MetricDetails(Source = "newDefinition")]
         public async Task<IActionResult> Create(DefinitionIndexView newDefinition)
         {
-            SetMetricDetails(newDefinition);
             if (!ModelState.IsValid)
             {
                 return View(newDefinition);
@@ -87,9 +88,9 @@ namespace demoWebApp.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
+        [MetricDetails(Source = "id")]
         public async Task<IActionResult> Delete(int id)
         {
-            SetMetricDetails(id);
             try
             {
                 var requestUri = $"{baseUri}/{id}";
@@ -114,9 +115,9 @@ namespace demoWebApp.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
+        [MetricDetails(Source = "id")]
         public async Task<IActionResult> Details(int id)
         {
-            SetMetricDetails(id);
             var requestUri = $"{baseUri}/{id}";
             var response = await HttpRequestFactory.Get(requestUri);
             if (!response.IsSuccessStatusCode)
@@ -135,9 +136,9 @@ namespace demoWebApp.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
+        [MetricDetails(Source = "id")]
         public async Task<IActionResult> Edit(int id)
         {
-            SetMetricDetails(id);
             var requestUri = $"{baseUri}/{id}";
             var response = await HttpRequestFactory.Get(requestUri);
             if (!response.IsSuccessStatusCode)
@@ -158,11 +159,11 @@ namespace demoWebApp.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MetricDetails(Source = "definition")]
         public async Task<IActionResult> Edit(DefinitionIndexView definition)
         {
             try
             {
-                SetMetricDetails(definition);
                 if (!ModelState.IsValid)
                 {
                     return View(definition);
@@ -209,9 +210,9 @@ namespace demoWebApp.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
+        [MetricDetails(Source = "id")]
         public async Task<IActionResult> Undelete(int id)
         {
-            SetMetricDetails(id);
             try
             {
                 var requestUri = $"{baseUri}/Undelete?id={id}";

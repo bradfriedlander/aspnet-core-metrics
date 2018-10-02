@@ -75,7 +75,6 @@ namespace demoWebApi.Controllers
         [MetricDetails(Source = "id")]
         public ActionResult<string> Get(int id)
         {
-            SetMetricDetails(id);
             var match = _context.Definitions.Find(id);
             _metric.ResultCount = 1;
             return Ok(match);

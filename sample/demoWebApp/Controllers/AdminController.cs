@@ -2,6 +2,7 @@
 using demoWebApp.Models.ViewBinding;
 using MagenicMetrics;
 using MagenicMetrics.Controllers;
+using MagenicMetrics.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -55,9 +56,9 @@ namespace demoWebApp.Controllers
         /// <returns>This is the list of metrics satisfying the <paramref name="adminIndex" /> constraints.</returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
+        [MetricDetails(Source = "adminIndex")]
         public async Task<IActionResult> Index(AdminIndexInput adminIndex)
         {
-            SetMetricDetails(adminIndex);
             var viewModel = new AdminIndexView
             {
                 PageSize = adminIndex.PageSize,
