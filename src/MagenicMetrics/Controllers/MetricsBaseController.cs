@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MagenicMetrics.Filters;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using System;
@@ -46,6 +47,16 @@ namespace MagenicMetrics.Controllers
         }
 
         /// <summary>
+        ///     Sets the <see cref="IMetric" /> details.
+        /// </summary>
+        /// <param name="details">This is the details to serialize into <see cref="IMetric.Details" />.</param>
+        /// <remarks>
+        ///     <para>This method can be invoked from any action that inherits from <see cref="MetricsBaseController" />.</para>
+        ///     <para>Since <see cref="MetricDetailsAttribute" /> uses this method, it must be <c>public</c> instead of <c>protected</c>.</para>
+        /// </remarks>
+        public void SetMetricDetails(object details) => MetricDetails = details;
+
+        /// <summary>
         ///     Gets the concatenated validation errors.
         /// </summary>
         /// <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
@@ -65,12 +76,6 @@ namespace MagenicMetrics.Controllers
             }
             return validationErrors.ToString();
         }
-
-        /// <summary>
-        ///     Sets the <see cref="IMetric" /> details.
-        /// </summary>
-        /// <param name="details">This is the details to serialize into <see cref="IMetric.Details" />.</param>
-        protected void SetMetricDetails(object details) => MetricDetails = details;
 
         /// <summary>
         ///     This method sets the value of <see cref="IMetric.Details" />.

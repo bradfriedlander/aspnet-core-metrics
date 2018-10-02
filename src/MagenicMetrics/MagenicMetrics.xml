@@ -33,17 +33,21 @@
             </summary>
             <param name="context">The action executed context.</param>
         </member>
-        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.GetValidationErrors(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
-            <summary>
-                Gets the concatenated validation errors.
-            </summary>
-            <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
-        </member>
         <member name="M:MagenicMetrics.Controllers.MetricsBaseController.SetMetricDetails(System.Object)">
             <summary>
                 Sets the <see cref="T:MagenicMetrics.IMetric" /> details.
             </summary>
             <param name="details">This is the details to serialize into <see cref="P:MagenicMetrics.IMetric.Details" />.</param>
+            <remarks>
+                <para>This method can be invoked from any action that inherits from <see cref="T:MagenicMetrics.Controllers.MetricsBaseController" />.</para>
+                <para>Since <see cref="T:MagenicMetrics.Filters.MetricDetailsAttribute" /> uses this method, it must be <c>public</c> instead of <c>protected</c>.</para>
+            </remarks>
+        </member>
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.GetValidationErrors(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+                Gets the concatenated validation errors.
+            </summary>
+            <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
         </member>
         <member name="M:MagenicMetrics.Controllers.MetricsBaseController.SerializeDetails">
             <summary>
@@ -58,6 +62,43 @@
                     set to a simple string representation of <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails" />.
                 </para>
                 <para>Otherwise, <see cref="P:MagenicMetrics.IMetric.Details" /> is set to a JSON serialization of <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails" />.</para>
+            </remarks>
+        </member>
+        <member name="T:MagenicMetrics.Filters.MetricDetailsAttribute">
+            <summary>
+                This class defines a filter for setting the object to be serialized into <see cref="P:MagenicMetrics.IMetric.Details" />.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Filters.IActionFilter" />
+        </member>
+        <member name="P:MagenicMetrics.Filters.MetricDetailsAttribute.Source">
+            <summary>
+                Gets or sets the source identifier.
+            </summary>
+            <value>
+                This is the source identifier. It is the name of the action parameter that gets serialized into <see cref="P:MagenicMetrics.IMetric.Details" />.
+            </value>
+        </member>
+        <member name="M:MagenicMetrics.Filters.MetricDetailsAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+                Called after the action executes, before the action result.
+            </summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext" />.</param>
+            <remarks>
+                <para>This method does nothing.</para>
+            </remarks>
+        </member>
+        <member name="M:MagenicMetrics.Filters.MetricDetailsAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+                Called before the action executes, after model binding is complete.
+            </summary>
+            <param name="context">This is the <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext" /> context.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Source</exception>
+            <remarks>
+                <para>
+                    This method invokes <see cref="M:MagenicMetrics.Controllers.MetricsBaseController.SetMetricDetails(System.Object)" /> to save the object identified by <see
+                    cref="P:MagenicMetrics.Filters.MetricDetailsAttribute.Source" />.
+                </para>
             </remarks>
         </member>
         <member name="T:MagenicMetrics.IMetric">
