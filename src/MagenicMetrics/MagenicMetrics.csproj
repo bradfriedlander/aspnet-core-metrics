@@ -10,6 +10,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\TestDev\demoMetrics\src\MagenicMetrics\MagenicMetrics.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>..\..\UnusedCode.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
