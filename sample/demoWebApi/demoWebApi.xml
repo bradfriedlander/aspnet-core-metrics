@@ -159,7 +159,7 @@
         </member>
         <member name="P:demoWebApi.Models.Definition.DefinitionId">
             <summary>
-                Gets or sets the definition identifier.
+                Gets or sets the identity definition identifier.
             </summary>
             <value>This is the identity definition identifier.</value>
         </member>
@@ -171,9 +171,9 @@
         </member>
         <member name="P:demoWebApi.Models.Definition.Name">
             <summary>
-                Gets or sets the name for the definition.
+                Gets or sets the name of the definition.
             </summary>
-            <value>This is the name.</value>
+            <value>This is the name of the definition.</value>
         </member>
         <member name="T:demoWebApi.Models.HealthCheckStatus">
             <summary>

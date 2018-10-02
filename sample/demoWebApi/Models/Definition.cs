@@ -6,7 +6,7 @@
     public class Definition
     {
         /// <summary>
-        ///     Gets or sets the definition identifier.
+        ///     Gets or sets the identity definition identifier.
         /// </summary>
         /// <value>This is the identity definition identifier.</value>
         public int DefinitionId { get; set; }
@@ -18,9 +18,9 @@
         public bool IsDeleted { get; set; }
 
         /// <summary>
-        ///     Gets or sets the name for the definition.
+        ///     Gets or sets the name of the definition.
         /// </summary>
-        /// <value>This is the name.</value>
+        /// <value>This is the name of the definition.</value>
         public string Name { get; set; }
     }
 }
