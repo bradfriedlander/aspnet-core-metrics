@@ -85,5 +85,10 @@ namespace MagenicMetrics
                 }
             }
         }
+
+        private void UnusedMethod()
+        {
+
+        }
     }
 }
