@@ -2,6 +2,7 @@
 using demoWebApp.Models.InputBinding;
 using MagenicMetrics;
 using MagenicMetrics.Controllers;
+using MagenicMetrics.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -113,9 +114,9 @@ namespace demoWebApp.Controllers
         /// <param name="model">This is the model containing status code.</param>
         /// <returns></returns>
         [HttpPost]
+        [MetricDetails(Source = "model")]
         public IActionResult ForceStatusCode(HomeForceStatusCode model)
         {
-            SetMetricDetails(model);
             if (!ModelState.IsValid)
             {
                 return View(model);
