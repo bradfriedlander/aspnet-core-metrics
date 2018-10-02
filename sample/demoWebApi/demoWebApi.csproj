@@ -36,4 +36,10 @@
     <ProjectReference Include="..\..\src\MagenicMetrics\MagenicMetrics.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="demoWebApi.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -98,7 +98,18 @@ namespace demoWebApi
             services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase("SimpleDatabase"));
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Demo API", Version = "v1" });
+                c.SwaggerDoc("v1",
+                    new Info
+                    {
+                        Title = "Demo API",
+                        Version = "v1",
+                        Contact = new Contact
+                        {
+                            Name = "Brad Friedlander",
+                            Email = "bradf@magenic.com"
+                        }
+                    });
+                c.IncludeXmlComments(@"C:\TestDev\demoMetrics\sample\demoWebApi\demoWebApi.xml", includeControllerXmlComments: true);
             });
         }
 
