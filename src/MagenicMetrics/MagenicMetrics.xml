@@ -227,6 +227,12 @@
             <summary>
                 Initializes a new instance of the <see cref="T:MagenicMetrics.Metric" /> class.
             </summary>
+            <remarks>
+                <para>
+                    The constructor initializes <see cref="P:MagenicMetrics.Metric.StartTime" /> to the current UTC date/time. It also sets the <see cref="T:System.Int32" /> properties
+                    to <c>-1</c> to distinguish a never set condition from the default value of <c>0</c>
+                </para>
+            </remarks>
         </member>
         <member name="P:MagenicMetrics.Metric.Application">
             <summary>

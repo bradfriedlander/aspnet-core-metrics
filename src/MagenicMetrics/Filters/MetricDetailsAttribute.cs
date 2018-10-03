@@ -9,7 +9,8 @@ namespace MagenicMetrics.Filters
     /// </summary>
     /// <seealso cref="Attribute" />
     /// <seealso cref="IActionFilter" />
-    public class MetricDetailsAttribute : Attribute, IActionFilter
+    [AttributeUsage(AttributeTargets.Method)]
+    public sealed class MetricDetailsAttribute : Attribute, IActionFilter
     {
         /// <summary>
         ///     Gets or sets the source identifier.

@@ -11,10 +11,17 @@ namespace MagenicMetrics
         /// <summary>
         ///     Initializes a new instance of the <see cref="Metric" /> class.
         /// </summary>
+        /// <remarks>
+        ///     <para>
+        ///         The constructor initializes <see cref="StartTime" /> to the current UTC date/time. It also sets the <see cref="int" /> properties
+        ///         to <c>-1</c> to distinguish a never set condition from the default value of <c>0</c>
+        ///     </para>
+        /// </remarks>
         public Metric()
         {
             StartTime = DateTime.UtcNow;
             ResultCount = -1;
+            ElapsedTime = -1;
         }
 
         /// <summary>
