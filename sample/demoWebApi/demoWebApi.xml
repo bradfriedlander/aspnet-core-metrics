@@ -97,6 +97,7 @@
             <summary>
                 This attribute ensures that the record id is valid and that there is a matching <see cref="T:demoWebApi.Models.Definition" /> record.
             </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.TypeFilterAttribute" />
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute" />
         </member>
         <member name="M:demoWebApi.Filters.EnsureDefinitionExistsAttribute.#ctor">
