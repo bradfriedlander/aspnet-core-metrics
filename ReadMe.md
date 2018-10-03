@@ -3,7 +3,8 @@ This is the read me file for this project.
 
 ## Overview
 Magenic Metric is a middleware component for use in ASP.NET Core MVC/Web API applications.
-It's purpose is to provide a standard mechanism for [capturing](#metric-middleware) and [logging](#metric-service) (to a database) consistent information about each request (*i.e.*, controller action usage) to the application.
+It's purpose is to provide a standard mechanism for [capturing](#metric-middleware) and [logging](#metric-service) 
+(to a [database](#database)) consistent information about each request (*i.e.*, controller action usage) to the application.
 The information is contained in the [Metric](#metric) class.
 
 This component provides mechanisms for each action to add action-specific information into the [Metric](#metric) record.
@@ -20,10 +21,11 @@ This class provides the ability to persist a Metric to a backing store.
 This class is a middleware pipeline component that manages the Metric information for each HTTP request.
 
 ## [MetricBaseController](Documentation/MetricBaseController.md){#metric-base-controller}
-This is a base class for all controllers that use MetricMiddleware.
+This is a base class for all controllers that use [MetricMiddleware](#metric-middleware).
 
 ## [MetricDetails](Documentation/MetricDetails.md){#metric-details}
-This is an attribute that populates the "Details" property of the [Metric](#metric) class.
+This is an attribute that supports populating the "Details" property of the [Metric](#metric) class.
+The actual population is done in the [MetricBaseController](#metric-base-controller).
 
 ## [Database](Documentation/Database.md){#database}
 This is a folder that contains scripts to create the database artifacts used by Magenic Metrics. This is an alternative to using the `dotnet ef` commands.
