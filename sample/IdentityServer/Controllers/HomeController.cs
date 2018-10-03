@@ -1,6 +1,6 @@
-﻿using IdentityServer.Models;
+﻿using System.Diagnostics;
+using IdentityServer.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace IdentityServer.Controllers
 {

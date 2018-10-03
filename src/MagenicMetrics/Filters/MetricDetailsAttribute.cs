@@ -1,6 +1,6 @@
-﻿using MagenicMetrics.Controllers;
+﻿using System;
+using MagenicMetrics.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
 
 namespace MagenicMetrics.Filters
 {

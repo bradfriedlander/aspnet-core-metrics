@@ -1,9 +1,9 @@
-﻿using MagenicMetrics.Filters;
+﻿using System;
+using System.Text;
+using MagenicMetrics.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
-using System;
-using System.Text;
 
 namespace MagenicMetrics.Controllers
 {
@@ -105,7 +105,6 @@ namespace MagenicMetrics.Controllers
 
         private void xxx()
         {
-
         }
     }
 }

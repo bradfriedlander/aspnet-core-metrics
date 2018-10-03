@@ -6,6 +6,12 @@ namespace demoWebApp.Migrations
 {
     public partial class InitialSchema : Migration
     {
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "Metrics");
+        }
+
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -31,12 +37,6 @@ namespace demoWebApp.Migrations
                 {
                     table.PrimaryKey("PK_Metrics", x => x.MetricId);
                 });
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Metrics");
         }
     }
 }

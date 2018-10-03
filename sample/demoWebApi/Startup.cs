@@ -1,4 +1,6 @@
-﻿using demoWebApi.Models;
+﻿using System;
+using System.Text;
+using demoWebApi.Models;
 using demoWebApi.Services;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Builder;
@@ -9,8 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
-using System.Text;
 
 namespace demoWebApi
 {
