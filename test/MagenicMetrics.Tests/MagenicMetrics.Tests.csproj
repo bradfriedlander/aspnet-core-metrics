@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IdentityModel" Version="3.9.0" />
+    <PackageReference Include="IdentityModel" Version="3.10.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.6.2">
       <PrivateAssets>all</PrivateAssets>
