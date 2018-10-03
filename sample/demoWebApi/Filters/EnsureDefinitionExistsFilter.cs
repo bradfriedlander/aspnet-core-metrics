@@ -41,7 +41,7 @@ namespace demoWebApi.Filters
         {
             var definitionId = 0;
             DefinitionInput definitionInput;
-            var metric = ((ApiBaseController)(context.Controller))._metric;
+            var metric = ((ApiBaseController)context.Controller)._metric;
             if (context.ActionArguments.Keys.Contains("id"))
             {
                 definitionId = (int)context.ActionArguments["id"];
