@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore;
+﻿using System.IO;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
 
 namespace demoWebApi
 {

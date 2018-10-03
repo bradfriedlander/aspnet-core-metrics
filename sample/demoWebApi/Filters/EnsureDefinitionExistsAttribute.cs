@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace demoWebApi.Filters
 {
     /// <summary>
-    /// This attribute ensures that the record id is valid and that there is a matching <see cref="Definition" /> record.
+    ///     This attribute ensures that the record id is valid and that there is a matching <see cref="Definition" /> record.
     /// </summary>
     /// <seealso cref="TypeFilterAttribute" />
     /// <seealso cref="ActionFilterAttribute" />

@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Http;
-using Moq;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Moq;
 using Xunit;
 
 namespace MagenicMetrics.Tests

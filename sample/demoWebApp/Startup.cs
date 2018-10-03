@@ -1,4 +1,5 @@
-﻿using demoWebApp.Models.Settings;
+﻿using System.IdentityModel.Tokens.Jwt;
+using demoWebApp.Models.Settings;
 using demoWebApp.Services;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Builder;
@@ -9,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace demoWebApp
 {

@@ -1,4 +1,7 @@
-﻿using demoWebApp.HttpHelpers;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using demoWebApp.HttpHelpers;
 using demoWebApp.Models.ViewBinding;
 using MagenicMetrics;
 using MagenicMetrics.Controllers;
@@ -6,9 +9,6 @@ using MagenicMetrics.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace demoWebApp.Controllers
 {

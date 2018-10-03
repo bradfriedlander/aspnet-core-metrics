@@ -1,4 +1,6 @@
-﻿using demoWebApp.Models;
+﻿using System;
+using System.Diagnostics;
+using demoWebApp.Models;
 using demoWebApp.Models.InputBinding;
 using MagenicMetrics;
 using MagenicMetrics.Controllers;
@@ -6,8 +8,6 @@ using MagenicMetrics.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Diagnostics;
 
 namespace demoWebApp.Controllers
 {

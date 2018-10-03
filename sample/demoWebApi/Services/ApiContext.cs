@@ -38,7 +38,7 @@ namespace demoWebApi.Services
         public async Task<bool> DoesDefinitionExist(int id)
         {
             var match = await Definitions.IgnoreQueryFilters().FirstOrDefaultAsync(d => id == d.DefinitionId);
-            return  match != null;
+            return match != null;
         }
 
         /// <summary>
