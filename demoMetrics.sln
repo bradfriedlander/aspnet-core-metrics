@@ -24,12 +24,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "sample\Id
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2782A2C8-7B01-46C8-8556-8819100699FD}"
 	ProjectSection(SolutionItems) = preProject
-		documentation\Metric.md = documentation\Metric.md
-		documentation\MetricBaseController.md = documentation\MetricBaseController.md
-		documentation\MetricMiddleware.md = documentation\MetricMiddleware.md
-		documentation\MetricService.md = documentation\MetricService.md
 		ReadMe.md = ReadMe.md
 		UnusedCode.ruleset = UnusedCode.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{22804807-97D4-4846-B265-6811E04C2851}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Database.md = Documentation\Database.md
+		documentation\Metric.md = documentation\Metric.md
+		documentation\MetricBaseController.md = documentation\MetricBaseController.md
+		Documentation\MetricDetails.md = Documentation\MetricDetails.md
+		documentation\MetricMiddleware.md = documentation\MetricMiddleware.md
+		documentation\MetricService.md = documentation\MetricService.md
 	EndProjectSection
 EndProject
 Global
@@ -65,6 +71,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{22804807-97D4-4846-B265-6811E04C2851} = {2782A2C8-7B01-46C8-8556-8819100699FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2F89AE9-8569-4779-81FD-993A5A2410D6}
