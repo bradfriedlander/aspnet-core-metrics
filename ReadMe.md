@@ -11,23 +11,23 @@ This component provides mechanisms for each action to add action-specific inform
 To facilitate this, the controller class needs to inherit from the [MetricBaseController](#metric-base-controller).
 The component exposes the [MetricDetails attribute](#metric-details) which populates part of the record.
 
-## [Metric](Documentation/Metric.md){#metric}
+## [Metric](Documentation/Metric.md) {#metric}
 This class is the data that is persisted for each MVC controller interaction.
 
-## [MetricService](Documentation/MetricService.md){#metric-service}
+## [MetricService](Documentation/MetricService.md) {#metric-service}
 This class provides the ability to persist a Metric to a backing store.
 
-## [MetricMiddleware](Documentation/MetricMiddleware.md){#metric-middleware}
+## [MetricMiddleware](Documentation/MetricMiddleware.md) {#metric-middleware}
 This class is a middleware pipeline component that manages the Metric information for each HTTP request.
 
-## [MetricBaseController](Documentation/MetricBaseController.md){#metric-base-controller}
+## [MetricBaseController](Documentation/MetricBaseController.md) {#metric-base-controller}
 This is a base class for all controllers that use [MetricMiddleware](#metric-middleware).
 
-## [MetricDetails](Documentation/MetricDetails.md){#metric-details}
+## [MetricDetails](Documentation/MetricDetails.md) {#metric-details}
 This is an attribute that supports populating the "Details" property of the [Metric](#metric) class.
 The actual population is done in the [MetricBaseController](#metric-base-controller).
 
-## [Database](Documentation/Database.md){#database}
+## [Database](Documentation/Database.md) {#database}
 This is a folder that contains scripts to create the database artifacts used by Magenic Metrics. This is an alternative to using the `dotnet ef` commands.
 
 # [Code](Documentation/MagenicMetrics.md)
