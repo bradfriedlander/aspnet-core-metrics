@@ -24,7 +24,7 @@
         </member>
         <member name="F:MagenicMetrics.Controllers.MetricsBaseController._metric">
             <summary>
-                The is the current <see cref="T:MagenicMetrics.IMetric" /> instance.
+                This is the current <see cref="T:MagenicMetrics.IMetric" /> instance.
             </summary>
         </member>
         <member name="M:MagenicMetrics.Controllers.MetricsBaseController.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
@@ -35,17 +35,17 @@
         </member>
         <member name="M:MagenicMetrics.Controllers.MetricsBaseController.SetMetricDetails(System.Object)">
             <summary>
-                Sets the <see cref="T:MagenicMetrics.IMetric" /> details.
+                This method sets the <see cref="T:MagenicMetrics.IMetric" /> details.
             </summary>
             <param name="details">This is the details to serialize into <see cref="P:MagenicMetrics.IMetric.Details" />.</param>
             <remarks>
                 <para>This method can be invoked from any action that inherits from <see cref="T:MagenicMetrics.Controllers.MetricsBaseController" />.</para>
-                <para>Since <see cref="T:MagenicMetrics.Filters.MetricDetailsAttribute" /> uses this method, it must be <c>public</c> instead of <c>protected</c>.</para>
+                <para>Since <see cref="T:MagenicMetrics.Filters.MetricDetailsAttribute" /> uses this method, it must be <c>internal</c> instead of <c>protected</c>.</para>
             </remarks>
         </member>
         <member name="M:MagenicMetrics.Controllers.MetricsBaseController.GetValidationErrors(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
             <summary>
-                Gets the concatenated validation errors.
+                This method gets the concatenated validation errors.
             </summary>
             <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
         </member>
