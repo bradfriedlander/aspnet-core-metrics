@@ -28,7 +28,7 @@
 ---
 ### MagenicMetrics.Controllers.MetricsBaseController._metric
 
- The is the current [MagenicMetrics.IMetric] instance. 
+ This is the current [MagenicMetrics.IMetric] instance. 
 
 
 
@@ -45,7 +45,7 @@
 ---
 ### MagenicMetrics.Controllers.MetricsBaseController.SetMetricDetails(System.Object)
 
- Sets the [MagenicMetrics.IMetric] details. 
+ This method sets the [MagenicMetrics.IMetric] details. 
 
 | Parameter | Description |
 |-----|------|
@@ -58,7 +58,7 @@ This method can be invoked from any action that inherits from [MagenicMetrics.Co
 
 
 
-Since [MagenicMetrics.Filters.MetricDetailsAttribute] uses this method, it must be `public` instead of `protected`.
+Since [MagenicMetrics.Filters.MetricDetailsAttribute] uses this method, it must be `internal` instead of `protected`.
 
 
 
@@ -67,7 +67,7 @@ Since [MagenicMetrics.Filters.MetricDetailsAttribute] uses this method, it must 
 ---
 ### MagenicMetrics.Controllers.MetricsBaseController.GetValidationErrors(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)
 
- Gets the concatenated validation errors. 
+ This method gets the concatenated validation errors. 
 
 
 **Returns:** This is the concatenated validation errors with "|" uses as a separator.

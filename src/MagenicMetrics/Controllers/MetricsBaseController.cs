@@ -29,7 +29,7 @@ namespace MagenicMetrics.Controllers
         public object MetricDetails { get; private set; }
 
         /// <summary>
-        ///     The is the current <see cref="IMetric" /> instance.
+        ///     This is the current <see cref="IMetric" /> instance.
         /// </summary>
         public readonly IMetric _metric;
 
@@ -47,17 +47,17 @@ namespace MagenicMetrics.Controllers
         }
 
         /// <summary>
-        ///     Sets the <see cref="IMetric" /> details.
+        ///     This method sets the <see cref="IMetric" /> details.
         /// </summary>
         /// <param name="details">This is the details to serialize into <see cref="IMetric.Details" />.</param>
         /// <remarks>
         ///     <para>This method can be invoked from any action that inherits from <see cref="MetricsBaseController" />.</para>
-        ///     <para>Since <see cref="MetricDetailsAttribute" /> uses this method, it must be <c>public</c> instead of <c>protected</c>.</para>
+        ///     <para>Since <see cref="MetricDetailsAttribute" /> uses this method, it must be <c>internal</c> instead of <c>protected</c>.</para>
         /// </remarks>
         internal void SetMetricDetails(object details) => MetricDetails = details;
 
         /// <summary>
-        ///     Gets the concatenated validation errors.
+        ///     This method gets the concatenated validation errors.
         /// </summary>
         /// <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
         protected string GetValidationErrors(ActionExecutedContext context)
@@ -101,10 +101,6 @@ namespace MagenicMetrics.Controllers
                 : MetricDetails.GetType().IsPrimitive
                     ? MetricDetails.ToString()
                     : JsonConvert.SerializeObject(MetricDetails);
-        }
-
-        private void xxx()
-        {
         }
     }
 }
