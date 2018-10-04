@@ -36,6 +36,16 @@ namespace MagenicMetrics
         ///     injected objects. This service must be scoped.
         /// </param>
         /// <returns></returns>
+        /// <remarks>
+        ///     <para>The metric service performs five actions.</para>
+        ///     <list type="number">
+        ///         <item>Populate <paramref name="metric" /> with initial values and start time.</item>
+        ///         <item>Invoke the <see cref="_next" /> step of the pipeline.</item>
+        ///         <item>Capture message from any exception that may occur and then re-throw the exception.</item>
+        ///         <item>Always populate the elapsed time and other end of processing information.</item>
+        ///         <item>Persist <paramref name="metric" /> using <paramref name="metricService" />.</item>
+        ///     </list>
+        /// </remarks>
         public async Task Invoke(HttpContext context, IMetric metric, IMetricService metricService)
         {
             var exceptionMessage = string.Empty;

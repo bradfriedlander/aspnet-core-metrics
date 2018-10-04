@@ -508,6 +508,21 @@ This method does nothing.
 
 
 
+
+
+The metric service performs five actions.
+
+1. Populate `metric` with initial values and start time.
+1. Invoke the [MagenicMetrics.MetricMiddleware._next](#MagenicMetrics.MetricMiddleware._next) step of the pipeline.
+1. Capture message from any exception that may occur and then re-throw the exception.
+1. Always populate the elapsed time and other end of processing information.
+1. Persist `metric` using `metricService`.
+
+
+
+
+
+
 ---
 ## MagenicMetrics.MetricMiddlewareExtensions
 
