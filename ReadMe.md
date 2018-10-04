@@ -30,6 +30,9 @@ The actual population is done in the [MetricBaseController](#metric-base-control
 ## [Database](Documentation/Database.md){#database}
 This is a folder that contains scripts to create the database artifacts used by Magenic Metrics. This is an alternative to using the `dotnet ef` commands.
 
+# [Code](Documentation/MagenicMetrics.md)
+This document provides details on the classes, methods, and properties in the MagenicMetrics assembly.
+
 # demoWebApp
 This is a simple MVC project that demonstrates how Magenic Metrics works for controllers that serve a user interface.
 
