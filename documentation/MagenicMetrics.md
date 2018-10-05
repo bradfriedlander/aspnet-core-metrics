@@ -139,7 +139,8 @@ This method does nothing.
 | Parameter | Description |
 |-----|------|
 | context | This is the `Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext` context. |
-[[System.ArgumentOutOfRangeException|System.ArgumentOutOfRangeException]]: Source
+
+**Exception:** [System.ArgumentOutOfRangeException(System.ArgumentOutOfRangeException)]: Source
 
 
 
@@ -586,9 +587,23 @@ The metric service performs five actions.
 ---
 ### MagenicMetrics.MetricService.Metrics
 
- Gets or sets the metrics. 
+ Gets or sets the `Microsoft.EntityFrameworkCore.DbSet`1` for [MagenicMetrics.Metric](#MagenicMetrics.Metric). 
 
-**Value:** The metrics.
+**Value:** This is the `Microsoft.EntityFrameworkCore.DbSet`1` for [MagenicMetrics.Metric](#MagenicMetrics.Metric).
+
+
+
+---
+### MagenicMetrics.MetricService._logger
+
+ This is the logger instance passed to the constructor. 
+
+
+
+---
+### MagenicMetrics.MetricService._options
+
+ This is the configuration options passed to the constructor. 
 
 
 
@@ -630,7 +645,15 @@ The metric service performs five actions.
 | modelBuilder |  The builder being used to construct the model for this context. Databases (and other extensions) typically define extension methods on this object that allow you to configure aspects of the model that are specific to a given database.  |
 
 
+
+
  If a model is explicitly set on the options for this context (via `Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)`) then this method will not be run. 
+
+
+
+ The name of the table containing the [MagenicMetrics.Metric](#MagenicMetrics.Metric) records is define by the [MagenicMetrics.MetricServiceOptions.TableName](#MagenicMetrics.MetricServiceOptions.TableName) in [MagenicMetrics.MetricService._options](#MagenicMetrics.MetricService._options). 
+
+
 
 
 
