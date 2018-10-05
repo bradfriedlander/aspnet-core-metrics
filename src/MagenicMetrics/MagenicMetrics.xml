@@ -476,7 +476,8 @@
                     <item>
                         <term>MagenicMetrics</term>
                         <description>
-                            This contains three major classes: <see cref="T:MagenicMetrics.Metric" />, <see cref="T:MagenicMetrics.MetricMiddleware" />, and <see cref="T:MagenicMetrics.MetricService" />.
+                            This contains three major classes: <see cref="T:MagenicMetrics.Metric" />; <see cref="T:MagenicMetrics.MetricMiddleware" />; and <see cref="T:MagenicMetrics.MetricService" />. It
+                            also contains the interfaces for those classes and some supporting classes.
                         </description>
                     </item>
                     <item>
