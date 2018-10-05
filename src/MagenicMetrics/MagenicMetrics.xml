@@ -394,9 +394,19 @@
         </member>
         <member name="P:MagenicMetrics.MetricService.Metrics">
             <summary>
-                Gets or sets the metrics.
+                Gets or sets the <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> for <see cref="T:MagenicMetrics.Metric" />.
             </summary>
-            <value>The metrics.</value>
+            <value>This is the <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> for <see cref="T:MagenicMetrics.Metric" />.</value>
+        </member>
+        <member name="F:MagenicMetrics.MetricService._logger">
+            <summary>
+                This is the logger instance passed to the constructor.
+            </summary>
+        </member>
+        <member name="F:MagenicMetrics.MetricService._options">
+            <summary>
+                This is the configuration options passed to the constructor.
+            </summary>
         </member>
         <member name="M:MagenicMetrics.MetricService.AddAndSave(MagenicMetrics.IMetric)">
             <summary>
@@ -425,8 +435,14 @@
                 this object that allow you to configure aspects of the model that are specific to a given database.
             </param>
             <remarks>
-                If a model is explicitly set on the options for this context (via <see
-                cref="M:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />) then this method will not be run.
+                <para>
+                    If a model is explicitly set on the options for this context (via <see
+                    cref="M:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />) then this method will not be run.
+                </para>
+                <para>
+                    The name of the table containing the <see cref="T:MagenicMetrics.Metric" /> records is define by the <see cref="P:MagenicMetrics.MetricServiceOptions.TableName" />
+                    in <see cref="F:MagenicMetrics.MetricService._options" />.
+                </para>
             </remarks>
         </member>
         <member name="T:MagenicMetrics.MetricServiceOptions">

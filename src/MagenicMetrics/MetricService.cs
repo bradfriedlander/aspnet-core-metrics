@@ -36,12 +36,19 @@ namespace MagenicMetrics
         }
 
         /// <summary>
-        ///     Gets or sets the metrics.
+        ///     Gets or sets the <see cref="DbSet{TEntity}" /> for <see cref="Metric" />.
         /// </summary>
-        /// <value>The metrics.</value>
+        /// <value>This is the <see cref="DbSet{TEntity}" /> for <see cref="Metric" />.</value>
         public DbSet<Metric> Metrics { get; set; }
 
+        /// <summary>
+        ///     This is the logger instance passed to the constructor.
+        /// </summary>
         private readonly ILogger _logger;
+
+        /// <summary>
+        ///     This is the configuration options passed to the constructor.
+        /// </summary>
         private readonly MetricServiceOptions _options;
 
         /// <summary>
@@ -91,8 +98,14 @@ namespace MagenicMetrics
         ///     this object that allow you to configure aspects of the model that are specific to a given database.
         /// </param>
         /// <remarks>
-        ///     If a model is explicitly set on the options for this context (via <see
-        ///     cref="DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />) then this method will not be run.
+        ///     <para>
+        ///         If a model is explicitly set on the options for this context (via <see
+        ///         cref="DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />) then this method will not be run.
+        ///     </para>
+        ///     <para>
+        ///         The name of the table containing the <see cref="Metric" /> records is define by the <see cref="MetricServiceOptions.TableName" />
+        ///         in <see cref="_options" />.
+        ///     </para>
         /// </remarks>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
