@@ -1,5 +1,24 @@
 # MagenicMetrics
 
+ This namespace is the root for all classes in Magenic Metrics. 
+
+
+
+
+
+This namespace contains the following namespaces.
+
+| Namespace | Usage |
+|-----|------|
+| MagenicMetrics |  This contains three major classes: [MagenicMetrics.Metric](#MagenicMetrics.Metric), [MagenicMetrics.MetricMiddleware](#MagenicMetrics.MetricMiddleware), and [MagenicMetrics.MetricService](#MagenicMetrics.MetricService).  |
+| MagenicMetrics.Controllers | This contains the [MagenicMetrics.Controllers.MetricsBaseController](#MagenicMetrics.Controllers.MetricsBaseController) class that can be used by application controllers. |
+| MagenicMetrics.Filters |  This contains the [MagenicMetrics.Filters.MetricDetailsAttribute](#MagenicMetrics.Filters.MetricDetailsAttribute) attribute that supports populating [MagenicMetrics.Metric](#MagenicMetrics.Metric).  |
+
+
+
+
+
+
 ## MagenicMetrics.Controllers.MetricsBaseController
 
  This is a base class for all controllers that use [MagenicMetrics.MetricMiddleware](#MagenicMetrics.MetricMiddleware). 

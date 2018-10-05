@@ -462,5 +462,35 @@
             </summary>
             <value>This is the name of the table.</value>
         </member>
+        <member name="T:MagenicMetrics.NamespaceDoc">
+            <summary>
+                This namespace is the root for all classes in Magenic Metrics.
+            </summary>
+            <remarks>
+                <para>This namespace contains the following namespaces.</para>
+                <list type="table">
+                    <listheader>
+                        <term>Namespace</term>
+                        <description>Usage</description>
+                    </listheader>
+                    <item>
+                        <term>MagenicMetrics</term>
+                        <description>
+                            This contains three major classes: <see cref="T:MagenicMetrics.Metric" />, <see cref="T:MagenicMetrics.MetricMiddleware" />, and <see cref="T:MagenicMetrics.MetricService" />.
+                        </description>
+                    </item>
+                    <item>
+                        <term>MagenicMetrics.Controllers</term>
+                        <description>This contains the <see cref="T:MagenicMetrics.Controllers.MetricsBaseController" /> class that can be used by application controllers.</description>
+                    </item>
+                    <item>
+                        <term>MagenicMetrics.Filters</term>
+                        <description>
+                            This contains the <see cref="T:MagenicMetrics.Filters.MetricDetailsAttribute" /> attribute that supports populating <see cref="T:MagenicMetrics.Metric" />.
+                        </description>
+                    </item>
+                </list>
+            </remarks>
+        </member>
     </members>
 </doc>
