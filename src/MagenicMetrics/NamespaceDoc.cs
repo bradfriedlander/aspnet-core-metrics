@@ -17,7 +17,8 @@ namespace MagenicMetrics
     ///         <item>
     ///             <term>MagenicMetrics</term>
     ///             <description>
-    ///                 This contains three major classes: <see cref="Metric" />, <see cref="MetricMiddleware" />, and <see cref="MetricService" />.
+    ///                 This contains three major classes: <see cref="Metric" />; <see cref="MetricMiddleware" />; and <see cref="MetricService" />. It
+    ///                 also contains the interfaces for those classes and some supporting classes.
     ///             </description>
     ///         </item>
     ///         <item>
