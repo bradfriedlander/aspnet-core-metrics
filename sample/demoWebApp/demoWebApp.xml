@@ -1,0 +1,380 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>demoWebApp</name>
+    </assembly>
+    <members>
+        <member name="T:demoWebApp.Controllers.AdminController">
+            <summary>
+                This controllers is used to display the latest metrics.
+            </summary>
+            <seealso cref="T:MagenicMetrics.Controllers.MetricsBaseController" />
+        </member>
+        <member name="M:demoWebApp.Controllers.AdminController.#ctor(MagenicMetrics.IMetric,MagenicMetrics.IMetricService)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApp.Controllers.AdminController" /> class.
+            </summary>
+            <param name="metric">The metric.</param>
+            <param name="metricService">The metric service.</param>
+        </member>
+        <member name="M:demoWebApp.Controllers.AdminController.Index">
+            <summary>
+                Retrieve the latest <see cref="T:MagenicMetrics.Metric" /> records.
+            </summary>
+            <returns>This is the default list of metrics.</returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.AdminController.Index(demoWebApp.Models.InputBinding.AdminIndexInput)">
+            <summary>
+                Retrieve the latest <see cref="T:MagenicMetrics.Metric" /> records. <paramref name="adminIndex.Count.Count" /> limits the number to return.
+            </summary>
+            <param name="adminIndex">This is the input for this action.</param>
+            <returns>This is the list of metrics satisfying the <paramref name="adminIndex" /> constraints.</returns>
+        </member>
+        <member name="T:demoWebApp.Controllers.DefinitionController">
+            <summary>
+                This controller manages the creation, editing, and deletion of definitions.
+            </summary>
+            <seealso cref="T:MagenicMetrics.Controllers.MetricsBaseController" />
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.#ctor(MagenicMetrics.IMetric,Microsoft.Extensions.Logging.ILogger{demoWebApp.Controllers.DefinitionController})">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApp.Controllers.DefinitionController" /> class.
+            </summary>
+            <param name="metric">The metric.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Create">
+            <summary>
+                Creates new <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Create(demoWebApp.Models.ViewBinding.DefinitionIndexView)">
+            <summary>
+                Creates the specified new definition.
+            </summary>
+            <param name="newDefinition">The new definition.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Delete(System.Int32)">
+            <summary>
+                Deletes the specified <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Details(System.Int32)">
+            <summary>
+                Shows the details of the specified <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Edit(System.Int32)">
+            <summary>
+                Edits the specified <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Edit(demoWebApp.Models.ViewBinding.DefinitionIndexView)">
+            <summary>
+                Edits the specified <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <param name="definition">The definition.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Index">
+            <summary>
+                Get all <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" /> records.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.DefinitionController.Undelete(System.Int32)">
+            <summary>
+                Undeletes the specified <see cref="T:demoWebApp.Models.ViewBinding.DefinitionIndexView" />.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:demoWebApp.Controllers.HomeController">
+            <summary>
+                This is the default controller for the application.
+            </summary>
+            <seealso cref="T:MagenicMetrics.Controllers.MetricsBaseController" />
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.#ctor(MagenicMetrics.IMetric)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApp.Controllers.HomeController" /> class.
+            </summary>
+            <param name="metric">The metric.</param>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.About">
+            <summary>
+                This controller action shows the about information.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.BadCode">
+            <summary>
+                This controller action forces <see langword="abstract" /><see cref="T:System.NullReferenceException" />.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.NullReferenceException">Abort failed</exception>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.BadResult">
+            <summary>
+                This controller action forces a <see cref="T:Microsoft.AspNetCore.Mvc.ConflictResult" />.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.Contact">
+            <summary>
+                This controller action shows the contact information.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.Error">
+            <summary>
+                This controller action shows the error information.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.ForceStatusCode">
+            <summary>
+                This display the input form to forces the status code value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.ForceStatusCode(demoWebApp.Models.InputBinding.HomeForceStatusCode)">
+            <summary>
+                This action forces the status code to be set to <paramref name="model" />.
+            </summary>
+            <param name="model">This is the model containing status code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.Index">
+            <summary>
+                This is the default display for this controller.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Controllers.HomeController.Privacy">
+            <summary>
+                This controller action shows the privacy information.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:demoWebApp.Models.ErrorViewModel">
+            <summary>
+                This is the view model for errors.
+            </summary>
+        </member>
+        <member name="P:demoWebApp.Models.ErrorViewModel.RequestId">
+            <summary>
+                Gets or sets the request identifier.
+            </summary>
+            <value>The request identifier.</value>
+        </member>
+        <member name="P:demoWebApp.Models.ErrorViewModel.ShowRequestId">
+            <summary>
+                Gets a value indicating if the request identifier should be shown.
+            </summary>
+            <value><c>true</c> if the request identifier should be shown; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:demoWebApp.Models.InputBinding.AdminIndexInput">
+            <summary>
+                This is the input class for the Index action of the Admin controller.
+            </summary>
+        </member>
+        <member name="P:demoWebApp.Models.InputBinding.AdminIndexInput.ApplicationFilter">
+            <summary>
+                Gets or sets the application name filter.
+            </summary>
+            <value>This is the application name filter (using T-SQL case-insensitive contains).</value>
+        </member>
+        <member name="P:demoWebApp.Models.InputBinding.AdminIndexInput.PageNumber">
+            <summary>
+                Gets or sets the page number.
+            </summary>
+            <value>This is the page number where <see cref="P:demoWebApp.Models.InputBinding.AdminIndexInput.PageSize" /> is the page size.</value>
+        </member>
+        <member name="P:demoWebApp.Models.InputBinding.AdminIndexInput.PageSize">
+            <summary>
+                Gets or sets the maximum number of records to be shown on a page.
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="T:demoWebApp.Models.InputBinding.HomeForceStatusCode">
+            <summary>
+                This is the input and binding model for status code input.
+            </summary>
+        </member>
+        <member name="P:demoWebApp.Models.InputBinding.HomeForceStatusCode.Code">
+            <summary>
+                Gets or sets the status code value.
+            </summary>
+            <value>This is the status code value.</value>
+        </member>
+        <member name="T:demoWebApp.Models.Settings.DefinitionServiceSettings">
+            <summary>
+                This class contains the setting options for the <see cref="T:demoWebApp.Controllers.DefinitionController" />.
+            </summary>
+        </member>
+        <member name="P:demoWebApp.Models.Settings.DefinitionServiceSettings.BaseUrl">
+            <summary>
+                Gets or sets the base URL for the Definition WEB API.
+            </summary>
+            <value>The base URL.</value>
+        </member>
+        <member name="T:demoWebApp.Models.ViewBinding.AdminIndexView">
+            <summary>
+                This is the view model for Admin Index.
+            </summary>
+            <seealso cref="T:demoWebApp.Models.InputBinding.AdminIndexInput" />
+        </member>
+        <member name="P:demoWebApp.Models.ViewBinding.AdminIndexView.Metrics">
+            <summary>
+                Gets or sets the metrics.
+            </summary>
+            <value>This is the set of metric to display metrics.</value>
+        </member>
+        <member name="T:demoWebApp.Models.ViewBinding.DefinitionIndexView">
+            <summary>
+                This is the view model for the retrieved definitions.
+            </summary>
+        </member>
+        <member name="P:demoWebApp.Models.ViewBinding.DefinitionIndexView.DefinitionId">
+            <summary>
+                Gets or sets the definition identifier.
+            </summary>
+            <value>This is the identity definition identifier.</value>
+        </member>
+        <member name="P:demoWebApp.Models.ViewBinding.DefinitionIndexView.IsDeleted">
+            <summary>
+                Gets or sets a value indicating whether this instance is deleted.
+            </summary>
+            <value><c>true</c> if this instance is deleted; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:demoWebApp.Models.ViewBinding.DefinitionIndexView.Name">
+            <summary>
+                Gets or sets the name for the definition.
+            </summary>
+            <value>This is the name.</value>
+        </member>
+        <member name="T:demoWebApp.Program">
+            <summary>
+                This is the starting class for the WebApp demo.
+            </summary>
+        </member>
+        <member name="M:demoWebApp.Program.CreateWebHostBuilder(System.String[],Microsoft.Extensions.Configuration.IConfigurationRoot)">
+            <summary>
+                Creates the web host builder.
+            </summary>
+            <param name="args">These are the command line arguments.</param>
+            <param name="hostingConfig">This is the hosting configuration.</param>
+            <returns></returns>
+        </member>
+        <member name="M:demoWebApp.Program.Main(System.String[])">
+            <summary>
+                This is the entry point for the application.
+            </summary>
+            <param name="args">This is the command line arguments.</param>
+        </member>
+        <member name="M:demoWebApp.Program.GetHostingConfiguration(System.String[])">
+            <summary>
+                Gets the hosting configuration.
+            </summary>
+            <returns>This is the hosting configuration information.</returns>
+        </member>
+        <member name="T:demoWebApp.Services.ApplicationDbContext">
+            <summary>
+                This is the identify service database context.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext" />
+        </member>
+        <member name="M:demoWebApp.Services.ApplicationDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{demoWebApp.Services.ApplicationDbContext})">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApp.Services.ApplicationDbContext" /> class.
+            </summary>
+            <param name="options">The options.</param>
+        </member>
+        <member name="T:demoWebApp.Startup">
+            <summary>
+                This is the <see cref="T:demoWebApp.Startup" /> class for the "demoWebApp" application.
+            </summary>
+        </member>
+        <member name="M:demoWebApp.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+                Initializes a new instance of the <see cref="T:demoWebApp.Startup" /> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <param name="env">This is the environment.</param>
+        </member>
+        <member name="P:demoWebApp.Startup.Configuration">
+            <summary>
+                This is the configuration for the application.
+            </summary>
+        </member>
+        <member name="M:demoWebApp.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+                This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">This is the application builder.</param>
+            <param name="env">This is the hosting environment.</param>
+            <remarks>
+                <para>
+                    Note 1: Per "https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-2.1&amp;tabs=aspnetcore2x"
+                    the default <see cref="T:Microsoft.AspNetCore.Builder.CookiePolicyOptions" /> for <see cref="T:Microsoft.AspNetCore.Http.CookieSecurePolicy" /> is <see
+                    cref="F:Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest" />. Using <see cref="F:Microsoft.AspNetCore.Http.CookieSecurePolicy.Always" /> is more secure and works if the site
+                    only allows HTTPS requests.
+                </para>
+            </remarks>
+        </member>
+        <member name="M:demoWebApp.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">This is the existing collection of services.</param>
+        </member>
+        <member name="M:demoWebApp.Startup.ConfigureAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                This method configures authentication for this application.
+            </summary>
+            <param name="services">This is the existing collection of services.</param>
+        </member>
+        <member name="M:demoWebApp.Startup.ConfigureMetrics(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                This method configures the metric middleware and its supporting services.
+            </summary>
+            <param name="services">This is the existing collection of services.</param>
+        </member>
+        <member name="T:demoWebApp.TagHelpers.IfTagHelper">
+            <summary>
+                This class implements the "asp-if" tag helper.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" />
+        </member>
+        <member name="P:demoWebApp.TagHelpers.IfTagHelper.ContentShouldBeRendered">
+            <summary>
+                Gets or sets a value indicating whether the content should be rendered.
+            </summary>
+            <value><c>true</c> if the content should be rendered; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:demoWebApp.TagHelpers.IfTagHelper.Order">
+            <summary>
+                When a set of <see cref="T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper" /> s are executed, their <see cref="M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)" />'s are first invoked in
+                the specified <see cref="P:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Order" />; then their <see cref="M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)" />'s are
+                invoked in the specified <see cref="P:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Order" />. Lower values are executed first.
+            </summary>
+            <remarks>Default order is <c>0</c>.</remarks>
+        </member>
+        <member name="M:demoWebApp.TagHelpers.IfTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)">
+            <summary>
+                Synchronously executes the <see cref="T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" /> with the given <paramref name="context" /> and <paramref name="output" />.
+            </summary>
+            <param name="context">Contains information associated with the current HTML tag.</param>
+            <param name="output">A stateful HTML element used to generate an HTML tag.</param>
+        </member>
+    </members>
+</doc>

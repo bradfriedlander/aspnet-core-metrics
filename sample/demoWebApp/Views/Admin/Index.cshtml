@@ -1,0 +1,146 @@
+﻿@model AdminIndexView
+@using MagenicMetrics
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+@{
+    ViewData["Title"] = "Metrics";
+    var metricList = Model.Metrics;
+}
+@if (Model == null)
+{
+    <h2>Validation Errors</h2>
+    <p>@Html.ValidationSummary(false)</p>
+}
+else
+{
+    <div asp-validation-summary="All"></div>
+    <hr class="col-md-12" />
+    <div class="col-md-12">
+        <form asp-action="Index" asp-controller="Admin" method="post">
+            <div class="form-actions">
+                <div class="form-group col-md-4">
+                    <label asp-for="ApplicationFilter"></label>
+                    <input class="form-control" asp-for="ApplicationFilter" />
+                    <span asp-validation-for="ApplicationFilter"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="PageNumber"></label>
+                    <input class="form-control" asp-for="PageNumber" />
+                    <span asp-validation-for="PageNumber"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="PageSize"></label>
+                    <input class="form-control" asp-for="PageSize" />
+                    <span asp-validation-for="PageSize"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label>&nbsp;</label><br />
+                    <button type="submit" class="btn btn-default">Apply Filter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br />
+    <hr class="col-md-12" />
+    <br />
+    <h2>Page # @Model.PageNumber - @ViewBag.Count Records</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].MetricId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].StartTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].Application)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].Details)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].ElapsedTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].ExceptionMessage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].RequestMethod)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].RequestPath)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].Query)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].ResultCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].ResultCount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].ServerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].TraceId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metrics[0].UserName)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Metrics)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MetricId)
+                    </td>
+                    <td>
+                        @item.StartTime.ToString("yyyy-MM-dd HH:mm:ss.fff")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Application)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Details)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ElapsedTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExceptionMessage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestMethod)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestPath)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Query)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ResultCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ResultCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TraceId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

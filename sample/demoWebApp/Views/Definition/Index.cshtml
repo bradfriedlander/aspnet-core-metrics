@@ -1,0 +1,49 @@
+﻿@model IEnumerable<demoWebApp.Models.ViewBinding.DefinitionIndexView>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<div asp-validation-summary="All"></div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DefinitionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefinitionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.DefinitionId }) |&nbsp;
+                    @Html.ActionLink("Details", "Details", new { id = item.DefinitionId }) |&nbsp;
+                    <a asp-action="Undelete" asp-if="@item.IsDeleted" asp-route-id="@item.DefinitionId">Undelete</a>
+                    <a asp-action="Delete" asp-if="@(!item.IsDeleted)" asp-route-id="@item.DefinitionId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

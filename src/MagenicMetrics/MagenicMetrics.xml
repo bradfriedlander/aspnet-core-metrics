@@ -1,0 +1,497 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MagenicMetrics</name>
+    </assembly>
+    <members>
+        <member name="T:MagenicMetrics.Controllers.MetricsBaseController">
+            <summary>
+                This is a base class for all controllers that use <see cref="T:MagenicMetrics.MetricMiddleware" />.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.#ctor(MagenicMetrics.IMetric)">
+            <summary>
+                Initializes a new instance of the <see cref="T:MagenicMetrics.Controllers.MetricsBaseController" /> class.
+            </summary>
+            <param name="metric">The metric.</param>
+        </member>
+        <member name="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails">
+            <summary>
+                Gets the <see cref="T:MagenicMetrics.IMetric" /> Details.
+            </summary>
+            <value>This is the <see cref="T:MagenicMetrics.IMetric" /> Details.</value>
+        </member>
+        <member name="F:MagenicMetrics.Controllers.MetricsBaseController._metric">
+            <summary>
+                This is the current <see cref="T:MagenicMetrics.IMetric" /> instance.
+            </summary>
+        </member>
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+                Called after the action method is invoked.
+            </summary>
+            <param name="context">The action executed context.</param>
+        </member>
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.SetMetricDetails(System.Object)">
+            <summary>
+                This method sets the <see cref="T:MagenicMetrics.IMetric" /> details.
+            </summary>
+            <param name="details">This is the details to serialize into <see cref="P:MagenicMetrics.IMetric.Details" />.</param>
+            <remarks>
+                <para>This method can be invoked from any action that inherits from <see cref="T:MagenicMetrics.Controllers.MetricsBaseController" />.</para>
+                <para>Since <see cref="T:MagenicMetrics.Filters.MetricDetailsAttribute" /> uses this method, it must be <c>internal</c> instead of <c>protected</c>.</para>
+            </remarks>
+        </member>
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.GetValidationErrors(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+                This method gets the concatenated validation errors.
+            </summary>
+            <returns>This is the concatenated validation errors with "|" uses as a separator.</returns>
+        </member>
+        <member name="M:MagenicMetrics.Controllers.MetricsBaseController.SerializeDetails">
+            <summary>
+                This method sets the value of <see cref="P:MagenicMetrics.IMetric.Details" />.
+            </summary>
+            <remarks>
+                <para>
+                    This method takes no action if <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails" /> is <c>null</c> or <see cref="P:MagenicMetrics.IMetric.Details" /> already has a value.
+                </para>
+                <para>
+                    If <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails" /> is a <see cref="T:System.String" /> or <see cref="P:System.Type.IsPrimitive" />, <see cref="P:MagenicMetrics.IMetric.Details" /> is
+                    set to a simple string representation of <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails" />.
+                </para>
+                <para>Otherwise, <see cref="P:MagenicMetrics.IMetric.Details" /> is set to a JSON serialization of <see cref="P:MagenicMetrics.Controllers.MetricsBaseController.MetricDetails" />.</para>
+            </remarks>
+        </member>
+        <member name="T:MagenicMetrics.Filters.MetricDetailsAttribute">
+            <summary>
+                This class defines a filter for setting the object to be serialized into <see cref="P:MagenicMetrics.IMetric.Details" />.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Filters.IActionFilter" />
+        </member>
+        <member name="P:MagenicMetrics.Filters.MetricDetailsAttribute.Source">
+            <summary>
+                Gets or sets the source identifier.
+            </summary>
+            <value>
+                This is the source identifier. It is the name of the action parameter that gets serialized into <see cref="P:MagenicMetrics.IMetric.Details" />.
+            </value>
+        </member>
+        <member name="M:MagenicMetrics.Filters.MetricDetailsAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+                Called after the action executes, before the action result.
+            </summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext" />.</param>
+            <remarks>
+                <para>This method does nothing.</para>
+            </remarks>
+        </member>
+        <member name="M:MagenicMetrics.Filters.MetricDetailsAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+                Called before the action executes, after model binding is complete.
+            </summary>
+            <param name="context">This is the <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext" /> context.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Source</exception>
+            <remarks>
+                <para>
+                    This method invokes <see cref="M:MagenicMetrics.Controllers.MetricsBaseController.SetMetricDetails(System.Object)" /> to save the object identified by <see
+                    cref="P:MagenicMetrics.Filters.MetricDetailsAttribute.Source" />.
+                </para>
+            </remarks>
+        </member>
+        <member name="T:MagenicMetrics.IMetric">
+            <summary>
+                This is the information persisted for every MVC action.
+            </summary>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.Application">
+            <summary>
+                Gets or sets the name of current application.
+            </summary>
+            <value>This is the name of the application.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.Details">
+            <summary>
+                Gets or sets the action provided details.
+            </summary>
+            <value>This is the details. It should be a serialized JSOB object.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.ElapsedTime">
+            <summary>
+                Gets or sets the elapsed time in milliseconds.
+            </summary>
+            <value>This is the elapsed time for the request.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.ExceptionMessage">
+            <summary>
+                Gets or sets the exception message.
+            </summary>
+            <value>If an exception occurs, this is the exception message. Otherwise, it is a pipe delimited collection of validation messages.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.MetricId">
+            <summary>
+                Gets or sets the identity identifier for the metric instance.
+            </summary>
+            <value>This is the identity identifier for the metric.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.Query">
+            <summary>
+                Gets or sets the query.
+            </summary>
+            <value>The query.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.RequestMethod">
+            <summary>
+                Gets or sets the request method.
+            </summary>
+            <value>The request method.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.RequestPath">
+            <summary>
+                Gets or sets the request path.
+            </summary>
+            <value>The request path.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.ResultCode">
+            <summary>
+                Gets or sets the result code.
+            </summary>
+            <value>The result code.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.ResultCount">
+            <summary>
+                Gets or sets the result count.
+            </summary>
+            <value>This is the result count. It should be set to the number of items processed by the request.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.ServerName">
+            <summary>
+                Gets or sets the name of the server instance that responded to a request.
+            </summary>
+            <value>The name of the server instance.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.StartTime">
+            <summary>
+                Gets or sets the UTC start time.
+            </summary>
+            <value>This is the UTC start time.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.TraceId">
+            <summary>
+                Gets or sets the trace identifier.
+            </summary>
+            <value>The trace identifier.</value>
+        </member>
+        <member name="P:MagenicMetrics.IMetric.UserName">
+            <summary>
+                Gets or sets the name of the user.
+            </summary>
+            <value>The name of the user.</value>
+        </member>
+        <member name="T:MagenicMetrics.IMetricService">
+            <summary>
+                This service provides the persistence for <see cref="T:MagenicMetrics.IMetric" /> objects.
+            </summary>
+            <remarks>
+                <para>
+                    The application that uses this is responsible for providing the database that will serve as the persistence store and a table that
+                    contains columns for all of the properties defined in <see cref="T:MagenicMetrics.IMetric" />.
+                </para>
+            </remarks>
+        </member>
+        <member name="M:MagenicMetrics.IMetricService.AddAndSave(MagenicMetrics.IMetric)">
+            <summary>
+                This method adds an instance of <paramref name="metric" /> to the persistence store and commits the addition.
+            </summary>
+            <param name="metric">The metric to be added to the persistence store.</param>
+            <returns>This is the number of entries written to the persistent store.</returns>
+        </member>
+        <member name="M:MagenicMetrics.IMetricService.GetLatest(System.Int32,System.Int32,System.String)">
+            <summary>
+                This method gets the most recent <see cref="T:MagenicMetrics.IMetric" /> records based on the provided filters.
+            </summary>
+            <param name="pageSize">This is the maximum number of records to retrieve for a given page.</param>
+            <param name="pageNumber">This is the page number where <paramref name="pageSize" /> is the page size.</param>
+            <param name="applicationFilter">This is the filter for the application name.</param>
+            <returns>This is the matching collection of the records.</returns>
+        </member>
+        <member name="T:MagenicMetrics.Metric">
+            <summary>
+                This is the information persisted for every MVC action.
+            </summary>
+            <seealso cref="T:MagenicMetrics.IMetric" />
+        </member>
+        <member name="M:MagenicMetrics.Metric.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:MagenicMetrics.Metric" /> class.
+            </summary>
+            <remarks>
+                <para>
+                    The constructor initializes <see cref="P:MagenicMetrics.Metric.StartTime" /> to the current UTC date/time. It also sets the <see cref="T:System.Int32" /> properties
+                    to <c>-1</c> to distinguish a never set condition from the default value of <c>0</c>
+                </para>
+            </remarks>
+        </member>
+        <member name="P:MagenicMetrics.Metric.Application">
+            <summary>
+                Gets or sets the name of current application.
+            </summary>
+            <value>This is the name of the application.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.Details">
+            <summary>
+                Gets or sets the action provided details.
+            </summary>
+            <value>This is the details. It should be a serialized JSOB object.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.ElapsedTime">
+            <summary>
+                Gets or sets the elapsed time in milliseconds.
+            </summary>
+            <value>This is the elapsed time for the request.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.ExceptionMessage">
+            <summary>
+                Gets or sets the exception message.
+            </summary>
+            <value>If an exception occurs, this is the exception message. Otherwise, it is a pipe delimited collection of validation messages.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.MetricId">
+            <summary>
+                Gets or sets the identity identifier for the metric instance.
+            </summary>
+            <value>This is the identity identifier for the metric.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.Query">
+            <summary>
+                Gets or sets the query.
+            </summary>
+            <value>The query.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.RequestMethod">
+            <summary>
+                Gets or sets the request method.
+            </summary>
+            <value>The request method.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.RequestPath">
+            <summary>
+                Gets or sets the request path.
+            </summary>
+            <value>The request path.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.ResultCode">
+            <summary>
+                Gets or sets the result code.
+            </summary>
+            <value>The result code.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.ResultCount">
+            <summary>
+                Gets or sets the result count.
+            </summary>
+            <value>This is the result count. It should be set to the number of items processed by the request.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.ServerName">
+            <summary>
+                Gets or sets the name of the server instance that responded to a request.
+            </summary>
+            <value>The name of the server instance.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.StartTime">
+            <summary>
+                Gets or sets the UTC start time.
+            </summary>
+            <value>This is the UTC start time.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.TraceId">
+            <summary>
+                Gets or sets the trace identifier.
+            </summary>
+            <value>The trace identifier.</value>
+        </member>
+        <member name="P:MagenicMetrics.Metric.UserName">
+            <summary>
+                Gets or sets the name of the user.
+            </summary>
+            <value>The name of the user.</value>
+        </member>
+        <member name="T:MagenicMetrics.MetricMiddleware">
+            <summary>
+                This class implements persisting DevOps metric information to a persistent store.
+            </summary>
+        </member>
+        <member name="M:MagenicMetrics.MetricMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{MagenicMetrics.MetricMiddleware})">
+            <summary>
+                Initializes a new instance of the <see cref="T:MagenicMetrics.MetricMiddleware" /> class.
+            </summary>
+            <param name="next">The next link in the middleware pipeline.</param>
+            <param name="logger">This is the logger.</param>
+        </member>
+        <member name="M:MagenicMetrics.MetricMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext,MagenicMetrics.IMetric,MagenicMetrics.IMetricService)">
+            <summary>
+                Invokes the specified HTTP context.
+            </summary>
+            <param name="context">This is the HTTP context for the request traversing the middleware pipeline.</param>
+            <param name="metric">This is an instance of the metrics that are persisted.</param>
+            <param name="metricService">
+                This is the metric service. It is here (instead of being in the constructor) because middleware components can only have singleton
+                injected objects. This service must be scoped.
+            </param>
+            <returns></returns>
+            <remarks>
+                <para>The metric service performs five actions.</para>
+                <list type="number">
+                    <item>Populate <paramref name="metric" /> with initial values and start time.</item>
+                    <item>Invoke the <see cref="F:MagenicMetrics.MetricMiddleware._next" /> step of the pipeline.</item>
+                    <item>Capture message from any exception that may occur and then re-throw the exception.</item>
+                    <item>Always populate the elapsed time and other end of processing information.</item>
+                    <item>Persist <paramref name="metric" /> using <paramref name="metricService" />.</item>
+                </list>
+            </remarks>
+        </member>
+        <member name="T:MagenicMetrics.MetricMiddlewareExtensions">
+            <summary>
+                This class contains the standard extension methods for an ASP.NET Core middleware service.
+            </summary>
+        </member>
+        <member name="M:MagenicMetrics.MetricMiddlewareExtensions.AddMetrics(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                This methods adds all classes used by <see cref="T:MagenicMetrics.MetricMiddleware" /> to the service collection.
+            </summary>
+            <param name="services">This is the current services collection.</param>
+            <returns>This is the updated services collection.</returns>
+        </member>
+        <member name="M:MagenicMetrics.MetricMiddlewareExtensions.UseMetrics(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+                This method performs all of the actions needed to add <see cref="T:MagenicMetrics.MetricMiddleware" /> to the HTTP request processing pipeline.
+            </summary>
+            <param name="app">This is the current application pipeline.</param>
+            <returns>This is the updated HTTP request processing pipeline.</returns>
+        </member>
+        <member name="T:MagenicMetrics.MetricService">
+            <summary>
+                This service provides the persistence for <see cref="T:MagenicMetrics.IMetric" /> objects.
+            </summary>
+            <remarks>
+                <para>
+                    The application that uses this is responsible for providing the database that will serve as the persistence store and a table that
+                    contains columns for all of the properties defined in <see cref="T:MagenicMetrics.IMetric" />.
+                </para>
+            </remarks>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+            <seealso cref="T:MagenicMetrics.IMetricService" />
+        </member>
+        <member name="M:MagenicMetrics.MetricService.#ctor(Microsoft.Extensions.Options.IOptions{MagenicMetrics.MetricServiceOptions},Microsoft.Extensions.Logging.ILogger{MagenicMetrics.MetricService},Microsoft.EntityFrameworkCore.DbContextOptions{MagenicMetrics.MetricService})">
+            <summary>
+                Initializes a new instance of the <see cref="T:MagenicMetrics.MetricService" /> class.
+            </summary>
+            <param name="options">These are the service configuration options.</param>
+            <param name="logger">This is the logger.</param>
+            <param name="contextOptions">This is the options for <see cref="T:Microsoft.EntityFrameworkCore.DbContext" />.</param>
+        </member>
+        <member name="P:MagenicMetrics.MetricService.Metrics">
+            <summary>
+                Gets or sets the <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> for <see cref="T:MagenicMetrics.Metric" />.
+            </summary>
+            <value>This is the <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> for <see cref="T:MagenicMetrics.Metric" />.</value>
+        </member>
+        <member name="F:MagenicMetrics.MetricService._logger">
+            <summary>
+                This is the logger instance passed to the constructor.
+            </summary>
+        </member>
+        <member name="F:MagenicMetrics.MetricService._options">
+            <summary>
+                This is the configuration options passed to the constructor.
+            </summary>
+        </member>
+        <member name="M:MagenicMetrics.MetricService.AddAndSave(MagenicMetrics.IMetric)">
+            <summary>
+                This method adds an instance of <paramref name="metric" /> to the persistence store and commits the addition.
+            </summary>
+            <param name="metric">The metric to be added to the persistence store.</param>
+            <returns>This is the number of entries written to the persistent store.</returns>
+        </member>
+        <member name="M:MagenicMetrics.MetricService.GetLatest(System.Int32,System.Int32,System.String)">
+            <summary>
+                This method gets the most recent <see cref="T:MagenicMetrics.IMetric" /> records based on the provided filters.
+            </summary>
+            <param name="pageSize">This is the maximum number of records to retrieve for a given page.</param>
+            <param name="pageNumber">This is the page number where <paramref name="pageSize" /> is the page size.</param>
+            <param name="applicationFilter">This is the filter for the application name.</param>
+            <returns>This is the matching collection of the records.</returns>
+        </member>
+        <member name="M:MagenicMetrics.MetricService.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+                Override this method to further configure the model that was discovered by convention from the entity types exposed in <see
+                cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> properties on your derived context. The resulting model may be cached and re-used for
+                subsequent instances of your derived context.
+            </summary>
+            <param name="modelBuilder">
+                The builder being used to construct the model for this context. Databases (and other extensions) typically define extension methods on
+                this object that allow you to configure aspects of the model that are specific to a given database.
+            </param>
+            <remarks>
+                <para>
+                    If a model is explicitly set on the options for this context (via <see
+                    cref="M:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />) then this method will not be run.
+                </para>
+                <para>
+                    The name of the table containing the <see cref="T:MagenicMetrics.Metric" /> records is define by the <see cref="P:MagenicMetrics.MetricServiceOptions.TableName" />
+                    in <see cref="F:MagenicMetrics.MetricService._options" />.
+                </para>
+            </remarks>
+        </member>
+        <member name="T:MagenicMetrics.MetricServiceOptions">
+            <summary>
+                This class contains the options for configuring <see cref="T:MagenicMetrics.MetricService" />.
+            </summary>
+        </member>
+        <member name="P:MagenicMetrics.MetricServiceOptions.MetricServiceConnection">
+            <summary>
+                Gets or sets the connection string for the database containing the <see cref="P:MagenicMetrics.MetricServiceOptions.TableName" /> table.
+            </summary>
+            <value>The connection string.</value>
+        </member>
+        <member name="P:MagenicMetrics.MetricServiceOptions.TableName">
+            <summary>
+                Gets or sets the name of the table that contains the properties for <see cref="T:MagenicMetrics.IMetric" />.
+            </summary>
+            <value>This is the name of the table.</value>
+        </member>
+        <member name="T:MagenicMetrics.NamespaceDoc">
+            <summary>
+                This namespace is the root for all classes in Magenic Metrics.
+            </summary>
+            <remarks>
+                <para>This namespace contains the following namespaces.</para>
+                <list type="table">
+                    <listheader>
+                        <term>Namespace</term>
+                        <description>Usage</description>
+                    </listheader>
+                    <item>
+                        <term>MagenicMetrics</term>
+                        <description>
+                            This contains three major classes: <see cref="T:MagenicMetrics.Metric" />; <see cref="T:MagenicMetrics.MetricMiddleware" />; and <see cref="T:MagenicMetrics.MetricService" />. It
+                            also contains the interfaces for those classes and some supporting classes.
+                        </description>
+                    </item>
+                    <item>
+                        <term>MagenicMetrics.Controllers</term>
+                        <description>This contains the <see cref="T:MagenicMetrics.Controllers.MetricsBaseController" /> class that can be used by application controllers.</description>
+                    </item>
+                    <item>
+                        <term>MagenicMetrics.Filters</term>
+                        <description>
+                            This contains the <see cref="T:MagenicMetrics.Filters.MetricDetailsAttribute" /> attribute that supports populating <see cref="T:MagenicMetrics.Metric" />.
+                        </description>
+                    </item>
+                </list>
+            </remarks>
+        </member>
+    </members>
+</doc>
