@@ -32,6 +32,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{22804807-97D4-4846-B265-6811E04C2851}"
 	ProjectSection(SolutionItems) = preProject
 		Documentation\Database.md = Documentation\Database.md
+		documentation\demoWebApi.md = documentation\demoWebApi.md
+		documentation\demoWebApp.md = documentation\demoWebApp.md
 		documentation\MagenicMetrics.md = documentation\MagenicMetrics.md
 		documentation\Metric.md = documentation\Metric.md
 		documentation\MetricBaseController.md = documentation\MetricBaseController.md
