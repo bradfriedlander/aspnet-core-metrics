@@ -17,7 +17,7 @@ This class is the data that is persisted for each MVC controller interaction.
 ## [MetricService](Documentation/MetricService.md)
 This class provides the ability to persist a Metric to a backing store.
 
-## [MetricMiddleware](Documentation/MetricMiddleware.md)
+## [MetricMiddleware](./Documentation/MetricMiddleware.md)
 This class is a middleware pipeline component that manages the Metric information for each HTTP request.
 
 ## [MetricBaseController](Documentation/MetricBaseController.md)
