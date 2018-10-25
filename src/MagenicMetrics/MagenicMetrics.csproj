@@ -6,6 +6,10 @@
     <Authors>Brad M. Friedlander</Authors>
     <Company>Magenic Technology</Company>
     <Copyright>Copyright (C) 2018, all rights reserved.</Copyright>
+    <RepositoryUrl>https://github.com/bradfriedlander/aspnet-core-metrics</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://github.com/bradfriedlander/aspnet-core-metrics/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
