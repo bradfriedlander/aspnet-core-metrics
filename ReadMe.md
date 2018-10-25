@@ -38,5 +38,6 @@ This document provides details on the classes, methods, and properties in the Ma
 This is a simple MVC project that demonstrates how Magenic Metrics works for controllers that serve a user interface.
 
 # [demoWebApi](documentation/demoWebApi.md)
+
 This is a simple MVC Web API projects that demonstrates how Magenic metrics works for API controllers.
 
