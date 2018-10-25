@@ -11,32 +11,32 @@ This component provides mechanisms for each action to add action-specific inform
 To facilitate this, the controller class needs to inherit from the [MetricBaseController](#MetricBaseController).
 The component exposes the [MetricDetails attribute](#MetricDetails) which populates part of the record.
 
-## [Metric](Documentation/Metric.md)
+## [Metric](documentation/Metric.md)
 This class is the data that is persisted for each MVC controller interaction.
 
-## [MetricService](Documentation/MetricService.md)
+## [MetricService](documentation/MetricService.md)
 This class provides the ability to persist a Metric to a backing store.
 
-## [MetricMiddleware](./Documentation/MetricMiddleware.md)
+## [MetricMiddleware](documentation/MetricMiddleware.md)
 This class is a middleware pipeline component that manages the Metric information for each HTTP request.
 
-## [MetricBaseController](Documentation/MetricBaseController.md)
+## [MetricBaseController](documentation/MetricBaseController.md)
 This is a base class for all controllers that use [MetricMiddleware](#MetricMiddleware).
 
-## [MetricDetails](Documentation/MetricDetails.md)
+## [MetricDetails](documentation/MetricDetails.md)
 This is an attribute that supports populating the "Details" property of the [Metric](#Metric) class.
 The actual population is done in the [MetricBaseController](#MetricBaseController).
 
-## [Database](Documentation/Database.md)
+## [Database](documentation/Database.md)
 This is a folder that contains scripts to create the database artifacts used by Magenic Metrics.
 This is an alternative to using the `dotnet ef` commands.
 
-# [Code](Documentation/MagenicMetrics.md)
+# [Code](documentation/MagenicMetrics.md)
 This document provides details on the classes, methods, and properties in the MagenicMetrics assembly.
 
-# [demoWebApp](Documentation/demoWebApp.md)
+# [demoWebApp](documentation/demoWebApp.md)
 This is a simple MVC project that demonstrates how Magenic Metrics works for controllers that serve a user interface.
 
-# [demoWebApi](Documentation/demoWebApi.md)
+# [demoWebApi](documentation/demoWebApi.md)
 This is a simple MVC Web API projects that demonstrates how Magenic metrics works for API controllers.
 
