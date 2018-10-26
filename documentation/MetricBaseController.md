@@ -7,4 +7,4 @@ The base controller provides the following capabilities and services.
 - When an action is finished executing and the model state is invalid, the validation errors are places in the
 [ExceptionMessage](./MagenicMetrics.md#magenicmetricsmetricexceptionmessage).
 - Provides the [SetMetricDetails](./MagenicMetrics.md#magenicmetricscontrollersmetricsbasecontrollersetmetricdetailssystemobject) 
-to set a value for [Details](./MagenicMetrics.md#magenicmetricsimetricdetails).
+to set a value for [Details](./MagenicMetrics.md#magenicmetricsmetricdetails).
