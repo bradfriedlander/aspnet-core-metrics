@@ -425,6 +425,18 @@ Initializes a new instance of the [MagenicMetrics.MetricMiddleware](#magenicmetr
 
 ---
 
+### MagenicMetrics.MetricMiddleware._logger
+
+This is the logger instance that can be used by this class.
+
+---
+
+### MagenicMetrics.MetricMiddleware._next
+
+This is the next action to be performed in the pipeline. This delegate is called during the processing of the [MagenicMetrics.MetricMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext,MagenicMetrics.IMetric,MagenicMetrics.IMetricService)](#magenicmetricsmetricmiddlewareinvoke(microsoftaspnetcorehttphttpcontext,magenicmetricsimetric,magenicmetricsimetricservice)) method.
+
+---
+
 ### MagenicMetrics.MetricMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext,MagenicMetrics.IMetric,MagenicMetrics.IMetricService)
 
 Invokes the specified HTTP context.

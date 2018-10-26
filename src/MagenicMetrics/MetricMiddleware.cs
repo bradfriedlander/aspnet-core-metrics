@@ -23,7 +23,14 @@ namespace MagenicMetrics
             _logger = logger;
         }
 
+        /// <summary>
+        ///     This is the logger instance that can be used by this class.
+        /// </summary>
         private readonly ILogger _logger;
+
+        /// <summary>
+        ///     This is the next action to be performed in the pipeline. This delegate is called during the processing of the <see cref="Invoke" /> method.
+        /// </summary>
         private readonly RequestDelegate _next;
 
         /// <summary>

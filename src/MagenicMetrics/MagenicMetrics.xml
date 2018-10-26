@@ -330,6 +330,16 @@
             <param name="next">The next link in the middleware pipeline.</param>
             <param name="logger">This is the logger.</param>
         </member>
+        <member name="F:MagenicMetrics.MetricMiddleware._logger">
+            <summary>
+                This is the logger instance that can be used by this class.
+            </summary>
+        </member>
+        <member name="F:MagenicMetrics.MetricMiddleware._next">
+            <summary>
+                This is the next action to be performed in the pipeline. This delegate is called during the processing of the <see cref="M:MagenicMetrics.MetricMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext,MagenicMetrics.IMetric,MagenicMetrics.IMetricService)" /> method.
+            </summary>
+        </member>
         <member name="M:MagenicMetrics.MetricMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext,MagenicMetrics.IMetric,MagenicMetrics.IMetricService)">
             <summary>
                 Invokes the specified HTTP context.
