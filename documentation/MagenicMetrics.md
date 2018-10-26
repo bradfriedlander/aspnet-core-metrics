@@ -6,13 +6,13 @@ This namespace contains the following namespaces.
 
 | Namespace | Usage |
 |-----|------|
-| MagenicMetrics |  This contains three major classes: [MagenicMetrics.Metric](#MagenicMetrics.Metric); [MagenicMetrics.MetricMiddleware](#MagenicMetrics.MetricMiddleware); and [MagenicMetrics.MetricService](#MagenicMetrics.MetricService). It also contains the interfaces for those classes and some supporting classes.  |
-| MagenicMetrics.Controllers | This contains the [MagenicMetrics.Controllers.MetricsBaseController](#MagenicMetrics.Controllers.MetricsBaseController) class that can be used by application controllers. |
-| MagenicMetrics.Filters |  This contains the [MagenicMetrics.Filters.MetricDetailsAttribute](#MagenicMetrics.Filters.MetricDetailsAttribute) attribute that supports populating [MagenicMetrics.Metric](#MagenicMetrics.Metric).  |
+| MagenicMetrics |  This contains three major classes: [MagenicMetrics.Metric](#magenicmetricsmetric); [MagenicMetrics.MetricMiddleware](#magenicmetricsmetricmiddleware); and [MagenicMetrics.MetricService](#magenicmetricsmetricservice). It also contains the interfaces for those classes and some supporting classes.  |
+| MagenicMetrics.Controllers | This contains the [MagenicMetrics.Controllers.MetricsBaseController](#magenicmetricscontrollersmetricsbasecontroller) class that can be used by application controllers. |
+| MagenicMetrics.Filters |  This contains the [MagenicMetrics.Filters.MetricDetailsAttribute](#magenicmetricsfiltersmetricdetailsattribute) attribute that supports populating [MagenicMetrics.Metric](#magenicmetricsmetric).  |
 
 ## MagenicMetrics.Controllers.MetricsBaseController
 
-This is a base class for all controllers that use [MagenicMetrics.MetricMiddleware](#MagenicMetrics.MetricMiddleware).
+This is a base class for all controllers that use [MagenicMetrics.MetricMiddleware](#magenicmetricsmetricmiddleware).
 
 `Microsoft.AspNetCore.Mvc.Controller`
 
@@ -20,7 +20,7 @@ This is a base class for all controllers that use [MagenicMetrics.MetricMiddlewa
 
 ### MagenicMetrics.Controllers.MetricsBaseController.#ctor(MagenicMetrics.IMetric)
 
-Initializes a new instance of the [MagenicMetrics.Controllers.MetricsBaseController](#MagenicMetrics.Controllers.MetricsBaseController) class.
+Initializes a new instance of the [MagenicMetrics.Controllers.MetricsBaseController](#magenicmetricscontrollersmetricsbasecontroller) class.
 
 | Parameter | Description |
 |-----|------|
@@ -30,15 +30,15 @@ Initializes a new instance of the [MagenicMetrics.Controllers.MetricsBaseControl
 
 ### MagenicMetrics.Controllers.MetricsBaseController.MetricDetails
 
-Gets the [MagenicMetrics.IMetric](#MagenicMetrics.IMetric) Details.
+Gets the [MagenicMetrics.IMetric](#magenicmetricsimetric) Details.
 
-**Value:** This is the [MagenicMetrics.IMetric](#MagenicMetrics.IMetric) Details.
+**Value:** This is the [MagenicMetrics.IMetric](#magenicmetricsimetric) Details.
 
 ---
 
 ### MagenicMetrics.Controllers.MetricsBaseController._metric
 
-This is the current [MagenicMetrics.IMetric](#MagenicMetrics.IMetric) instance.
+This is the current [MagenicMetrics.IMetric](#magenicmetricsimetric) instance.
 
 ---
 
@@ -54,15 +54,15 @@ Called after the action method is invoked.
 
 ### MagenicMetrics.Controllers.MetricsBaseController.SetMetricDetails(System.Object)
 
-This method sets the [MagenicMetrics.IMetric](#MagenicMetrics.IMetric) details.
+This method sets the [MagenicMetrics.IMetric](#magenicmetricsimetric) details.
 
 | Parameter | Description |
 |-----|------|
-| details | This is the details to serialize into [MagenicMetrics.IMetric.Details](#MagenicMetrics.IMetric.Details). |
+| details | This is the details to serialize into [MagenicMetrics.IMetric.Details](#magenicmetricsimetricdetails). |
 
-This method can be invoked from any action that inherits from [MagenicMetrics.Controllers.MetricsBaseController](#MagenicMetrics.Controllers.MetricsBaseController).
+This method can be invoked from any action that inherits from [MagenicMetrics.Controllers.MetricsBaseController](#magenicmetricscontrollersmetricsbasecontroller).
 
-Since [MagenicMetrics.Filters.MetricDetailsAttribute](#MagenicMetrics.Filters.MetricDetailsAttribute) uses this method, it must be `internal` instead of `protected`.
+Since [MagenicMetrics.Filters.MetricDetailsAttribute](#magenicmetricsfiltersmetricdetailsattribute) uses this method, it must be `internal` instead of `protected`.
 
 ---
 
@@ -76,19 +76,19 @@ This method gets the concatenated validation errors.
 
 ### MagenicMetrics.Controllers.MetricsBaseController.SerializeDetails
 
-This method sets the value of [MagenicMetrics.IMetric.Details](#MagenicMetrics.IMetric.Details).
+This method sets the value of [MagenicMetrics.IMetric.Details](#magenicmetricsimetricdetails).
 
-This method takes no action if [MagenicMetrics.Controllers.MetricsBaseController.MetricDetails](#MagenicMetrics.Controllers.MetricsBaseController.MetricDetails) is `null` or [MagenicMetrics.IMetric.Details](#MagenicMetrics.IMetric.Details) already has a value.
+This method takes no action if [MagenicMetrics.Controllers.MetricsBaseController.MetricDetails](#magenicmetricscontrollersmetricsbasecontrollermetricdetails) is `null` or [MagenicMetrics.IMetric.Details](#magenicmetricsimetricdetails) already has a value.
 
-If [MagenicMetrics.Controllers.MetricsBaseController.MetricDetails](#MagenicMetrics.Controllers.MetricsBaseController.MetricDetails) is a `System.String` or `System.Type.IsPrimitive`, [MagenicMetrics.IMetric.Details](#MagenicMetrics.IMetric.Details) is set to a simple string representation of [MagenicMetrics.Controllers.MetricsBaseController.MetricDetails](#MagenicMetrics.Controllers.MetricsBaseController.MetricDetails).
+If [MagenicMetrics.Controllers.MetricsBaseController.MetricDetails](#magenicmetricscontrollersmetricsbasecontrollermetricdetails) is a `System.String` or `System.Type.IsPrimitive`, [MagenicMetrics.IMetric.Details](#magenicmetricsimetricdetails) is set to a simple string representation of [MagenicMetrics.Controllers.MetricsBaseController.MetricDetails](#magenicmetricscontrollersmetricsbasecontrollermetricdetails).
 
-Otherwise, [MagenicMetrics.IMetric.Details](#MagenicMetrics.IMetric.Details) is set to a JSON serialization of [MagenicMetrics.Controllers.MetricsBaseController.MetricDetails](#MagenicMetrics.Controllers.MetricsBaseController.MetricDetails).
+Otherwise, [MagenicMetrics.IMetric.Details](#magenicmetricsimetricdetails) is set to a JSON serialization of [MagenicMetrics.Controllers.MetricsBaseController.MetricDetails](#magenicmetricscontrollersmetricsbasecontrollermetricdetails).
 
 ---
 
 ## MagenicMetrics.Filters.MetricDetailsAttribute
 
-This class defines a filter for setting the object to be serialized into [MagenicMetrics.IMetric.Details](#MagenicMetrics.IMetric.Details).
+This class defines a filter for setting the object to be serialized into [MagenicMetrics.IMetric.Details](#magenicmetricsimetricdetails).
 
 `System.Attribute``Microsoft.AspNetCore.Mvc.Filters.IActionFilter`
 
@@ -98,7 +98,7 @@ This class defines a filter for setting the object to be serialized into [Mageni
 
 Gets or sets the source identifier.
 
-**Value:**  This is the source identifier. It is the name of the action parameter that gets serialized into [MagenicMetrics.IMetric.Details](#MagenicMetrics.IMetric.Details). 
+**Value:**  This is the source identifier. It is the name of the action parameter that gets serialized into [MagenicMetrics.IMetric.Details](#magenicmetricsimetricdetails). 
 
 ---
 
@@ -124,7 +124,7 @@ Called before the action executes, after model binding is complete.
 
 **Exception:** [System.ArgumentOutOfRangeException(System.ArgumentOutOfRangeException)]: Source
 
-This method invokes [MagenicMetrics.Controllers.MetricsBaseController.SetMetricDetails(System.Object)](#MagenicMetrics.Controllers.MetricsBaseController.SetMetricDetails(System.Object)) to save the object identified by [MagenicMetrics.Filters.MetricDetailsAttribute.Source](#MagenicMetrics.Filters.MetricDetailsAttribute.Source).
+This method invokes [MagenicMetrics.Controllers.MetricsBaseController.SetMetricDetails(System.Object)](#magenicmetricscontrollersmetricsbasecontrollersetmetricdetails(systemobject)) to save the object identified by [MagenicMetrics.Filters.MetricDetailsAttribute.Source](#magenicmetricsfiltersmetricdetailsattributesource).
 
 ---
 
@@ -248,9 +248,9 @@ Gets or sets the name of the user.
 
 ## MagenicMetrics.IMetricService
 
-This service provides the persistence for [MagenicMetrics.IMetric](#MagenicMetrics.IMetric) objects.
+This service provides the persistence for [MagenicMetrics.IMetric](#magenicmetricsimetric) objects.
 
-The application that uses this is responsible for providing the database that will serve as the persistence store and a table that contains columns for all of the properties defined in [MagenicMetrics.IMetric](#MagenicMetrics.IMetric).
+The application that uses this is responsible for providing the database that will serve as the persistence store and a table that contains columns for all of the properties defined in [MagenicMetrics.IMetric](#magenicmetricsimetric).
 
 ---
 
@@ -268,7 +268,7 @@ This method adds an instance of `metric` to the persistence store and commits th
 
 ### MagenicMetrics.IMetricService.GetLatest(System.Int32,System.Int32,System.String)
 
-This method gets the most recent [MagenicMetrics.IMetric](#MagenicMetrics.IMetric) records based on the provided filters.
+This method gets the most recent [MagenicMetrics.IMetric](#magenicmetricsimetric) records based on the provided filters.
 
 | Parameter | Description |
 |-----|------|
@@ -284,15 +284,15 @@ This method gets the most recent [MagenicMetrics.IMetric](#MagenicMetrics.IMetri
 
 This is the information persisted for every MVC action.
 
-[MagenicMetrics.IMetric](#MagenicMetrics.IMetric)
+[MagenicMetrics.IMetric](#magenicmetricsimetric)
 
 ---
 
 ### MagenicMetrics.Metric.#ctor
 
-Initializes a new instance of the [MagenicMetrics.Metric](#MagenicMetrics.Metric) class.
+Initializes a new instance of the [MagenicMetrics.Metric](#magenicmetricsmetric) class.
 
-The constructor initializes [MagenicMetrics.Metric.StartTime](#MagenicMetrics.Metric.StartTime) to the current UTC date/time. It also sets the `System.Int32` properties to `-1` to distinguish a never set condition from the default value of `0`
+The constructor initializes [MagenicMetrics.Metric.StartTime](#magenicmetricsmetricstarttime) to the current UTC date/time. It also sets the `System.Int32` properties to `-1` to distinguish a never set condition from the default value of `0`
 
 ---
 
@@ -416,7 +416,7 @@ This class implements persisting DevOps metric information to a persistent store
 
 ### MagenicMetrics.MetricMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{MagenicMetrics.MetricMiddleware})
 
-Initializes a new instance of the [MagenicMetrics.MetricMiddleware](#MagenicMetrics.MetricMiddleware) class.
+Initializes a new instance of the [MagenicMetrics.MetricMiddleware](#magenicmetricsmetricmiddleware) class.
 
 | Parameter | Description |
 |-----|------|
@@ -440,7 +440,7 @@ Invokes the specified HTTP context.
 The metric service performs five actions.
 
 1. Populate `metric` with initial values and start time.
-1. Invoke the [MagenicMetrics.MetricMiddleware._next](#MagenicMetrics.MetricMiddleware._next) step of the pipeline.
+1. Invoke the [MagenicMetrics.MetricMiddleware._next](#magenicmetricsmetricmiddleware_next) step of the pipeline.
 1. Capture message from any exception that may occur and then re-throw the exception.
 1. Always populate the elapsed time and other end of processing information.
 1. Persist `metric` using `metricService`.
@@ -455,7 +455,7 @@ This class contains the standard extension methods for an ASP.NET Core middlewar
 
 ### MagenicMetrics.MetricMiddlewareExtensions.AddMetrics(Microsoft.Extensions.DependencyInjection.IServiceCollection)
 
-This methods adds all classes used by [MagenicMetrics.MetricMiddleware](#MagenicMetrics.MetricMiddleware) to the service collection.
+This methods adds all classes used by [MagenicMetrics.MetricMiddleware](#magenicmetricsmetricmiddleware) to the service collection.
 
 | Parameter | Description |
 |-----|------|
@@ -467,7 +467,7 @@ This methods adds all classes used by [MagenicMetrics.MetricMiddleware](#Magenic
 
 ### MagenicMetrics.MetricMiddlewareExtensions.UseMetrics(Microsoft.AspNetCore.Builder.IApplicationBuilder)
 
-This method performs all of the actions needed to add [MagenicMetrics.MetricMiddleware](#MagenicMetrics.MetricMiddleware) to the HTTP request processing pipeline.
+This method performs all of the actions needed to add [MagenicMetrics.MetricMiddleware](#magenicmetricsmetricmiddleware) to the HTTP request processing pipeline.
 
 | Parameter | Description |
 |-----|------|
@@ -479,17 +479,17 @@ This method performs all of the actions needed to add [MagenicMetrics.MetricMidd
 
 ## MagenicMetrics.MetricService
 
-This service provides the persistence for [MagenicMetrics.IMetric](#MagenicMetrics.IMetric) objects.
+This service provides the persistence for [MagenicMetrics.IMetric](#magenicmetricsimetric) objects.
 
-The application that uses this is responsible for providing the database that will serve as the persistence store and a table that contains columns for all of the properties defined in [MagenicMetrics.IMetric](#MagenicMetrics.IMetric).
+The application that uses this is responsible for providing the database that will serve as the persistence store and a table that contains columns for all of the properties defined in [MagenicMetrics.IMetric](#magenicmetricsimetric).
 
-`Microsoft.EntityFrameworkCore.DbContext`[MagenicMetrics.IMetricService](#MagenicMetrics.IMetricService)
+`Microsoft.EntityFrameworkCore.DbContext`[MagenicMetrics.IMetricService](#magenicmetricsimetricservice)
 
 ---
 
 ### MagenicMetrics.MetricService.#ctor(Microsoft.Extensions.Options.IOptions{MagenicMetrics.MetricServiceOptions},Microsoft.Extensions.Logging.ILogger{MagenicMetrics.MetricService},Microsoft.EntityFrameworkCore.DbContextOptions{MagenicMetrics.MetricService})
 
-Initializes a new instance of the [MagenicMetrics.MetricService](#MagenicMetrics.MetricService) class.
+Initializes a new instance of the [MagenicMetrics.MetricService](#magenicmetricsmetricservice) class.
 
 | Parameter | Description |
 |-----|------|
@@ -501,9 +501,9 @@ Initializes a new instance of the [MagenicMetrics.MetricService](#MagenicMetrics
 
 ### MagenicMetrics.MetricService.Metrics
 
-Gets or sets the `Microsoft.EntityFrameworkCore.DbSet`1` for [MagenicMetrics.Metric](#MagenicMetrics.Metric).
+Gets or sets the `Microsoft.EntityFrameworkCore.DbSet`1` for [MagenicMetrics.Metric](#magenicmetricsmetric).
 
-**Value:** This is the `Microsoft.EntityFrameworkCore.DbSet`1` for [MagenicMetrics.Metric](#MagenicMetrics.Metric).
+**Value:** This is the `Microsoft.EntityFrameworkCore.DbSet`1` for [MagenicMetrics.Metric](#magenicmetricsmetric).
 
 ---
 
@@ -533,7 +533,7 @@ This method adds an instance of `metric` to the persistence store and commits th
 
 ### MagenicMetrics.MetricService.GetLatest(System.Int32,System.Int32,System.String)
 
-This method gets the most recent [MagenicMetrics.IMetric](#MagenicMetrics.IMetric) records based on the provided filters.
+This method gets the most recent [MagenicMetrics.IMetric](#magenicmetricsimetric) records based on the provided filters.
 
 | Parameter | Description |
 |-----|------|
@@ -555,19 +555,19 @@ Override this method to further configure the model that was discovered by conve
 
 If a model is explicitly set on the options for this context (via `Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)`) then this method will not be run.
 
-The name of the table containing the [MagenicMetrics.Metric](#MagenicMetrics.Metric) records is define by the [MagenicMetrics.MetricServiceOptions.TableName](#MagenicMetrics.MetricServiceOptions.TableName) in [MagenicMetrics.MetricService._options](#MagenicMetrics.MetricService._options).
+The name of the table containing the [MagenicMetrics.Metric](#magenicmetricsmetric) records is define by the [MagenicMetrics.MetricServiceOptions.TableName](#magenicmetricsmetricserviceoptionstablename) in [MagenicMetrics.MetricService._options](#magenicmetricsmetricservice_options).
 
 ---
 
 ## MagenicMetrics.MetricServiceOptions
 
-This class contains the options for configuring [MagenicMetrics.MetricService](#MagenicMetrics.MetricService).
+This class contains the options for configuring [MagenicMetrics.MetricService](#magenicmetricsmetricservice).
 
 ---
 
 ### MagenicMetrics.MetricServiceOptions.MetricServiceConnection
 
-Gets or sets the connection string for the database containing the [MagenicMetrics.MetricServiceOptions.TableName](#MagenicMetrics.MetricServiceOptions.TableName) table.
+Gets or sets the connection string for the database containing the [MagenicMetrics.MetricServiceOptions.TableName](#magenicmetricsmetricserviceoptionstablename) table.
 
 **Value:** The connection string.
 
@@ -575,7 +575,7 @@ Gets or sets the connection string for the database containing the [MagenicMetri
 
 ### MagenicMetrics.MetricServiceOptions.TableName
 
-Gets or sets the name of the table that contains the properties for [MagenicMetrics.IMetric](#MagenicMetrics.IMetric).
+Gets or sets the name of the table that contains the properties for [MagenicMetrics.IMetric](#magenicmetricsimetric).
 
 **Value:** This is the name of the table.
 
