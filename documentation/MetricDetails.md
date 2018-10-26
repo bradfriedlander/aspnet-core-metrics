@@ -9,4 +9,4 @@ An example usage of the attribute is shown below.
 public IActionResult Post(DefinitionInput definition)
 ```
 
-In this example, the object named `definition` is stored in `Metric.Details` as a serialized JSON object.
+In this example, the object named `definition` is stored in [Metric.Details](./MagenicMetrics.md#magenicmetricsmetricdetails) as a serialized JSON object.
