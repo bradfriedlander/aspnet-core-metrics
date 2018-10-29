@@ -31,24 +31,27 @@ class Definitions extends Component {
 
 function renderDefinitions(props) {
     return (
-        <table className='table'>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Disbaled?</th>
-                    <th>Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                {props.definitions.map(definition =>
-                    <tr key={definition.Id}>
-                        <td>{definition.Id}</td>
-                        <td>{definition.IsDeleted}</td>
-                        <td>{definition.Name}</td>
+        <div>
+            <h2>{props.definitionPacket.packetId}</h2>
+            <table className='table'>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Disbaled?</th>
+                        <th>Name</th>
                     </tr>
-                )}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {props.definitionPacket.definitions.map(definition =>
+                        <tr key={definition.definitionId}>
+                            <td>{definition.definitionId}</td>
+                            <td>{definition.isDeleted}</td>
+                            <td>{definition.name}</td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+        </div>
     );
 }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using demoWebReact.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +11,6 @@ namespace demoWebReact.Controllers
     {
         public DefinitionsController()
         {
-
         }
 
         // TODO: Get this from configuration - use options
@@ -22,18 +22,20 @@ namespace demoWebReact.Controllers
         /// <returns></returns>
         /// <remarks>GET api/values/GetAll</remarks>
         [HttpGet("GetAll")]
-        public ActionResult<IEnumerable<string>> GetAll()
+        public ActionResult<DefinitionPacket> GetAll()
         {
             //var results = _context.Definitions.IgnoreQueryFilters().ToList();
             //_metric.ResultCount = results.Count;
-            var results = new List<Definition>
+            var results = new DefinitionPacket
+            {
+                PacketId = Convert.ToInt32(DateTime.UtcNow.TimeOfDay.TotalSeconds),
+                Definitions = new List<Definition>
             {
                 new Definition{DefinitionId=1,IsDeleted=false,Name="Definition 1"},
                 new Definition{DefinitionId=2,IsDeleted=true,Name="Definition 2"}
+            }
             };
             return Ok(results);
         }
-
     }
-
 }

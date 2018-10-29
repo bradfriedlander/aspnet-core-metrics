@@ -1,6 +1,6 @@
 ﻿const requestDefinitionsType = 'REQUEST_DEFINITIONS';
 const receiveDefinitionsType = 'RECEIVE_DEFINITIONS';
-const initialState = { definitions: [], isLoading: false };
+const initialState = { definitionPacket: { packetId: 0, definitions: [] }, isLoading: false };
 
 export const actionCreators = {
     requestDefinitions: startDateIndex => async (dispatch, getState) => {
@@ -11,8 +11,8 @@ export const actionCreators = {
         dispatch({ type: requestDefinitionsType, startDateIndex });
         const url = `api/Definitions/GetAll`;
         const response = await fetch(url);
-        const definitions = await response.json();
-        dispatch({ type: receiveDefinitionsType, startDateIndex, definitions });
+        const definitionPacket = await response.json();
+        dispatch({ type: receiveDefinitionsType, startDateIndex, definitionPacket });
     }
 };
 
@@ -29,7 +29,7 @@ export const reducer = (state, action) => {
         return {
             ...state,
             startDateIndex: action.startDateIndex,
-            definitions: action.definitions,
+            definitionPacket: action.definitionPacket,
             isLoading: false
         };
     }
