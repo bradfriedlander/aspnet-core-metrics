@@ -6,8 +6,8 @@ namespace demoWebReact.Models
     public class DefinitionPacket
 
     {
-        public int PacketId { get; set; }
-
         public List<Definition> Definitions { get; set; }
+
+        public Guid PacketId { get; set; }
     }
 }

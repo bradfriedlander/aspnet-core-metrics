@@ -37,7 +37,7 @@ function renderDefinitions(props) {
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Disbaled?</th>
+                        <th>Disabled?</th>
                         <th>Name</th>
                     </tr>
                 </thead>
@@ -45,7 +45,7 @@ function renderDefinitions(props) {
                     {props.definitionPacket.definitions.map(definition =>
                         <tr key={definition.definitionId}>
                             <td>{definition.definitionId}</td>
-                            <td>{definition.isDeleted}</td>
+                            <td><input type="checkbox" checked={definition.isDeleted} /></td>
                             <td>{definition.name}</td>
                         </tr>
                     )}

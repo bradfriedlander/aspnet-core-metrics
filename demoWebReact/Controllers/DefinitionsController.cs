@@ -28,12 +28,13 @@ namespace demoWebReact.Controllers
             //_metric.ResultCount = results.Count;
             var results = new DefinitionPacket
             {
-                PacketId = Convert.ToInt32(DateTime.UtcNow.TimeOfDay.TotalSeconds),
+                //PacketId = Convert.ToInt32(DateTime.UtcNow.TimeOfDay.TotalSeconds),
+                PacketId = Guid.NewGuid(),
                 Definitions = new List<Definition>
-            {
-                new Definition{DefinitionId=1,IsDeleted=false,Name="Definition 1"},
-                new Definition{DefinitionId=2,IsDeleted=true,Name="Definition 2"}
-            }
+                {
+                    new Definition {DefinitionId=1, IsDeleted=false, Name="Definition 1"},
+                    new Definition {DefinitionId=2, IsDeleted=true, Name="Definition 2"}
+                }
             };
             return Ok(results);
         }
