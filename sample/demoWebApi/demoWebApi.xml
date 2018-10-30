@@ -363,5 +363,11 @@
             </summary>
             <param name="services">The services.</param>
         </member>
+        <member name="M:demoWebApi.Startup.GetXmlCommentsPath">
+            <summary>
+                This method gets the absolute pathname to the XML comments.
+            </summary>
+            <returns>This is the XMl comment pathname.</returns>
+        </member>
     </members>
 </doc>

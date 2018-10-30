@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 import { actionCreators } from '../store/Definitions';
 
 class Definitions extends Component {
+    constructor() {
+
+    }
+
     componentWillMount() {
         // This method runs when the component is first added to the page
         const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 0;
@@ -27,18 +31,23 @@ class Definitions extends Component {
             </div>
         );
     }
+
+    edit = (id) => {
+        alert("Updating: {id}");
+    }
 }
 
 function renderDefinitions(props) {
     return (
         <div>
-            <h2>{props.definitionPacket.packetId}</h2>
+            <h3>Packet ID: {props.definitionPacket.packetId}</h3>
             <table className='table'>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Disabled?</th>
                         <th>Name</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,6 +56,7 @@ function renderDefinitions(props) {
                             <td>{definition.definitionId}</td>
                             <td><input type="checkbox" checked={definition.isDeleted} /></td>
                             <td>{definition.name}</td>
+                            <td><Link className='btn btn-default' onclick={() => this.edit(definition.definitionId)}>Update</Link></td>
                         </tr>
                     )}
                 </tbody>

@@ -20,6 +20,22 @@ namespace demoWebReact.Controllers
         ///     This retrieves all records, including logically deleted records, in the persistence store.
         /// </summary>
         /// <returns></returns>
+        /// <remarks>GET api/[controller]/Get</remarks>
+        [HttpGet("Get")]
+        public ActionResult<List<Definition>> Get()
+        {
+            var results = new List<Definition>
+            {
+                new Definition {DefinitionId=1, IsDeleted=false, Name="Definition 1"},
+                new Definition {DefinitionId=2, IsDeleted=true, Name="Definition 2"}
+            };
+            return Ok(results);
+        }
+
+        /// <summary>
+        ///     This retrieves all records, including logically deleted records, in the persistence store.
+        /// </summary>
+        /// <returns></returns>
         /// <remarks>GET api/values/GetAll</remarks>
         [HttpGet("GetAll")]
         public ActionResult<DefinitionPacket> GetAll()

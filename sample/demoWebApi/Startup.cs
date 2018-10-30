@@ -109,7 +109,7 @@ namespace demoWebApi
                             Email = "bradf@magenic.com"
                         }
                     });
-                c.IncludeXmlComments(@"C:\TestDev\demoMetrics\sample\demoWebApi\demoWebApi.xml", includeControllerXmlComments: true);
+                c.IncludeXmlComments(GetXmlCommentsPath(), includeControllerXmlComments: true);
             });
         }
 
@@ -136,6 +136,15 @@ namespace demoWebApi
             services.AddSingleton<IHealthCheckStatus>(new HealthCheckStatus(DateTime.UtcNow));
             var sp = services.BuildServiceProvider();
             healthCheckStatus = sp.GetService<IHealthCheckStatus>();
+        }
+
+        /// <summary>
+        ///     This method gets the absolute pathname to the XML comments.
+        /// </summary>
+        /// <returns>This is the XMl comment pathname.</returns>
+        private string GetXmlCommentsPath()
+        {
+            return string.Format(@"{0}\demoWebApi.xml", AppDomain.CurrentDomain.BaseDirectory);
         }
     }
 }

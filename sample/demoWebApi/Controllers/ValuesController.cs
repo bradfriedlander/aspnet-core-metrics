@@ -57,7 +57,7 @@ namespace demoWebApi.Controllers
         /// <returns></returns>
         /// <remarks>GET api/values</remarks>
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Definition>> Get()
         {
             var results = _context.Definitions.ToList();
             _metric.ResultCount = results.Count;
@@ -73,7 +73,7 @@ namespace demoWebApi.Controllers
         [HttpGet("{id}")]
         [EnsureDefinitionExists]
         [MetricDetails(Source = "id")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Definition> Get(int id)
         {
             var match = _context.Definitions.Find(id);
             _metric.ResultCount = 1;
@@ -86,7 +86,7 @@ namespace demoWebApi.Controllers
         /// <returns></returns>
         /// <remarks>GET api/values/GetAll</remarks>
         [HttpGet("GetAll")]
-        public ActionResult<IEnumerable<string>> GetAll()
+        public ActionResult<IEnumerable<Definition>> GetAll()
         {
             var results = _context.Definitions.IgnoreQueryFilters().ToList();
             _metric.ResultCount = results.Count;

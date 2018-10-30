@@ -58,8 +58,8 @@ namespace demoWebApi.Services
 
         private void AddTestData()
         {
-            Definitions.Add(new Definition() { DefinitionId = 1, Name = "Definition 1" });
-            Definitions.Add(new Definition() { DefinitionId = 2, Name = "Definition 2" });
+            Definitions.Add(new Definition() { DefinitionId = 1, Name = "Definition 1", IsDeleted = false });
+            Definitions.Add(new Definition() { DefinitionId = 2, Name = "Definition 2", IsDeleted = false });
             SaveChanges();
         }
     }
