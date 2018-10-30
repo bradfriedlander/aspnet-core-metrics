@@ -11,8 +11,8 @@ export const actionCreators = {
         dispatch({ type: requestDefinitionsType, startDateIndex });
         const url = `api/Definitions/GetAll`;
         const response = await fetch(url);
-        const definitionPacket = await response.json();
-        dispatch({ type: receiveDefinitionsType, startDateIndex, definitionPacket });
+        const definitions = await response.json();
+        dispatch({ type: receiveDefinitionsType, startDateIndex, definitions });
     }
 };
 
@@ -29,7 +29,7 @@ export const reducer = (state, action) => {
         return {
             ...state,
             startDateIndex: action.startDateIndex,
-            definitionPacket: action.definitionPacket,
+            definitionPacket: {packetId: 1, definitions: action.definitions },
             isLoading: false
         };
     }

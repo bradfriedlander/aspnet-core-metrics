@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using demoWebReact.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +15,20 @@ namespace demoWebReact.Controllers
         // TODO: Get this from configuration - use options
         private readonly string baseUri = "https://localhost:5001/api/values";
 
+        [HttpPost("Add")]
+        public ActionResult<Definition> Add(Definition definition)
+        {
+            // TODO: invoke web service
+            return Ok(definition);
+        }
+
+        [HttpDelete("Delete")]
+        public ActionResult<Definition> Delete(Definition definition)
+        {
+            // TODO: invoke web service
+            return Ok(definition);
+        }
+
         /// <summary>
         ///     This retrieves all records, including logically deleted records, in the persistence store.
         /// </summary>
@@ -29,7 +42,24 @@ namespace demoWebReact.Controllers
                 new Definition {DefinitionId=1, IsDeleted=false, Name="Definition 1"},
                 new Definition {DefinitionId=2, IsDeleted=true, Name="Definition 2"}
             };
+            // TODO: invoke web service
             return Ok(results);
+        }
+
+        /// <summary>
+        ///     This retrieves the record identified by <paramref name="id" />.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>The matching definition.</returns>
+        /// <remarks>GET api/values/5</remarks>
+        [HttpGet("{id}")]
+        public ActionResult<Definition> Get(int id)
+        {
+            var match = new Definition { DefinitionId = id, IsDeleted = false, Name = $"Definition {id}" };
+            // TODO: invoke web service
+            //var match = _context.Definitions.Find(id);
+            //_metric.ResultCount = 1;
+            return Ok(match);
         }
 
         /// <summary>
@@ -38,21 +68,31 @@ namespace demoWebReact.Controllers
         /// <returns></returns>
         /// <remarks>GET api/values/GetAll</remarks>
         [HttpGet("GetAll")]
-        public ActionResult<DefinitionPacket> GetAll()
+        public ActionResult<List<Definition>> GetAll()
         {
             //var results = _context.Definitions.IgnoreQueryFilters().ToList();
             //_metric.ResultCount = results.Count;
-            var results = new DefinitionPacket
+            var results = new List<Definition>
             {
-                //PacketId = Convert.ToInt32(DateTime.UtcNow.TimeOfDay.TotalSeconds),
-                PacketId = Guid.NewGuid(),
-                Definitions = new List<Definition>
-                {
-                    new Definition {DefinitionId=1, IsDeleted=false, Name="Definition 1"},
-                    new Definition {DefinitionId=2, IsDeleted=true, Name="Definition 2"}
-                }
+                new Definition {DefinitionId=1, IsDeleted=false, Name="Definition 1"},
+                new Definition {DefinitionId=2, IsDeleted=true, Name="Definition 2"}
             };
+            // TODO: invoke web service
             return Ok(results);
+        }
+
+        [HttpPut("Undelete")]
+        public ActionResult<Definition> Undelete(Definition definition)
+        {
+            // TODO: invoke web service
+            return Ok(definition);
+        }
+
+        [HttpPut("Update")]
+        public ActionResult<Definition> Update(Definition definition)
+        {
+            // TODO: invoke web service
+            return Ok(definition);
         }
     }
 }
