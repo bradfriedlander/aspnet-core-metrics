@@ -85,7 +85,7 @@
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptSourceMap>True</TypeScriptSourceMap>
     <TypeScriptMapRoot />
-    <TypeScriptSourceRoot />
+    <TypeScriptSourceRoot>C:\MagenicDev\aspnet-core-metrics\demoWebReact\ClientApp</TypeScriptSourceRoot>
   </PropertyGroup>
 
 </Project>

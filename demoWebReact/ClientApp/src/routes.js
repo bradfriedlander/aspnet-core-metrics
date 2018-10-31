@@ -8,5 +8,5 @@ export const routes = React.createElement(Layout, null,
     React.createElement(Route, { exact: true, path: '/', component: Home }),
     React.createElement(Route, { path: '/fetchdefinition', component: FetchDefinition }),
     React.createElement(Route, { path: '/adddefinition', component: AddDefinition }),
-    React.createElement(Route, { path: '/employee/edit/:empid', component: FetchDefinition }));
+    React.createElement(Route, { path: '/employee/edit/:empid', component: AddDefinition }));
 //# sourceMappingURL=routes.js.map

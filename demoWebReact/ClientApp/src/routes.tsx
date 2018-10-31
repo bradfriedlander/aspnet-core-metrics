@@ -9,5 +9,5 @@ export const routes = <Layout>
     <Route exact path='/' component={Home} />
     <Route path='/fetchdefinition' component={FetchDefinition} />
     <Route path='/adddefinition' component={AddDefinition} />
-    <Route path='/employee/edit/:empid' component={FetchDefinition} />
+    <Route path='/employee/edit/:empid' component={AddDefinition} />
 </Layout>;
