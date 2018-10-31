@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-
 export class FetchDefinition extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +27,7 @@ export class FetchDefinition extends React.Component {
     }
     // Handle Delete request for an employee
     handleDelete(id) {
-        fetch('api/Definition/Delete/' + id, {
+        fetch('api/Definitions/Delete/' + id, {
             method: 'delete'
         })
             .then(data => {

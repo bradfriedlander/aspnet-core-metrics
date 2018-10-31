@@ -8,7 +8,7 @@ namespace demoWebReact.Controllers
     [ApiController]
     public class DefinitionsController : ControllerBase
     {
-        public DefinitionsController()
+        public DefinitionsController() : base()
         {
         }
 
@@ -94,5 +94,6 @@ namespace demoWebReact.Controllers
             // TODO: invoke web service
             return Ok(definition);
         }
+
     }
 }

@@ -15,7 +15,7 @@ export class AddDefinition extends React.Component<RouteComponentProps<{}>, AddD
         var definitionId = this.props.match.params["definitionId"];
         // This will set state for Edit employee
         if (definitionId > 0) {
-            fetch('api/Definition/Details/' + definitionId)
+            fetch('api/Definitions/Details/' + definitionId)
                 .then(response => response.json() as Promise<DefinitionData>)
                 .then(data => {
                     this.setState({ title: "Edit", loading: false, definitionData: data });
@@ -45,11 +45,17 @@ export class AddDefinition extends React.Component<RouteComponentProps<{}>, AddD
     private handleSave(event) {
         event.preventDefault();
         const data = new FormData(event.target);
+        const defintionData = JSON.stringify({ name: data.get("name"), isDeleted: false });
         // PUT request for Edit employee.
         if (this.state.definitionData.definitionId) {
-            fetch('api/Definition/Update', {
+            alert('Update: ' + defintionData);
+            fetch('api/Definitions/Update', {
                 method: 'PUT',
-                body: data,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: defintionData,
             }).then((response) => response.json())
                 .then((responseJson) => {
                     this.props.history.push("/fetchdefinition");
@@ -57,9 +63,14 @@ export class AddDefinition extends React.Component<RouteComponentProps<{}>, AddD
         }
         // POST request to create definition.
         else {
-            fetch('api/Definition/Create', {
+            alert('Create: ' + defintionData);
+            fetch('api/Definitions/Create', {
                 method: 'POST',
-                body: data,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: defintionData,
             }).then((response) => response.json())
                 .then((responseJson) => {
                     this.props.history.push("/fetchdefinition");

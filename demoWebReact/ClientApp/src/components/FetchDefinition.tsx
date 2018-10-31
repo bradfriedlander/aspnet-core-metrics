@@ -37,7 +37,7 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
 
     // Handle Delete request for an employee
     private handleDelete(id: number) {
-        fetch('api/Definition/Delete/' + id, {
+        fetch('api/Definitions/Delete/' + id, {
             method: 'delete'
         })
             .then(data => {
