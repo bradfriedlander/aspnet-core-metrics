@@ -36,6 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\MagenicMetrics\MagenicMetrics.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\boot.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\Home.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\Layout.tsx" />

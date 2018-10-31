@@ -40,7 +40,7 @@ export class FetchDefinition extends React.Component {
         });
     }
     handleEdit(id) {
-        this.props.history.push("/employee/edit/" + id);
+        this.props.history.push("/definition/edit/" + id);
     }
     // Returns the HTML table to the render() method.
     renderEmployeeTable(definitionList) {

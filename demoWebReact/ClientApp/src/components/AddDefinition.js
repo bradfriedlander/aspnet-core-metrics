@@ -4,17 +4,17 @@ export class AddDefinition extends React.Component {
     constructor(props) {
         super(props);
         this.state = { title: "", loading: true, definitionData: new DefinitionData };
-        var definitionId = this.props.match.params["definitionId"];
-        // This will set state for Edit employee
+        var definitionId = props.match.params["definitionid"];
         if (definitionId > 0) {
+            // This will set state for Edit employee
             fetch('api/Definitions/Details/' + definitionId)
                 .then(response => response.json())
                 .then(data => {
                 this.setState({ title: "Edit", loading: false, definitionData: data });
             });
         }
-        // This will set state for Add employee
         else {
+            // This will set state for Add employee
             this.state = { title: "Create", loading: false, definitionData: new DefinitionData };
         }
         // This binding is necessary to make "this" work in the callback
@@ -35,10 +35,9 @@ export class AddDefinition extends React.Component {
     handleSave(event) {
         event.preventDefault();
         const data = new FormData(event.target);
-        const defintionData = JSON.stringify({ name: data.get("name"), isDeleted: false });
+        const defintionData = JSON.stringify({ definitionId: data.get("definitionId"), name: data.get("name"), isDeleted: false });
         // PUT request for Edit employee.
-        if (this.state.definitionData.definitionId) {
-            alert('Update: ' + defintionData);
+        if (this.state.title === "Edit") {
             fetch('api/Definitions/Update', {
                 method: 'PUT',
                 headers: {
@@ -53,7 +52,6 @@ export class AddDefinition extends React.Component {
         }
         // POST request to create definition.
         else {
-            alert('Create: ' + defintionData);
             fetch('api/Definitions/Create', {
                 method: 'POST',
                 headers: {
