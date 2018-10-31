@@ -15,8 +15,8 @@ namespace demoWebReact.Controllers
         // TODO: Get this from configuration - use options
         private readonly string baseUri = "https://localhost:5001/api/values";
 
-        [HttpPost("Add")]
-        public ActionResult<Definition> Add(Definition definition)
+        [HttpPost("Create")]
+        public ActionResult<Definition> Create(Definition definition)
         {
             // TODO: invoke web service
             return Ok(definition);
@@ -27,6 +27,22 @@ namespace demoWebReact.Controllers
         {
             // TODO: invoke web service
             return Ok(definition);
+        }
+
+        /// <summary>
+        ///     This retrieves the record identified by <paramref name="id" />.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>The matching definition.</returns>
+        /// <remarks>GET api/[controller]/Details/{id}</remarks>
+        [HttpGet("Details/{id}")]
+        public ActionResult<Definition> Details(int id)
+        {
+            var match = new Definition { DefinitionId = id, IsDeleted = false, Name = $"Definition {id}" };
+            // TODO: invoke web service
+            //var match = _context.Definitions.Find(id);
+            //_metric.ResultCount = 1;
+            return Ok(match);
         }
 
         /// <summary>
@@ -47,26 +63,10 @@ namespace demoWebReact.Controllers
         }
 
         /// <summary>
-        ///     This retrieves the record identified by <paramref name="id" />.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>The matching definition.</returns>
-        /// <remarks>GET api/values/5</remarks>
-        [HttpGet("{id}")]
-        public ActionResult<Definition> Get(int id)
-        {
-            var match = new Definition { DefinitionId = id, IsDeleted = false, Name = $"Definition {id}" };
-            // TODO: invoke web service
-            //var match = _context.Definitions.Find(id);
-            //_metric.ResultCount = 1;
-            return Ok(match);
-        }
-
-        /// <summary>
         ///     This retrieves all records, including logically deleted records, in the persistence store.
         /// </summary>
         /// <returns></returns>
-        /// <remarks>GET api/values/GetAll</remarks>
+        /// <remarks>GET api/[controller]/GetAll</remarks>
         [HttpGet("GetAll")]
         public ActionResult<List<Definition>> GetAll()
         {

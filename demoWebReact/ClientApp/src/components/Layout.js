@@ -1,16 +1,15 @@
-import React from 'react';
-import { Col, Grid, Row } from 'react-bootstrap';
-import NavMenu from './NavMenu';
-
-export default props => (
-  <Grid fluid>
-    <Row>
-      <Col sm={3}>
-        <NavMenu />
-      </Col>
-      <Col sm={9}>
-        {props.children}
-      </Col>
-    </Row>
-  </Grid>
-);
+import * as React from 'react';
+import { NavMenu } from './NavMenu';
+export class Layout extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return React.createElement("div", { className: 'container-fluid' },
+            React.createElement("div", { className: 'row' },
+                React.createElement("div", { className: 'col-sm-3' },
+                    React.createElement(NavMenu, null)),
+                React.createElement("div", { className: 'col-sm-9' }, this.props.children)));
+    }
+}
+//# sourceMappingURL=Layout.js.map

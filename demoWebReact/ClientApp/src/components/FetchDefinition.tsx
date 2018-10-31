@@ -1,23 +1,26 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 interface FetchDefinitionDataState {
     definitionList: DefinitionData[];
     loading: boolean;
 }
-export class FetchEmployee extends React.Component<RouteComponentProps<{}>, FetchDefinitionDataState> {
-    constructor() {
-        super();
+
+export class FetchDefinition extends React.Component<RouteComponentProps<{}>, FetchDefinitionDataState> {
+    constructor(props) {
+        super(props);
         this.state = { definitionList: [], loading: true };
-        fetch('api/Employee/Index')
+        fetch('api/Definitions/GetAll')
             .then(response => response.json() as Promise<DefinitionData[]>)
             .then(data => {
                 this.setState({ definitionList: data, loading: false });
             });
-        // This binding is necessary to make "this" work in the callback  
+        // This binding is necessary to make "this" work in the callback
         this.handleDelete = this.handleDelete.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
     }
+
     public render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
@@ -31,27 +34,28 @@ export class FetchEmployee extends React.Component<RouteComponentProps<{}>, Fetc
             {contents}
         </div>;
     }
-    // Handle Delete request for an employee  
+
+    // Handle Delete request for an employee
     private handleDelete(id: number) {
-        if (!confirm("Do you want to delete employee with Id: " + id))
-            return;
-        else {
-            fetch('api/Employee/Delete/' + id, {
-                method: 'delete'
-            }).then(data => {
+        fetch('api/Definition/Delete/' + id, {
+            method: 'delete'
+        })
+            .then(data => {
                 this.setState(
                     {
-                        definitionList: this.state.definitionList.filter((rec) => {
-                            return (rec.definitionId != id);
-                        })
+                        //definitionList: this.state.definitionList.filter((rec) => {
+                        //    return (rec.definitionId != id);
+                        //};
+                        definitionList: this.state.definitionList
                     });
             });
-        }
     }
+
     private handleEdit(id: number) {
         this.props.history.push("/employee/edit/" + id);
     }
-    // Returns the HTML table to the render() method.  
+
+    // Returns the HTML table to the render() method.
     private renderEmployeeTable(definitionList: DefinitionData[]) {
         return <table className='table'>
             <thead>
@@ -79,6 +83,7 @@ export class FetchEmployee extends React.Component<RouteComponentProps<{}>, Fetc
         </table>;
     }
 }
+
 export class DefinitionData {
     definitionId: number = 0;
     name: string = "";

@@ -1,40 +1,27 @@
-﻿import React from 'react';
-import { Link } from 'react-router-dom';
-import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import './NavMenu.css';
-
-export default props => (
-    <Navbar inverse fixedTop fluid collapseOnSelect>
-        <Navbar.Header>
-            <Navbar.Brand>
-                <Link to={'/'}>demoWebReact</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-            <Nav>
-                <LinkContainer to={'/'} exact>
-                    <NavItem>
-                        <Glyphicon glyph='home' /> Home
-          </NavItem>
-                </LinkContainer>
-                <LinkContainer to={'/counter'}>
-                    <NavItem>
-                        <Glyphicon glyph='education' /> Counter
-          </NavItem>
-                </LinkContainer>
-                <LinkContainer to={'/fetchdata'}>
-                    <NavItem>
-                        <Glyphicon glyph='th-list' /> Fetch data
-          </NavItem>
-                </LinkContainer>
-                <LinkContainer to={'/definitions'}>
-                    <NavItem>
-                        <Glyphicon glyph='th-list' /> Definitions
-          </NavItem>
-                </LinkContainer>
-            </Nav>
-        </Navbar.Collapse>
-    </Navbar>
-);
+import * as React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+export class NavMenu extends React.Component {
+    render() {
+        return React.createElement("div", { className: 'main-nav' },
+            React.createElement("div", { className: 'navbar navbar-inverse' },
+                React.createElement("div", { className: 'navbar-header' },
+                    React.createElement("button", { type: 'button', className: 'navbar-toggle', "data-toggle": 'collapse', "data-target": '.navbar-collapse' },
+                        React.createElement("span", { className: 'sr-only' }, "Toggle navigation"),
+                        React.createElement("span", { className: 'icon-bar' }),
+                        React.createElement("span", { className: 'icon-bar' }),
+                        React.createElement("span", { className: 'icon-bar' })),
+                    React.createElement(Link, { className: 'navbar-brand', to: '/' }, "demoWebReact")),
+                React.createElement("div", { className: 'clearfix' }),
+                React.createElement("div", { className: 'navbar-collapse collapse' },
+                    React.createElement("ul", { className: 'nav navbar-nav' },
+                        React.createElement("li", null,
+                            React.createElement(NavLink, { to: '/', exact: true, activeClassName: 'active' },
+                                React.createElement("span", { className: 'glyphicon glyphicon-home' }),
+                                " Home")),
+                        React.createElement("li", null,
+                            React.createElement(NavLink, { to: '/fetchdefinition', activeClassName: 'active' },
+                                React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
+                                " Definitions"))))));
+    }
+}
+//# sourceMappingURL=NavMenu.js.map
