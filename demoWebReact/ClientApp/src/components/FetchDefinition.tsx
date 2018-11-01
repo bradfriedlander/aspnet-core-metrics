@@ -11,13 +11,9 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
     constructor(props) {
         super(props);
         this.state = { definitionList: [], loading: true };
-        fetch('api/Definitions/GetAll')
-            .then(response => response.json() as Promise<DefinitionData[]>)
-            .then(data => {
-                this.setState({ definitionList: data, loading: false });
-            });
-        // This binding is necessary to make "this" work in the callback
+        this.getAll();
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleUndelete = this.handleUndelete.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
     }
 
@@ -35,7 +31,14 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
         </div>;
     }
 
-    // Handle Delete request for an employee
+    private getAll() {
+        fetch('api/Definitions/GetAll')
+            .then(response => response.json() as Promise<DefinitionData[]>)
+            .then(data => {
+                this.setState({ definitionList: data, loading: false });
+            });
+    }
+
     private handleDelete(id: number) {
         fetch('api/Definitions/Delete/' + id, {
             method: 'delete'
@@ -49,13 +52,29 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
                         definitionList: this.state.definitionList
                     });
             });
+        this.getAll();
     }
 
     private handleEdit(id: number) {
         this.props.history.push("/definition/edit/" + id);
     }
 
-    // Returns the HTML table to the render() method.
+    private handleUndelete(id: number) {
+        fetch('api/Definitions/Undelete/' + id, {
+            method: 'put'
+        })
+            .then(data => {
+                this.setState(
+                    {
+                        //definitionList: this.state.definitionList.filter((rec) => {
+                        //    return (rec.definitionId != id);
+                        //};
+                        definitionList: this.state.definitionList
+                    });
+            });
+        this.getAll();
+    }
+
     private renderEmployeeTable(definitionList: DefinitionData[]) {
         return <table className='table'>
             <thead>

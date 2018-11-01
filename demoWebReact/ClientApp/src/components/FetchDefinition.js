@@ -4,13 +4,9 @@ export class FetchDefinition extends React.Component {
     constructor(props) {
         super(props);
         this.state = { definitionList: [], loading: true };
-        fetch('api/Definitions/GetAll')
-            .then(response => response.json())
-            .then(data => {
-            this.setState({ definitionList: data, loading: false });
-        });
-        // This binding is necessary to make "this" work in the callback
+        this.getAll();
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleUndelete = this.handleUndelete.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
     }
     render() {
@@ -25,7 +21,13 @@ export class FetchDefinition extends React.Component {
                 React.createElement(Link, { to: "/adddefinition" }, "Create New")),
             contents);
     }
-    // Handle Delete request for an employee
+    getAll() {
+        fetch('api/Definitions/GetAll')
+            .then(response => response.json())
+            .then(data => {
+            this.setState({ definitionList: data, loading: false });
+        });
+    }
     handleDelete(id) {
         fetch('api/Definitions/Delete/' + id, {
             method: 'delete'
@@ -38,11 +40,25 @@ export class FetchDefinition extends React.Component {
                 definitionList: this.state.definitionList
             });
         });
+        this.getAll();
     }
     handleEdit(id) {
         this.props.history.push("/definition/edit/" + id);
     }
-    // Returns the HTML table to the render() method.
+    handleUndelete(id) {
+        fetch('api/Definitions/Undelete/' + id, {
+            method: 'put'
+        })
+            .then(data => {
+            this.setState({
+                //definitionList: this.state.definitionList.filter((rec) => {
+                //    return (rec.definitionId != id);
+                //};
+                definitionList: this.state.definitionList
+            });
+        });
+        this.getAll();
+    }
     renderEmployeeTable(definitionList) {
         return React.createElement("table", { className: 'table' },
             React.createElement("thead", null,
@@ -70,4 +86,4 @@ export class DefinitionData {
         this.isDeleted = false;
     }
 }
-//# sourceMappingURL=FetchDefinition.js.map
+//# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/components/FetchDefinition.js.map

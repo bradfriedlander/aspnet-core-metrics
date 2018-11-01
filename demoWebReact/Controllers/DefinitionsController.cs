@@ -2,15 +2,18 @@
 using System.Threading.Tasks;
 using demoWebReact.HttpHelpers;
 using demoWebReact.Models;
+using MagenicMetrics;
+using MagenicMetrics.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace demoWebReact.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DefinitionsController : ControllerBase
+    public class DefinitionsController : MetricsBaseController
     {
-        public DefinitionsController() : base()
+        public DefinitionsController(IMetric metric, ILogger<DefinitionsController> logger/*, IOptions<DefinitionServiceSettings> options*/) : base(metric)
         {
         }
 
@@ -86,12 +89,12 @@ namespace demoWebReact.Controllers
             var response = await HttpRequestFactory.Get(requestUri);
             if (!response.IsSuccessStatusCode)
             {
-                //_metric.ResultCode = (int)response.StatusCode;
+                _metric.ResultCode = (int)response.StatusCode;
                 ModelState.AddModelError("", $"Could not retrieve definitions, status code: '{response.StatusCode}'.");
                 return BadRequest(definitions);
             }
             definitions = response.ContentAsType<List<Definition>>();
-            //_metric.ResultCount = definitions.Count;
+            _metric.ResultCount = definitions.Count;
             return Ok(definitions);
         }
 

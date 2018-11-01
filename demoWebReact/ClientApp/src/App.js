@@ -23,4 +23,4 @@ export default () => (React.createElement(Layout, null,
     React.createElement(Route, { path: '/fetchdefinition', component: FetchDefinition }),
     React.createElement(Route, { path: '/adddefinition', component: AddDefinition }),
     React.createElement(Route, { path: '/definition/edit/:definitionid', component: AddDefinition })));
-//# sourceMappingURL=App.js.map
+//# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/App.js.map

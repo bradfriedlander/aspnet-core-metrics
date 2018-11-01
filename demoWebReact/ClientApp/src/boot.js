@@ -21,4 +21,4 @@ renderApp();
 //        renderApp();
 //    });
 //}
-//# sourceMappingURL=boot.js.map
+//# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/boot.js.map

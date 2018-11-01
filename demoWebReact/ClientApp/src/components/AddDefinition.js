@@ -84,4 +84,4 @@ export class AddDefinition extends React.Component {
                 React.createElement("button", { className: "btn", onClick: this.handleCancel }, "Cancel"))));
     }
 }
-//# sourceMappingURL=AddDefinition.js.map
+//# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/components/AddDefinition.js.map
