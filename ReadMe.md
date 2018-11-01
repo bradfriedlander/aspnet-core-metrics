@@ -11,6 +11,8 @@ This component provides mechanisms for each action to add action-specific inform
 To facilitate this, the controller class needs to inherit from the [MetricBaseController](#MetricBaseController).
 The component exposes the [MetricDetails attribute](#MetricDetails) which populates part of the record.
 
+![Sample Metrics](/images/metrics-in-grid.png)
+
 ## [Metric](documentation/Metric.md)
 This class is the data that is persisted for each MVC controller interaction.
 
