@@ -1,5 +1,5 @@
-# demoWebApp
-This is a simple MVC Razor project that demonstrates how Magenic Metrics works for controllers that serve a user interface.
+# demoWebReact
+This is a simple MVC ReactJS project that demonstrates how Magenic Metrics works for controllers that serve a user interface.
 
 To use this project in a development environment, you will need to create the user secrets in your roaming folder.
 ```
