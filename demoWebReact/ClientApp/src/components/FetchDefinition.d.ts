@@ -12,6 +12,7 @@ export declare class FetchDefinition extends React.Component<RouteComponentProps
     private handleEdit;
     private handleUndelete;
     private renderEmployeeTable;
+    private renderDeleteLink;
 }
 export declare class DefinitionData {
     definitionId: number;

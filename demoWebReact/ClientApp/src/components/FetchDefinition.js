@@ -75,8 +75,13 @@ export class FetchDefinition extends React.Component {
                     React.createElement("input", { type: "checkbox", checked: definition.isDeleted })),
                 React.createElement("td", null,
                     React.createElement("a", { className: "action", onClick: (id) => this.handleEdit(definition.definitionId) }, "Edit"),
-                    "  |",
-                    React.createElement("a", { className: "action", onClick: (id) => this.handleDelete(definition.definitionId) }, "Delete"))))));
+                    "  | \u00A0",
+                    this.renderDeleteLink(definition.definitionId, definition.isDeleted))))));
+    }
+    renderDeleteLink(definitionId, isDeleted) {
+        return isDeleted
+            ? React.createElement("a", { className: "action", onClick: (id) => this.handleUndelete(definitionId) }, "Undelete")
+            : React.createElement("a", { className: "action", onClick: (id) => this.handleDelete(definitionId) }, "Delete");
     }
 }
 export class DefinitionData {

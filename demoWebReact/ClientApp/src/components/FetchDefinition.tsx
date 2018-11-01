@@ -94,12 +94,18 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
                         <td><input type="checkbox" checked={definition.isDeleted} /></td>
                         <td>
                             <a className="action" onClick={(id) => this.handleEdit(definition.definitionId)}>Edit</a>  |
-                            <a className="action" onClick={(id) => this.handleDelete(definition.definitionId)}>Delete</a>
+                            &nbsp;{this.renderDeleteLink(definition.definitionId, definition.isDeleted)}
                         </td>
                     </tr>
                 )}
             </tbody>
         </table>;
+    }
+
+    private renderDeleteLink(definitionId: number, isDeleted: boolean) {
+        return isDeleted
+            ? <a className="action" onClick={(id) => this.handleUndelete(definitionId)}>Undelete</a>
+            : <a className="action" onClick={(id) => this.handleDelete(definitionId)}>Delete</a>
     }
 }
 

@@ -64,8 +64,7 @@ namespace demoWebReact
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseMetrics();
@@ -78,7 +77,6 @@ namespace demoWebReact
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
-
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
