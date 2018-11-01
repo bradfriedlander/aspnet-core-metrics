@@ -34,6 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		Documentation\Database.md = Documentation\Database.md
 		documentation\demoWebApi.md = documentation\demoWebApi.md
 		documentation\demoWebApp.md = documentation\demoWebApp.md
+		documentation\demoWebReact.md = documentation\demoWebReact.md
 		documentation\MagenicMetrics.md = documentation\MagenicMetrics.md
 		documentation\Metric.md = documentation\Metric.md
 		documentation\MetricBaseController.md = documentation\MetricBaseController.md

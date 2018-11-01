@@ -37,7 +37,12 @@ This is an alternative to using the `dotnet ef` commands.
 This document provides details on the classes, methods, and properties in the MagenicMetrics assembly.
 
 # [demoWebApp](documentation/demoWebApp.md)
-This is a simple MVC project that demonstrates how Magenic Metrics works for controllers that serve a user interface.
+This is a simple MVC Razor project that demonstrates how Magenic Metrics works for controllers that serve a user interface.
+
+# [demoWebReact](documentation/demoWebReact.md)
+This is a simple MVC ReactJS project that demonstrates how Magenic Metrics works for controllers that serve a user interface.
+
+It is a simplified version of [demoWebApp](#demoWebApp)
 
 # [demoWebApi](documentation/demoWebApi.md)
 
