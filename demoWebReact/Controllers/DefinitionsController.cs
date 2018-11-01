@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using demoWebReact.HttpHelpers;
 using demoWebReact.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,12 +14,18 @@ namespace demoWebReact.Controllers
         {
         }
 
+        private static List<Definition> definitions;
+
         // TODO: Get this from configuration - use options
         private readonly string baseUri = "https://localhost:5001/api/values";
 
         [HttpPost("Create")]
         public ActionResult<Definition> Create(Definition definition)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(definition);
+            }
             // TODO: invoke web service
             return Ok(definition);
         }
@@ -25,6 +33,10 @@ namespace demoWebReact.Controllers
         [HttpDelete("Delete")]
         public ActionResult<Definition> Delete(Definition definition)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(definition);
+            }
             // TODO: invoke web service
             return Ok(definition);
         }
@@ -65,25 +77,31 @@ namespace demoWebReact.Controllers
         /// <summary>
         ///     This retrieves all records, including logically deleted records, in the persistence store.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>This is the current list of <see cref="Definition" />.</returns>
         /// <remarks>GET api/[controller]/GetAll</remarks>
         [HttpGet("GetAll")]
-        public ActionResult<List<Definition>> GetAll()
+        public async Task<ActionResult<List<Definition>>> GetAll()
         {
-            //var results = _context.Definitions.IgnoreQueryFilters().ToList();
-            //_metric.ResultCount = results.Count;
-            var results = new List<Definition>
+            var requestUri = $"{baseUri}/GetAll";
+            var response = await HttpRequestFactory.Get(requestUri);
+            if (!response.IsSuccessStatusCode)
             {
-                new Definition {DefinitionId=1, IsDeleted=false, Name="Definition 1"},
-                new Definition {DefinitionId=2, IsDeleted=true, Name="Definition 2"}
-            };
-            // TODO: invoke web service
-            return Ok(results);
+                //_metric.ResultCode = (int)response.StatusCode;
+                ModelState.AddModelError("", $"Could not retrieve definitions, status code: '{response.StatusCode}'.");
+                return BadRequest(definitions);
+            }
+            definitions = response.ContentAsType<List<Definition>>();
+            //_metric.ResultCount = definitions.Count;
+            return Ok(definitions);
         }
 
         [HttpPut("Undelete")]
         public ActionResult<Definition> Undelete(Definition definition)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(definition);
+            }
             // TODO: invoke web service
             return Ok(definition);
         }
@@ -91,9 +109,12 @@ namespace demoWebReact.Controllers
         [HttpPut("Update")]
         public ActionResult<Definition> Update(Definition definition)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(definition);
+            }
             // TODO: invoke web service
             return Ok(definition);
         }
-
     }
 }

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>ec4a4551-c405-4c90-ade2-9b6719cdc813</UserSecretsId>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
@@ -85,10 +86,10 @@
     <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
     <TypeScriptOutFile />
     <TypeScriptOutDir />
-    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptSourceMap>True</TypeScriptSourceMap>
-    <TypeScriptMapRoot />
+    <TypeScriptMapRoot>C:\MagenicDev\aspnet-core-metrics\demoWebReact\ClientApp</TypeScriptMapRoot>
     <TypeScriptSourceRoot>C:\MagenicDev\aspnet-core-metrics\demoWebReact\ClientApp</TypeScriptSourceRoot>
   </PropertyGroup>
 
