@@ -23,41 +23,46 @@ export class FetchDefinition extends React.Component {
     }
     getAll() {
         fetch('api/Definitions/GetAll')
+            .then(this.handleErrors)
             .then(response => response.json())
             .then(data => {
             this.setState({ definitionList: data, loading: false });
         });
     }
-    handleDelete(id) {
-        fetch('api/Definitions/Delete/' + id, {
-            method: 'delete'
+    handleDelete(definition) {
+        fetch('api/Definitions/Delete/', {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(definition)
         })
-            .then(data => {
-            this.setState({
-                //definitionList: this.state.definitionList.filter((rec) => {
-                //    return (rec.definitionId != id);
-                //};
-                definitionList: this.state.definitionList
-            });
-        });
-        this.getAll();
+            .then(this.handleErrors)
+            .then(response => response.json())
+            .then(data => this.getAll());
     }
     handleEdit(id) {
         this.props.history.push("/definition/edit/" + id);
     }
-    handleUndelete(id) {
-        fetch('api/Definitions/Undelete/' + id, {
-            method: 'put'
+    handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
+    handleUndelete(definition) {
+        fetch('api/Definitions/Undelete/', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(definition)
         })
-            .then(data => {
-            this.setState({
-                //definitionList: this.state.definitionList.filter((rec) => {
-                //    return (rec.definitionId != id);
-                //};
-                definitionList: this.state.definitionList
-            });
-        });
-        this.getAll();
+            .then(this.handleErrors)
+            .then(response => response.json())
+            .then(data => this.getAll());
     }
     renderEmployeeTable(definitionList) {
         return React.createElement("table", { className: 'table' },
@@ -72,16 +77,16 @@ export class FetchDefinition extends React.Component {
                 React.createElement("td", null, definition.definitionId),
                 React.createElement("td", null, definition.name),
                 React.createElement("td", null,
-                    React.createElement("input", { type: "checkbox", checked: definition.isDeleted })),
+                    React.createElement("input", { type: "checkbox", className: "readonly", checked: definition.isDeleted })),
                 React.createElement("td", null,
                     React.createElement("a", { className: "action", onClick: (id) => this.handleEdit(definition.definitionId) }, "Edit"),
                     "  | \u00A0",
-                    this.renderDeleteLink(definition.definitionId, definition.isDeleted))))));
+                    this.renderDeleteLink(definition))))));
     }
-    renderDeleteLink(definitionId, isDeleted) {
-        return isDeleted
-            ? React.createElement("a", { className: "action", onClick: (id) => this.handleUndelete(definitionId) }, "Undelete")
-            : React.createElement("a", { className: "action", onClick: (id) => this.handleDelete(definitionId) }, "Delete");
+    renderDeleteLink(definition) {
+        return definition.isDeleted
+            ? React.createElement("a", { className: "action", onClick: (id) => this.handleUndelete(definition) }, "Undelete")
+            : React.createElement("a", { className: "action", onClick: (id) => this.handleDelete(definition) }, "Delete");
     }
 }
 export class DefinitionData {

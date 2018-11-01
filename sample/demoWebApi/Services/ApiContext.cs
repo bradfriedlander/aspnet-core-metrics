@@ -17,7 +17,7 @@ namespace demoWebApi.Services
         public ApiContext(DbContextOptions<ApiContext> options)
             : base(options)
         {
-            var countTask = Definitions.CountAsync();
+            var countTask = Definitions.IgnoreQueryFilters().CountAsync();
             if (countTask.Result == 0)
             {
                 AddTestData();

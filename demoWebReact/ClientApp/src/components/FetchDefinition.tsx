@@ -33,46 +33,50 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
 
     private getAll() {
         fetch('api/Definitions/GetAll')
+            .then(this.handleErrors)
             .then(response => response.json() as Promise<DefinitionData[]>)
             .then(data => {
                 this.setState({ definitionList: data, loading: false });
             });
     }
 
-    private handleDelete(id: number) {
-        fetch('api/Definitions/Delete/' + id, {
-            method: 'delete'
+    private handleDelete(definition: DefinitionData) {
+        fetch('api/Definitions/Delete/', {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(definition)
         })
-            .then(data => {
-                this.setState(
-                    {
-                        //definitionList: this.state.definitionList.filter((rec) => {
-                        //    return (rec.definitionId != id);
-                        //};
-                        definitionList: this.state.definitionList
-                    });
-            });
-        this.getAll();
+            .then(this.handleErrors)
+            .then(response => response.json() as Promise<DefinitionData>)
+            .then(data => this.getAll());
     }
 
     private handleEdit(id: number) {
         this.props.history.push("/definition/edit/" + id);
     }
 
-    private handleUndelete(id: number) {
-        fetch('api/Definitions/Undelete/' + id, {
-            method: 'put'
+    private handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
+
+    private handleUndelete(definition: DefinitionData) {
+        fetch('api/Definitions/Undelete/', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(definition)
         })
-            .then(data => {
-                this.setState(
-                    {
-                        //definitionList: this.state.definitionList.filter((rec) => {
-                        //    return (rec.definitionId != id);
-                        //};
-                        definitionList: this.state.definitionList
-                    });
-            });
-        this.getAll();
+            .then(this.handleErrors)
+            .then(response => response.json() as Promise<DefinitionData>)
+            .then(data => this.getAll());
     }
 
     private renderEmployeeTable(definitionList: DefinitionData[]) {
@@ -91,10 +95,10 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
                         <td></td>
                         <td>{definition.definitionId}</td>
                         <td>{definition.name}</td>
-                        <td><input type="checkbox" checked={definition.isDeleted} /></td>
+                        <td><input type="checkbox" className="readonly" checked={definition.isDeleted} /></td>
                         <td>
                             <a className="action" onClick={(id) => this.handleEdit(definition.definitionId)}>Edit</a>  |
-                            &nbsp;{this.renderDeleteLink(definition.definitionId, definition.isDeleted)}
+                            &nbsp;{this.renderDeleteLink(definition)}
                         </td>
                     </tr>
                 )}
@@ -102,10 +106,10 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
         </table>;
     }
 
-    private renderDeleteLink(definitionId: number, isDeleted: boolean) {
-        return isDeleted
-            ? <a className="action" onClick={(id) => this.handleUndelete(definitionId)}>Undelete</a>
-            : <a className="action" onClick={(id) => this.handleDelete(definitionId)}>Delete</a>
+    private renderDeleteLink(definition: DefinitionData) {
+        return definition.isDeleted
+            ? <a className="action" onClick={(id) => this.handleUndelete(definition)}>Undelete</a>
+            : <a className="action" onClick={(id) => this.handleDelete(definition)}>Delete</a>
     }
 }
 

@@ -31,13 +31,18 @@ export class AddDefinition extends React.Component {
             React.createElement("hr", null),
             contents);
     }
-    // This will handle the submit form event.
+    handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
     handleSave(event) {
         event.preventDefault();
         const data = new FormData(event.target);
         const defintionData = JSON.stringify({ definitionId: data.get("definitionId"), name: data.get("name"), isDeleted: false });
-        // PUT request for Edit employee.
         if (this.state.title === "Edit") {
+            // PUT request for Edit employee.
             fetch('api/Definitions/Update', {
                 method: 'PUT',
                 headers: {
@@ -45,13 +50,15 @@ export class AddDefinition extends React.Component {
                     'Content-Type': 'application/json',
                 },
                 body: defintionData,
-            }).then((response) => response.json())
-                .then((responseJson) => {
+            })
+                .then(this.handleErrors)
+                .then((response) => response.json())
+                .then((data) => {
                 this.props.history.push("/fetchdefinition");
             });
         }
-        // POST request to create definition.
         else {
+            // POST request to create definition.
             fetch('api/Definitions/Create', {
                 method: 'POST',
                 headers: {
@@ -59,8 +66,10 @@ export class AddDefinition extends React.Component {
                     'Content-Type': 'application/json',
                 },
                 body: defintionData,
-            }).then((response) => response.json())
-                .then((responseJson) => {
+            })
+                .then(this.handleErrors)
+                .then((response) => response.json())
+                .then((data) => {
                 this.props.history.push("/fetchdefinition");
             });
         }
