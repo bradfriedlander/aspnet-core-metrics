@@ -17,7 +17,7 @@ namespace demoWebApi.Services
         public ApiContext(DbContextOptions<ApiContext> options)
             : base(options)
         {
-            var countTask = Definitions.CountAsync();
+            var countTask = Definitions.IgnoreQueryFilters().CountAsync();
             if (countTask.Result == 0)
             {
                 AddTestData();
@@ -58,8 +58,8 @@ namespace demoWebApi.Services
 
         private void AddTestData()
         {
-            Definitions.Add(new Definition() { DefinitionId = 1, Name = "Definition 1" });
-            Definitions.Add(new Definition() { DefinitionId = 2, Name = "Definition 2" });
+            Definitions.Add(new Definition() { DefinitionId = 1, Name = "Definition 1", IsDeleted = false });
+            Definitions.Add(new Definition() { DefinitionId = 2, Name = "Definition 2", IsDeleted = false });
             SaveChanges();
         }
     }
