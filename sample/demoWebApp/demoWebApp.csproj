@@ -30,9 +30,9 @@
 		<PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\MagenicMetrics\MagenicMetrics.csproj" />
+	  <Folder Include="Services\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Services\" />
+	  <ProjectReference Include="..\..\src\MagenicMetrics\MagenicMetrics.csproj" />
 	</ItemGroup>
 </Project>
