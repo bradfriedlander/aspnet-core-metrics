@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using demoWebApp.Models.InputBinding;
+using demoWebReact.Models;
 using MagenicMetrics;
 
-namespace demoWebApp.Models.ViewBinding
+namespace demoWebReact.Models
 {
     /// <summary>
     ///     This is the view model for Admin Index.
     /// </summary>
     /// <seealso cref="AdminIndexInput" />
-    public class AdminIndexView : AdminIndexInput
+    public class MetricsPage : MetricsQuery
     {
         /// <summary>
         ///     Gets or sets the metrics.
