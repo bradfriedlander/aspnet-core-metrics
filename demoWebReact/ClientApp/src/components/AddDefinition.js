@@ -85,7 +85,7 @@ export class AddDefinition extends React.Component {
             React.createElement("div", { className: "form-group row" },
                 React.createElement("input", { type: "hidden", name: "definitionId", value: this.state.definitionData.definitionId })),
             React.createElement("div", { className: "form-group row" },
-                React.createElement("label", { className: " control-label col-md-12", htmlFor: "Name" }, "Name"),
+                React.createElement("label", { className: "control-label col-md-12", htmlFor: "Name" }, "Name"),
                 React.createElement("div", { className: "col-md-4" },
                     React.createElement("input", { className: "form-control", type: "text", name: "name", defaultValue: this.state.definitionData.name, required: true }))),
             React.createElement("div", { className: "form-group" },

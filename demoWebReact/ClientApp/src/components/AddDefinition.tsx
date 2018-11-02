@@ -100,7 +100,7 @@ export class AddDefinition extends React.Component<RouteComponentProps<{}>, AddD
                     <input type="hidden" name="definitionId" value={this.state.definitionData.definitionId} />
                 </div>
                 < div className="form-group row" >
-                    <label className=" control-label col-md-12" htmlFor="Name">Name</label>
+                    <label className="control-label col-md-12" htmlFor="Name">Name</label>
                     <div className="col-md-4">
                         <input className="form-control" type="text" name="name" defaultValue={this.state.definitionData.name} required />
                     </div>

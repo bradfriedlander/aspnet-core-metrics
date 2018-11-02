@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 export class NavMenu extends React.Component<{}, {}> {
     public render() {
-        return <div className='main-nav'>
+        return <div className='main-nav col-md-8'>
             <div className='navbar navbar-inverse'>
                 <div className='navbar-header'>
                     <button type='button' className='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
@@ -25,6 +25,11 @@ export class NavMenu extends React.Component<{}, {}> {
                         <li>
                             <NavLink to={'/fetchdefinition'} activeClassName='active'>
                                 <span className='glyphicon glyphicon-th-list'></span> Definitions
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/fetchmetrics'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-th-list'></span> Metrics
                             </NavLink>
                         </li>
                     </ul>

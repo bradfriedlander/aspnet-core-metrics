@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 export class NavMenu extends React.Component {
     render() {
-        return React.createElement("div", { className: 'main-nav' },
+        return React.createElement("div", { className: 'main-nav col-md-8' },
             React.createElement("div", { className: 'navbar navbar-inverse' },
                 React.createElement("div", { className: 'navbar-header' },
                     React.createElement("button", { type: 'button', className: 'navbar-toggle', "data-toggle": 'collapse', "data-target": '.navbar-collapse' },
@@ -21,7 +21,11 @@ export class NavMenu extends React.Component {
                         React.createElement("li", null,
                             React.createElement(NavLink, { to: '/fetchdefinition', activeClassName: 'active' },
                                 React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
-                                " Definitions"))))));
+                                " Definitions")),
+                        React.createElement("li", null,
+                            React.createElement(NavLink, { to: '/fetchmetrics', activeClassName: 'active' },
+                                React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
+                                " Metrics"))))));
     }
 }
-//# sourceMappingURL=NavMenu.js.map
+//# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/components/NavMenu.js.map

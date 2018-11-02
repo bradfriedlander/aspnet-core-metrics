@@ -63,11 +63,11 @@ namespace demoWebApp.Controllers
             {
                 PageSize = adminIndex.PageSize,
                 PageNumber = adminIndex.PageNumber,
-                ApplicationFilter = adminIndex.ApplicationFilter
+                ApplicationFilter = adminIndex.ApplicationFilter,
+                Metrics = new List<IMetric>()
             };
             if (!ModelState.IsValid)
             {
-                viewModel.Metrics = new List<IMetric>();
                 return View(viewModel);
             }
             var results = await _metricService.GetLatest(adminIndex.PageSize, adminIndex.PageNumber, adminIndex.ApplicationFilter ?? string.Empty);

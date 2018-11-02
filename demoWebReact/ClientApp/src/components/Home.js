@@ -1,6 +1,5 @@
 import * as React from 'react';
 export class Home extends React.Component {
-    //const Home = props => (
     render() {
         return React.createElement("div", null,
             React.createElement("h1", null, "Hello, world!"),
@@ -52,4 +51,4 @@ export class Home extends React.Component {
                 "."));
     }
 }
-//# sourceMappingURL=Home.js.map
+//# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/components/Home.js.map
