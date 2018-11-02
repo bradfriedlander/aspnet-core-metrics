@@ -13,8 +13,18 @@ interface FetchMetricsDataState {
 export class FetchMetrics extends React.Component<RouteComponentProps<{}>, FetchMetricsDataState> {
     constructor(props) {
         super(props);
-        this.state = { loading: true, pageSize: 10, pageNumber: 1, applicationFilter: '', recordCount: 0, metricList: [] };
+        this.state = {
+            loading: true,
+            pageSize: 10,
+            pageNumber: 1,
+            applicationFilter: '',
+            recordCount: 0,
+            metricList: []
+        };
         this.handleQuery = this.handleQuery.bind(this);
+        this.onChangeApplicationFilter = this.onChangeApplicationFilter.bind(this);
+        this.onChangePageNumber = this.onChangePageNumber.bind(this);
+        this.onChangePageSize = this.onChangePageSize.bind(this);
         this.getMetrics();
     }
 
@@ -26,19 +36,67 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
         return <div>
             <hr />
             {queryForm}
-            <br />
             <hr />
-            <br />
             {metricsTable}
         </div>;
     }
     private getMetrics() {
-        //this.state = { loading: true, pageSize: 10, pageNumber: 1, applicationFilter: '', metricList: new MetricData[0] };
+        const metricQuery = JSON.stringify({
+            pageSize: this.state.pageSize,
+            pageNumber: this.state.pageNumber,
+            applicationFilter: this.state.applicationFilter
+        });
+        fetch('api/Metrics/Get', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: metricQuery,
+        })
+            .then(this.handleErrors)
+            .then(response => response.json() as Promise<MetricPage>)
+            .then(data => {
+                this.setState({
+                    metricList: data.metrics,
+                    loading: false,
+                    recordCount: data.metrics.length,
+                    applicationFilter: this.state.applicationFilter,
+                    pageSize: this.state.pageSize,
+                    pageNumber: this.state.pageNumber
+                });
+            });
+    }
+
+    private handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
     }
 
     private handleQuery(event) {
         event.preventDefault();
         const data = new FormData(event.target);
+        this.getMetrics();
+    }
+
+    private onChangePageSize(event) {
+        if (event.target.value < 1) {
+            this.setState({ pageSize: 10 });
+        } else {
+            this.setState({ pageSize: event.target.value });
+        }
+    }
+    private onChangePageNumber(event) {
+        if (event.target.value < 1) {
+            this.setState({ pageNumber: 1 });
+        } else {
+            this.setState({ pageNumber: event.target.value });
+        }
+    }
+    private onChangeApplicationFilter(event) {
+        this.setState({ applicationFilter: event.target.value });
     }
 
     private renderQueryForm() {
@@ -46,22 +104,18 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
             <form onSubmit={this.handleQuery} >
                 <div className="form-group row">
                     <div className="form-group col-md-4">
-                        <label asp-for="ApplicationFilter"></label>
-                        <input className="form-control" asp-for="ApplicationFilter" />
-                        <span asp-validation-for="ApplicationFilter"></span>
+                        <label className="control-label">Application Filter</label>
+                        <input className="form-control" name="applicationFilter" value={this.state.applicationFilter} onChange={this.onChangeApplicationFilter} />
                     </div>
                     <div className="form-group col-md-2">
-                        <label asp-for="PageNumber"></label>
-                        <input className="form-control" asp-for="PageNumber" />
-                        <span asp-validation-for="PageNumber"></span>
+                        <label className="control-label">Page Number</label>
+                        <input className="form-control" name="pageNumber" type="number" value={this.state.pageNumber} onChange={this.onChangePageNumber} />
                     </div>
                     <div className="form-group col-md-2">
-                        <label asp-for="PageSize"></label>
-                        <input className="form-control" asp-for="PageSize" />
-                        <span asp-validation-for="PageSize"></span>
+                        <label className="control-label">Page Size</label>
+                        <input className="form-control" name="pageSize" type="number" value={this.state.pageSize} onChange={this.onChangePageSize} />
                     </div>
                     <div className="form-group col-md-2">
-                        <label>&nbsp;</label><br />
                         <button type="submit" className="btn btn-default">Apply Filter</button>
                     </div>
                 </div>
@@ -82,10 +136,10 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
                 <thead>
                     <tr>
                         <th>
-                            Metric Id
+                            Metric&nbsp;Id
                 </th>
                         <th>
-                            StartTime
+                            Start&nbsp;Time
                 </th>
                         <th>
                             Application
@@ -94,34 +148,34 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
                             Details
                 </th>
                         <th>
-                            Elapsed Time
+                            Seconds
                 </th>
                         <th>
-                            Exception Message
+                            Exception
                 </th>
                         <th>
-                            Request Method
+                            Method
                 </th>
                         <th>
-                            Request Path
+                            Request&nbsp;Path
                 </th>
                         <th>
                             Query
                 </th>
                         <th>
-                            Result Code
+                            Result&nbsp;Code
                 </th>
                         <th>
-                            Result Count
+                            Result&nbsp;Count
                 </th>
                         <th>
-                            Server Name
+                            Server&nbsp;Name
                 </th>
                         <th>
-                            TraceId)
+                            Trace&nbsp;Id
                 </th>
                         <th>
-                            UserName)
+                            User&nbsp;Name
                 </th>
                     </tr>
                 </thead>
@@ -129,46 +183,46 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
                     {this.state.metricList.map(metric =>
                         <tr>
                             <td>
-                                {metric.MetricId}
+                                {metric.metricId}
+                            </td>
+                            <td className="col-md-2">
+                                {metric.startTime.toString().slice(0,23)}
                             </td>
                             <td>
-                                {metric.StartTime.toISOString()}
+                                {metric.application}
                             </td>
                             <td>
-                                {metric.Application}
+                                {metric.details}
                             </td>
                             <td>
-                                {metric.Details}
+                                {metric.elapsedTime}
                             </td>
                             <td>
-                                {metric.ElapsedTime}
+                                {metric.exceptionMessage}
                             </td>
                             <td>
-                                {metric.ExceptionMessage}
+                                {metric.requestMethod}
                             </td>
                             <td>
-                                {metric.RequestMethod}
+                                {metric.requestPath}
                             </td>
                             <td>
-                                {metric.RequestPath}
+                                {metric.query}
                             </td>
                             <td>
-                                {metric.Query}
+                                {metric.resultCode}
                             </td>
                             <td>
-                                {metric.ResultCode}
+                                {metric.resultCount}
                             </td>
                             <td>
-                                {metric.ResultCount}
+                                {metric.serverName}
                             </td>
                             <td>
-                                {metric.ServerName}
+                                {metric.traceId}
                             </td>
                             <td>
-                                {metric.TraceId}
-                            </td>
-                            <td>
-                                {metric.UserName}
+                                {metric.userName}
                             </td>
                         </tr>
                     )
@@ -179,19 +233,26 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
     }
 }
 
+export class MetricPage {
+    applicationFilter: string;
+    pageSize: number;
+    pageNumber: number;
+    metrics: MetricData[];
+}
+
 export class MetricData {
-    Application: string;
-    Details: string;
-    ElapsedTime: number;
-    ExceptionMessage: string;
-    MetricId: number;
-    Query: string;
-    RequestMethod: string;
-    RequestPath: string;
-    ResultCode: number;
-    ResultCount: number;
-    ServerName: string;
-    StartTime: Date;
-    TraceId: string;
-    UserName: string;
+    application: string;
+    details: string;
+    elapsedTime: number;
+    exceptionMessage: string;
+    metricId: number;
+    query: string;
+    requestMethod: string;
+    requestPath: string;
+    resultCode: number;
+    resultCount: number;
+    serverName: string;
+    startTime: Date;
+    traceId: string;
+    userName: string;
 }

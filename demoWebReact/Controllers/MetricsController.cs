@@ -20,9 +20,9 @@ namespace demoWebReact.Controllers
 
         private readonly IMetricService _metricService;
 
-        [HttpGet("Get")]
+        [HttpPost("Get")]
         [MetricDetails(Source = "query")]
-        public async Task<ActionResult<MetricsPage>> Get(MetricsQuery query)
+        public async Task<ActionResult<MetricsPage>> Get([FromBody]MetricsQuery query)
         {
             var metricsPage = new MetricsPage
             {

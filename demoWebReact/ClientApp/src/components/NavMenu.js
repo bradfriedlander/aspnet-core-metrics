@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 export class NavMenu extends React.Component {
     render() {
-        return React.createElement("div", { className: 'main-nav' },
+        return React.createElement("div", { className: 'main-nav col-md-8' },
             React.createElement("div", { className: 'navbar navbar-inverse' },
                 React.createElement("div", { className: 'navbar-header' },
                     React.createElement("button", { type: 'button', className: 'navbar-toggle', "data-toggle": 'collapse', "data-target": '.navbar-collapse' },

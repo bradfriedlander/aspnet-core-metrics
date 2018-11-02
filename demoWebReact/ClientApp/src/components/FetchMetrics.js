@@ -2,8 +2,18 @@ import * as React from 'react';
 export class FetchMetrics extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { loading: true, pageSize: 10, pageNumber: 1, applicationFilter: '', recordCount: 0, metricList: [] };
+        this.state = {
+            loading: true,
+            pageSize: 10,
+            pageNumber: 1,
+            applicationFilter: '',
+            recordCount: 0,
+            metricList: []
+        };
         this.handleQuery = this.handleQuery.bind(this);
+        this.onChangeApplicationFilter = this.onChangeApplicationFilter.bind(this);
+        this.onChangePageNumber = this.onChangePageNumber.bind(this);
+        this.onChangePageSize = this.onChangePageSize.bind(this);
         this.getMetrics();
     }
     render() {
@@ -14,37 +24,80 @@ export class FetchMetrics extends React.Component {
         return React.createElement("div", null,
             React.createElement("hr", null),
             queryForm,
-            React.createElement("br", null),
             React.createElement("hr", null),
-            React.createElement("br", null),
             metricsTable);
     }
     getMetrics() {
-        //this.state = { loading: true, pageSize: 10, pageNumber: 1, applicationFilter: '', metricList: new MetricData[0] };
+        const metricQuery = JSON.stringify({
+            pageSize: this.state.pageSize,
+            pageNumber: this.state.pageNumber,
+            applicationFilter: this.state.applicationFilter
+        });
+        fetch('api/Metrics/Get', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: metricQuery,
+        })
+            .then(this.handleErrors)
+            .then(response => response.json())
+            .then(data => {
+            this.setState({
+                metricList: data.metrics,
+                loading: false,
+                recordCount: data.metrics.length,
+                applicationFilter: this.state.applicationFilter,
+                pageSize: this.state.pageSize,
+                pageNumber: this.state.pageNumber
+            });
+        });
+    }
+    handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
     }
     handleQuery(event) {
         event.preventDefault();
         const data = new FormData(event.target);
+        this.getMetrics();
+    }
+    onChangePageSize(event) {
+        if (event.target.value < 1) {
+            this.setState({ pageSize: 10 });
+        }
+        else {
+            this.setState({ pageSize: event.target.value });
+        }
+    }
+    onChangePageNumber(event) {
+        if (event.target.value < 1) {
+            this.setState({ pageNumber: 1 });
+        }
+        else {
+            this.setState({ pageNumber: event.target.value });
+        }
+    }
+    onChangeApplicationFilter(event) {
+        this.setState({ applicationFilter: event.target.value });
     }
     renderQueryForm() {
         return React.createElement("div", null,
             React.createElement("form", { onSubmit: this.handleQuery },
                 React.createElement("div", { className: "form-group row" },
                     React.createElement("div", { className: "form-group col-md-4" },
-                        React.createElement("label", { "asp-for": "ApplicationFilter" }),
-                        React.createElement("input", { className: "form-control", "asp-for": "ApplicationFilter" }),
-                        React.createElement("span", { "asp-validation-for": "ApplicationFilter" })),
+                        React.createElement("label", { className: "control-label" }, "Application Filter"),
+                        React.createElement("input", { className: "form-control", name: "applicationFilter", value: this.state.applicationFilter, onChange: this.onChangeApplicationFilter })),
                     React.createElement("div", { className: "form-group col-md-2" },
-                        React.createElement("label", { "asp-for": "PageNumber" }),
-                        React.createElement("input", { className: "form-control", "asp-for": "PageNumber" }),
-                        React.createElement("span", { "asp-validation-for": "PageNumber" })),
+                        React.createElement("label", { className: "control-label" }, "Page Number"),
+                        React.createElement("input", { className: "form-control", name: "pageNumber", type: "number", value: this.state.pageNumber, onChange: this.onChangePageNumber })),
                     React.createElement("div", { className: "form-group col-md-2" },
-                        React.createElement("label", { "asp-for": "PageSize" }),
-                        React.createElement("input", { className: "form-control", "asp-for": "PageSize" }),
-                        React.createElement("span", { "asp-validation-for": "PageSize" })),
+                        React.createElement("label", { className: "control-label" }, "Page Size"),
+                        React.createElement("input", { className: "form-control", name: "pageSize", type: "number", value: this.state.pageSize, onChange: this.onChangePageSize })),
                     React.createElement("div", { className: "form-group col-md-2" },
-                        React.createElement("label", null, "\u00A0"),
-                        React.createElement("br", null),
                         React.createElement("button", { type: "submit", className: "btn btn-default" }, "Apply Filter")))));
     }
     renderEmptyMetricsTable() {
@@ -67,36 +120,38 @@ export class FetchMetrics extends React.Component {
             React.createElement("table", null,
                 React.createElement("thead", null,
                     React.createElement("tr", null,
-                        React.createElement("th", null, "Metric Id"),
-                        React.createElement("th", null, "StartTime"),
+                        React.createElement("th", null, "Metric\u00A0Id"),
+                        React.createElement("th", null, "Start\u00A0Time"),
                         React.createElement("th", null, "Application"),
                         React.createElement("th", null, "Details"),
-                        React.createElement("th", null, "Elapsed Time"),
-                        React.createElement("th", null, "Exception Message"),
-                        React.createElement("th", null, "Request Method"),
-                        React.createElement("th", null, "Request Path"),
+                        React.createElement("th", null, "Seconds"),
+                        React.createElement("th", null, "Exception"),
+                        React.createElement("th", null, "Method"),
+                        React.createElement("th", null, "Request\u00A0Path"),
                         React.createElement("th", null, "Query"),
-                        React.createElement("th", null, "Result Code"),
-                        React.createElement("th", null, "Result Count"),
-                        React.createElement("th", null, "Server Name"),
-                        React.createElement("th", null, "TraceId)"),
-                        React.createElement("th", null, "UserName)"))),
+                        React.createElement("th", null, "Result\u00A0Code"),
+                        React.createElement("th", null, "Result\u00A0Count"),
+                        React.createElement("th", null, "Server\u00A0Name"),
+                        React.createElement("th", null, "Trace\u00A0Id"),
+                        React.createElement("th", null, "User\u00A0Name"))),
                 React.createElement("tbody", null, this.state.metricList.map(metric => React.createElement("tr", null,
-                    React.createElement("td", null, metric.MetricId),
-                    React.createElement("td", null, metric.StartTime.toISOString()),
-                    React.createElement("td", null, metric.Application),
-                    React.createElement("td", null, metric.Details),
-                    React.createElement("td", null, metric.ElapsedTime),
-                    React.createElement("td", null, metric.ExceptionMessage),
-                    React.createElement("td", null, metric.RequestMethod),
-                    React.createElement("td", null, metric.RequestPath),
-                    React.createElement("td", null, metric.Query),
-                    React.createElement("td", null, metric.ResultCode),
-                    React.createElement("td", null, metric.ResultCount),
-                    React.createElement("td", null, metric.ServerName),
-                    React.createElement("td", null, metric.TraceId),
-                    React.createElement("td", null, metric.UserName))))));
+                    React.createElement("td", null, metric.metricId),
+                    React.createElement("td", { className: "col-md-2" }, metric.startTime.toString().slice(0, 23)),
+                    React.createElement("td", null, metric.application),
+                    React.createElement("td", null, metric.details),
+                    React.createElement("td", null, metric.elapsedTime),
+                    React.createElement("td", null, metric.exceptionMessage),
+                    React.createElement("td", null, metric.requestMethod),
+                    React.createElement("td", null, metric.requestPath),
+                    React.createElement("td", null, metric.query),
+                    React.createElement("td", null, metric.resultCode),
+                    React.createElement("td", null, metric.resultCount),
+                    React.createElement("td", null, metric.serverName),
+                    React.createElement("td", null, metric.traceId),
+                    React.createElement("td", null, metric.userName))))));
     }
+}
+export class MetricPage {
 }
 export class MetricData {
 }
