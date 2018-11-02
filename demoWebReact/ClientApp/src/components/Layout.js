@@ -12,4 +12,4 @@ export class Layout extends React.Component {
                 React.createElement("div", { className: 'col-sm-9' }, this.props.children)));
     }
 }
-//# sourceMappingURL=Layout.js.map
+//# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/components/Layout.js.map

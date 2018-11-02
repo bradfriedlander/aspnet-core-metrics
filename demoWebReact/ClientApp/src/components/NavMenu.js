@@ -21,7 +21,11 @@ export class NavMenu extends React.Component {
                         React.createElement("li", null,
                             React.createElement(NavLink, { to: '/fetchdefinition', activeClassName: 'active' },
                                 React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
-                                " Definitions"))))));
+                                " Definitions")),
+                        React.createElement("li", null,
+                            React.createElement(NavLink, { to: '/fetchmetrics', activeClassName: 'active' },
+                                React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
+                                " Metrics"))))));
     }
 }
-//# sourceMappingURL=NavMenu.js.map
+//# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/components/NavMenu.js.map

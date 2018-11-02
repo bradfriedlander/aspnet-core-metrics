@@ -27,6 +27,11 @@ export class NavMenu extends React.Component<{}, {}> {
                                 <span className='glyphicon glyphicon-th-list'></span> Definitions
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink to={'/fetchmetrics'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-th-list'></span> Metrics
+                            </NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>
