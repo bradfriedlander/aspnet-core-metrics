@@ -243,6 +243,18 @@
             </summary>
             <value>The base URL.</value>
         </member>
+        <member name="P:demoWebApp.Models.Settings.IdentitySettings.IdentityServer">
+            <summary>
+                Gets or sets the URL of the identity server.
+            </summary>
+            <value>This is the URL of the identity server.</value>
+        </member>
+        <member name="P:demoWebApp.Models.Settings.IdentitySettings.UseIdentityServer">
+            <summary>
+                Gets or sets a value indicating whether or not to use the identity server.
+            </summary>
+            <value><c>true</c> if the application should use the identity server; otherwise, <c>false</c>.</value>
+        </member>
         <member name="T:demoWebApp.Models.ViewBinding.AdminIndexView">
             <summary>
                 This is the view model for Admin Index.
