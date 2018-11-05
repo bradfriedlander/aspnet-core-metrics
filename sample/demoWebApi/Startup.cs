@@ -43,6 +43,9 @@ namespace demoWebApi
         /// </summary>
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        ///     This is the singleton instance of the health check status
+        /// </summary>
         private IHealthCheckStatus healthCheckStatus;
 
         /// <summary>

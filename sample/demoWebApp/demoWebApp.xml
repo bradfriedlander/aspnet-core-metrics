@@ -175,6 +175,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:demoWebApp.Controllers.HomeController.Logout">
+            <summary>
+                This is used to logout the user from this application.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:demoWebApp.Controllers.HomeController.Privacy">
             <summary>
                 This controller action shows the privacy information.

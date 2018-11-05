@@ -22,13 +22,15 @@ namespace IdentityServer
         // clients want to access resources (aka scopes)
         public static IEnumerable<Client> GetClients()
         {
-            // client credentials client
             return new List<Client>
             {
+                // client credentials client
                 new Client
                 {
                     ClientId = "client",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    // TODO: temporary line
+                    RequireConsent = false,
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
@@ -61,7 +63,7 @@ namespace IdentityServer
                         new Secret("secret".Sha256())
                     },
                     RedirectUris = { "https://localhost:5101/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:5101/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:5101/signout-callback-oidc" },
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
