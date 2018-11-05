@@ -54,7 +54,7 @@ namespace IdentityServer
                 new Client
                 {
                     ClientId = "mvc",
-                    ClientName = "MVC Client",
+                    ClientName = "demoWebApp",
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
                     // TODO: temporary line
                     RequireConsent = false,

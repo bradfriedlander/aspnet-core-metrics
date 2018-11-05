@@ -111,9 +111,9 @@ namespace MagenicMetrics
         {
             modelBuilder.Entity<Metric>().ToTable(_options.TableName);
             modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.Application)).HasMaxLength(64).IsRequired();
-            modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.Query)).HasMaxLength(128).IsRequired();
+            modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.Query)).IsRequired();
             modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.RequestMethod)).HasMaxLength(10).IsRequired();
-            modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.RequestPath)).HasMaxLength(128).IsRequired();
+            modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.RequestPath)).IsRequired();
             modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.ServerName)).HasMaxLength(64).IsRequired();
             modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.TraceId)).HasMaxLength(64).IsRequired();
             modelBuilder.Entity<Metric>().Property<string>(nameof(Metric.UserName)).HasMaxLength(64).IsRequired();
