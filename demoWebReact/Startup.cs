@@ -1,3 +1,4 @@
+using demoWebReact.Models.Settings;
 using MagenicMetrics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -93,6 +94,8 @@ namespace demoWebReact
         /// <param name="services">This is the existing collection of services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            services.Configure<DefinitionServiceSettings>(Configuration.GetSection("DefinitionServiceSettings"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

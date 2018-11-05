@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using demoWebReact.HttpHelpers;
 using demoWebReact.Models;
+using demoWebReact.Models.Settings;
 using MagenicMetrics;
 using MagenicMetrics.Controllers;
 using MagenicMetrics.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace demoWebReact.Controllers
 {
@@ -15,14 +17,29 @@ namespace demoWebReact.Controllers
     [ApiController]
     public class DefinitionsController : MetricsBaseController
     {
-        public DefinitionsController(IMetric metric, ILogger<DefinitionsController> logger/*, IOptions<DefinitionServiceSettings> options*/) : base(metric)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="DefinitionController" /> class.
+        /// </summary>
+        /// <param name="metric">This is the metric instance used by this controller.</param>
+        /// <param name="logger">This is the logger for this controller instance.</param>
+        /// <param name="options">These are the options for the definition service.</param>
+        public DefinitionsController(IMetric metric, ILogger<DefinitionsController> logger, IOptions<DefinitionServiceSettings> options) : base(metric)
         {
+            _logger = logger;
+            baseUri = options.Value.BaseUrl;
         }
 
         private static List<Definition> definitions;
 
-        // TODO: Get this from configuration - use options
-        private readonly string baseUri = "https://localhost:5001/api/values";
+        /// <summary>
+        ///     This is the logger instance for this controller.
+        /// </summary>
+        private readonly ILogger _logger;
+
+        /// <summary>
+        ///     This is the base URI for the definition APIs.
+        /// </summary>
+        private readonly string baseUri;
 
         [HttpPost("Create")]
         [MetricDetails(Source = "newDefinition")]

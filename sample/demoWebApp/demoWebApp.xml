@@ -36,12 +36,28 @@
             </summary>
             <seealso cref="T:MagenicMetrics.Controllers.MetricsBaseController" />
         </member>
-        <member name="M:demoWebApp.Controllers.DefinitionController.#ctor(MagenicMetrics.IMetric,Microsoft.Extensions.Logging.ILogger{demoWebApp.Controllers.DefinitionController})">
+        <member name="M:demoWebApp.Controllers.DefinitionController.#ctor(MagenicMetrics.IMetric,Microsoft.Extensions.Logging.ILogger{demoWebApp.Controllers.DefinitionController},Microsoft.Extensions.Options.IOptions{demoWebApp.Models.Settings.DefinitionServiceSettings})">
             <summary>
                 Initializes a new instance of the <see cref="T:demoWebApp.Controllers.DefinitionController" /> class.
             </summary>
-            <param name="metric">The metric.</param>
-            <param name="logger">The logger.</param>
+            <param name="metric">This is the metric instance used by this controller.</param>
+            <param name="logger">This is the logger for this controller instance.</param>
+            <param name="options">These are the options for the definition service.</param>
+        </member>
+        <member name="F:demoWebApp.Controllers.DefinitionController.definitions">
+            <summary>
+                This is the list of definitions managed by the current action.
+            </summary>
+        </member>
+        <member name="F:demoWebApp.Controllers.DefinitionController._logger">
+            <summary>
+                This is the logger instance for this controller.
+            </summary>
+        </member>
+        <member name="F:demoWebApp.Controllers.DefinitionController.baseUri">
+            <summary>
+                This is the base URI for the definition APIs.
+            </summary>
         </member>
         <member name="M:demoWebApp.Controllers.DefinitionController.Create">
             <summary>
