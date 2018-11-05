@@ -338,6 +338,11 @@
                 This is the configuration for the application.
             </summary>
         </member>
+        <member name="F:demoWebApi.Startup.healthCheckStatus">
+            <summary>
+                This is the singleton instance of the health check status
+            </summary>
+        </member>
         <member name="M:demoWebApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
             <summary>
                 This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

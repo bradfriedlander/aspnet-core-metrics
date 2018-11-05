@@ -175,6 +175,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:demoWebApp.Controllers.HomeController.Logout">
+            <summary>
+                This is used to logout the user from this application.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:demoWebApp.Controllers.HomeController.Privacy">
             <summary>
                 This controller action shows the privacy information.
@@ -242,6 +248,18 @@
                 Gets or sets the base URL for the Definition WEB API.
             </summary>
             <value>The base URL.</value>
+        </member>
+        <member name="P:demoWebApp.Models.Settings.IdentitySettings.IdentityServer">
+            <summary>
+                Gets or sets the URL of the identity server.
+            </summary>
+            <value>This is the URL of the identity server.</value>
+        </member>
+        <member name="P:demoWebApp.Models.Settings.IdentitySettings.UseIdentityServer">
+            <summary>
+                Gets or sets a value indicating whether or not to use the identity server.
+            </summary>
+            <value><c>true</c> if the application should use the identity server; otherwise, <c>false</c>.</value>
         </member>
         <member name="T:demoWebApp.Models.ViewBinding.AdminIndexView">
             <summary>

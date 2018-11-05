@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using demoWebApp.Models;
 using demoWebApp.Models.InputBinding;
 using MagenicMetrics;
 using MagenicMetrics.Controllers;
 using MagenicMetrics.Filters;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -129,6 +131,7 @@ namespace demoWebApp.Controllers
         ///     This is the default display for this controller.
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         public IActionResult Index()
         {
             if (!ModelState.IsValid)
@@ -137,6 +140,16 @@ namespace demoWebApp.Controllers
             }
             _metric.ResultCount = 1;
             return View();
+        }
+
+        /// <summary>
+        ///     This is used to logout the user from this application.
+        /// </summary>
+        /// <returns></returns>
+        public async Task Logout()
+        {
+            await HttpContext.SignOutAsync("Cookies");
+            await HttpContext.SignOutAsync("oidc");
         }
 
         /// <summary>

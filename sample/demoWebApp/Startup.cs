@@ -106,9 +106,8 @@ namespace demoWebApp
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            var identitySettings = Configuration.GetSection("IdentitySettings");
-            var useIdentityServer = bool.Parse(identitySettings["UseIdentityServer"]);
-            if (useIdentityServer)
+            var identitySettings = Configuration.GetSection("IdentitySettings").Get<IdentitySettings>();
+            if (identitySettings.UseIdentityServer)
             {
                 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
                 services
@@ -122,7 +121,7 @@ namespace demoWebApp
                     {
                         // https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.openidconnect.openidconnectoptions?view=aspnetcore-2.1
                         options.SignInScheme = "Cookies";
-                        options.Authority = identitySettings["IdentityServer"];
+                        options.Authority = identitySettings.IdentityServer;
                         options.RequireHttpsMetadata = true;
                         options.ClientId = "mvc";
                         options.ClientSecret = "secret";
