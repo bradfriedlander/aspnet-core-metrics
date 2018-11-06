@@ -123,13 +123,13 @@ namespace demoWebApp
                         options.SignInScheme = "Cookies";
                         options.Authority = identitySettings.IdentityServer;
                         options.RequireHttpsMetadata = true;
-                        options.ClientId = "mvc";
-                        options.ClientSecret = "secret";
-                        options.ResponseType = "code id_token";
+                        options.ClientId = "mvc.implicit";
+                        //options.ClientSecret = "secret";
+                        //options.ResponseType = "code id_token";
                         options.SaveTokens = true;
-                        options.GetClaimsFromUserInfoEndpoint = true;
-                        options.Scope.Add("api1");
-                        options.Scope.Add("offline_access");
+                        //options.GetClaimsFromUserInfoEndpoint = true;
+                        //options.Scope.Add("api1");
+                        //options.Scope.Add("offline_access");
                     });
             }
             services
