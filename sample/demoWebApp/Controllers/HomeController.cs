@@ -3,12 +3,14 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using demoWebApp.Models;
 using demoWebApp.Models.InputBinding;
+using demoWebApp.Models.Settings;
 using MagenicMetrics;
 using MagenicMetrics.Controllers;
 using MagenicMetrics.Filters;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace demoWebApp.Controllers
@@ -24,9 +26,12 @@ namespace demoWebApp.Controllers
         ///     Initializes a new instance of the <see cref="HomeController" /> class.
         /// </summary>
         /// <param name="metric">The metric.</param>
-        public HomeController(IMetric metric) : base(metric)
+        public HomeController(IMetric metric, IOptions<IdentitySettings> options) : base(metric)
         {
+            identitySettings = options.Value;
         }
+
+        private readonly IdentitySettings identitySettings;
 
         /// <summary>
         ///     This controller action shows the about information.
@@ -150,9 +155,12 @@ namespace demoWebApp.Controllers
         {
             try
             {
-                await HttpContext.SignOutAsync("Cookies");
-                await HttpContext.SignOutAsync("oidc");
-                _metric.ResultCount = 1;
+                if (identitySettings.UseIdentityServer)
+                {
+                    await HttpContext.SignOutAsync("Cookies");
+                    await HttpContext.SignOutAsync("oidc");
+                    _metric.ResultCount = 1;
+                }
             }
             catch (Exception signOutEx)
             {
