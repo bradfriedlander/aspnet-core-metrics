@@ -145,11 +145,20 @@ namespace demoWebApp.Controllers
         /// <summary>
         ///     This is used to logout the user from this application.
         /// </summary>
-        /// <returns></returns>
-        public async Task Logout()
+        /// <returns>This always redirects to the "Home" page.</returns>
+        public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync("Cookies");
-            await HttpContext.SignOutAsync("oidc");
+            try
+            {
+                await HttpContext.SignOutAsync("Cookies");
+                await HttpContext.SignOutAsync("oidc");
+                _metric.ResultCount = 1;
+            }
+            catch (Exception signOutEx)
+            {
+                _metric.ExceptionMessage = signOutEx.Message;
+            }
+            return RedirectToAction("Index");
         }
 
         /// <summary>

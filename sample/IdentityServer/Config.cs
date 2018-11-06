@@ -71,6 +71,24 @@ namespace IdentityServer
                         "api1"
                     },
                     AllowOfflineAccess = true
+                },
+
+                // OpenID Connect implicit flow client (MVC)
+                new Client
+                {
+                    ClientId = "mvc.implicit",
+                    ClientName = "demoWebAppX",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    // TODO: temporary line
+                    RequireConsent = false,
+                    RedirectUris = { "https://localhost:5101/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:5101/signout-callback-oidc" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
                 }
             };
         }

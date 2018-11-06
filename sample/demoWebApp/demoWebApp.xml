@@ -179,7 +179,7 @@
             <summary>
                 This is used to logout the user from this application.
             </summary>
-            <returns></returns>
+            <returns>This always redirects to the "Home" page.</returns>
         </member>
         <member name="M:demoWebApp.Controllers.HomeController.Privacy">
             <summary>
