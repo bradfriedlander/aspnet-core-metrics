@@ -119,7 +119,7 @@
             </summary>
             <seealso cref="T:MagenicMetrics.Controllers.MetricsBaseController" />
         </member>
-        <member name="M:demoWebApp.Controllers.HomeController.#ctor(MagenicMetrics.IMetric)">
+        <member name="M:demoWebApp.Controllers.HomeController.#ctor(MagenicMetrics.IMetric,Microsoft.Extensions.Options.IOptions{demoWebApp.Models.Settings.IdentitySettings})">
             <summary>
                 Initializes a new instance of the <see cref="T:demoWebApp.Controllers.HomeController" /> class.
             </summary>

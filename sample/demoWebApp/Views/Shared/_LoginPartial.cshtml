@@ -1,7 +1,10 @@
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Options
+@using demoWebApp.Models.Settings
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject IOptions<IdentitySettings> IdentitySettings
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -13,7 +16,10 @@
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
             </li>
-            <li><a asp-controller="Home" asp-action="Logout">Identity Server Logout</a></li>
+            @if (IdentitySettings.Value.UseIdentityServer)
+            {
+                <li><a asp-controller="Home" asp-action="Logout">Identity Server Logout</a></li>
+            }
         </ul>
     </form>
 }
