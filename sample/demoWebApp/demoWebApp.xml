@@ -350,6 +350,12 @@
                 This is the configuration for the application.
             </summary>
         </member>
+        <member name="P:demoWebApp.Startup.LocalIdentitySettings">
+            <summary>
+                Gets or sets the local identity settings.
+            </summary>
+            <value>This is the local identity settings.</value>
+        </member>
         <member name="M:demoWebApp.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
             <summary>
                 This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

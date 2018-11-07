@@ -98,12 +98,16 @@ namespace demoWebApi.Controllers
         /// </summary>
         /// <param name="definition">This is the new definition.</param>
         /// <returns>The newly added definition.</returns>
-        /// <remarks>POST api/values?DefinitionInput</remarks>
+        /// <remarks>
+        ///     <para>POST api/values?DefinitionInput</para>
+        ///     <para>Note 1: Need to account for logically deleted definitions which may include the highest id used.</para>
+        /// </remarks>
         [HttpPost]
         [MetricDetails(Source = "definition")]
         public IActionResult Post(DefinitionInput definition)
         {
-            var nextId = _context.Definitions.Max(d => d.DefinitionId) + 1;
+            // Note 1
+            var nextId = _context.Definitions.IgnoreQueryFilters().Max(d => d.DefinitionId) + 1;
             _context.Definitions.Add(new Definition() { DefinitionId = nextId, Name = definition.Name });
             _metric.ResultCount = _context.SaveChanges();
             var match = _context.Definitions.Find(nextId);

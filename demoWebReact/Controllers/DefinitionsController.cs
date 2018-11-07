@@ -7,6 +7,7 @@ using demoWebReact.Models.Settings;
 using MagenicMetrics;
 using MagenicMetrics.Controllers;
 using MagenicMetrics.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -15,6 +16,7 @@ namespace demoWebReact.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class DefinitionsController : MetricsBaseController
     {
         /// <summary>
