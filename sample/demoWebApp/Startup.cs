@@ -42,6 +42,10 @@ namespace demoWebApp
         /// </summary>
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        ///     Gets or sets the local identity settings.
+        /// </summary>
+        /// <value>This is the local identity settings.</value>
         public IdentitySettings LocalIdentitySettings { get; set; }
 
         /// <summary>

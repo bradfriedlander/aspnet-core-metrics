@@ -5,12 +5,14 @@ using demoWebReact.Models;
 using MagenicMetrics;
 using MagenicMetrics.Controllers;
 using MagenicMetrics.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace demoWebReact.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class MetricsController : MetricsBaseController
     {
         public MetricsController(IMetric metric, IMetricService metricService) : base(metric)

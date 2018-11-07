@@ -75,7 +75,10 @@
             </summary>
             <param name="definition">This is the new definition.</param>
             <returns>The newly added definition.</returns>
-            <remarks>POST api/values?DefinitionInput</remarks>
+            <remarks>
+                <para>POST api/values?DefinitionInput</para>
+                <para>Note 1: Need to account for logically deleted definitions which may include the highest id used.</para>
+            </remarks>
         </member>
         <member name="M:demoWebApi.Controllers.ValuesController.Put(demoWebApi.InputModels.DefinitionInput)">
             <summary>
