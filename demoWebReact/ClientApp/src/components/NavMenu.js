@@ -3,17 +3,9 @@ import { Link, NavLink } from 'react-router-dom';
 export class NavMenu extends React.Component {
     constructor(props) {
         super(props);
-        //var isAuthenticated = new Authenticate(this.props).isUserAuthenticated();
-        //this.state = { hasUserAuthenticated: isAuthenticated};
-        this.state = { hasUserAuthenticated: true };
+        this.state = { hasUserAuthenticated: true, userName: '' };
+        this.getAuthentication();
     }
-    //public componentDidMount() {
-    //    var isAuthenticated = new Authenticate(this.props).isUserAuthenticated();
-    //    if (this.state.hasUserAuthenticated !== isAuthenticated) {
-    //        alert("NavMenu authentication changed");
-    //        this.setState({ hasUserAuthenticated: isAuthenticated });
-    //    }
-    //}
     render() {
         var isAuthenticated = this.state.hasUserAuthenticated;
         let contentMetrics = this.renderMetricsLink(isAuthenticated);
@@ -41,6 +33,26 @@ export class NavMenu extends React.Component {
                                 React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
                                 " Authentication"))))));
     }
+    getAuthentication() {
+        fetch('api/Authentication/GetAuthentication', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(this.handleErrors)
+            .then(response => response.json())
+            .then(data => {
+            this.setState({ hasUserAuthenticated: data.isAuthenticated, userName: data.userName });
+        });
+    }
+    handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
     renderMetricsLink(isAuthenticated) {
         return isAuthenticated
             ? React.createElement("li", null,
@@ -61,5 +73,7 @@ export class NavMenu extends React.Component {
                 React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
                 " Definitions");
     }
+}
+export class AuthenticationData {
 }
 //# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/components/NavMenu.js.map
