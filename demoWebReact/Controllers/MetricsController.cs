@@ -12,7 +12,7 @@ namespace demoWebReact.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class MetricsController : MetricsBaseController
     {
         public MetricsController(IMetric metric, IMetricService metricService) : base(metric)
