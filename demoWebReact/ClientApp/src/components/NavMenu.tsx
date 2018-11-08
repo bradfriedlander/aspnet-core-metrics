@@ -1,26 +1,17 @@
 ﻿import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Authenticate } from './Authenticate';
 
 interface NavState {
     hasUserAuthenticated: boolean;
+    userName: string;
 }
 
 export class NavMenu extends React.Component<{}, NavState> {
     constructor(props) {
         super(props);
-        //var isAuthenticated = new Authenticate(this.props).isUserAuthenticated();
-        //this.state = { hasUserAuthenticated: isAuthenticated};
-        this.state = { hasUserAuthenticated: true };
+        this.state = { hasUserAuthenticated: true, userName: '' };
+        this.getAuthentication();
     }
-
-    //public componentDidMount() {
-    //    var isAuthenticated = new Authenticate(this.props).isUserAuthenticated();
-    //    if (this.state.hasUserAuthenticated !== isAuthenticated) {
-    //        alert("NavMenu authentication changed");
-    //        this.setState({ hasUserAuthenticated: isAuthenticated });
-    //    }
-    //}
 
     public render() {
         var isAuthenticated = this.state.hasUserAuthenticated;
@@ -58,6 +49,28 @@ export class NavMenu extends React.Component<{}, NavState> {
         </div>;
     }
 
+    private getAuthentication() {
+        fetch('api/Authentication/GetAuthentication', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(this.handleErrors)
+            .then(response => response.json() as Promise<AuthenticationData>)
+            .then(data => {
+                this.setState({ hasUserAuthenticated: data.isAuthenticated, userName: data.userName });
+            });
+    }
+
+    private handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
+
     private renderMetricsLink(isAuthenticated: boolean) {
         return isAuthenticated
             ? <li>
@@ -81,4 +94,9 @@ export class NavMenu extends React.Component<{}, NavState> {
                 <span className='glyphicon glyphicon-th-list'></span> Definitions
                 </li>;
     }
+}
+
+export class AuthenticationData {
+    isAuthenticated: boolean;
+    userName: string;
 }
