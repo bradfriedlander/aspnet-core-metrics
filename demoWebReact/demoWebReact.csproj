@@ -30,6 +30,7 @@
     <None Remove="ClientApp\routes.tsx" />
     <None Remove="ClientApp\src\App.tsx" />
     <None Remove="ClientApp\src\components\AddDefinition.tsx" />
+    <None Remove="ClientApp\src\components\Authenticate.tsx" />
     <None Remove="ClientApp\src\components\FetchDefinition.tsx" />
     <None Remove="ClientApp\src\components\FetchMetrics.tsx" />
     <None Remove="ClientApp\src\components\Home.tsx" />
@@ -49,6 +50,7 @@
     <TypeScriptCompile Include="ClientApp\src\App.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\AddDefinition.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\FetchDefinition.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\Authenticate.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\NavMenu.tsx" />
     <TypeScriptCompile Include="ClientApp\src\index.js" />
   </ItemGroup>

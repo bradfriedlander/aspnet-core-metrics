@@ -16,7 +16,7 @@ namespace demoWebReact.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class DefinitionsController : MetricsBaseController
     {
         /// <summary>
