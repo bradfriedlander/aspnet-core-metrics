@@ -37,6 +37,7 @@
     <None Remove="ClientApp\src\components\Layout.tsx" />
     <None Remove="ClientApp\src\components\NavMenu.tsx" />
     <None Remove="ClientApp\src\index.js" />
+    <None Remove="ClientApp\src\store\authentication.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +54,7 @@
     <TypeScriptCompile Include="ClientApp\src\components\Authenticate.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\NavMenu.tsx" />
     <TypeScriptCompile Include="ClientApp\src\index.js" />
+    <TypeScriptCompile Include="ClientApp\src\store\authentication.ts" />
   </ItemGroup>
 
   <ItemGroup>
