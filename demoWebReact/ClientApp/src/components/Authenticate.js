@@ -47,9 +47,13 @@ export class Authenticate extends React.Component {
             .then(response => response.json())
             .then(data => {
             this.setState({ isAuthenticated: data.isAuthenticated, userName: data.userName });
+            //this.context.store.dispatch(setAuthentication({type:'', isAuthenticated: data.isAuthenticated, userName: data.userName }));
         });
     }
 }
+Authenticate.contextTypes = {
+//store: PropKeys.object.isRequired
+};
 export class AuthenticationData {
 }
 //# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/components/Authenticate.js.map

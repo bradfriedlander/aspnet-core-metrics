@@ -9,10 +9,15 @@ export class AuthenticationData {
 export const authentication = (state = [], action: AuthenticationData) => {
     switch (action.type) {
         case SET_AUTHENTICATION:
-            return { isAuthenticated: action.isAuthenticated, userName: action.userName }
+            console.log(SET_AUTHENTICATION + ': ' + action);
+            return { isAuthenticated: action.isAuthenticated, userName: action.userName };
         default:
-            return state
+            return state;
     }
 }
 
 export const setAuthentication = (action: AuthenticationData) => ({ type: SET_AUTHENTICATION, isAuthenticated: action.isAuthenticated, userName: action.userName });
+
+export const mapStatetoProps = state => {
+    return { authetication: authentication };
+}
