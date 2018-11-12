@@ -1,12 +1,6 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-//import { RequiredKeys } from 'prop-types';
-import { setAuthentication } from '../store/authentication';
-
-interface AuthenticationState {
-    isAuthenticated: boolean;
-    userName: string;
-}
+import { AuthenticationState } from '../store/authentication';
 
 export class Authenticate extends React.Component<RouteComponentProps<{}>, AuthenticationState> {
     constructor(props) {
@@ -65,12 +59,7 @@ export class Authenticate extends React.Component<RouteComponentProps<{}>, Authe
             .then(response => response.json() as Promise<AuthenticationData>)
             .then(data => {
                 this.setState({ isAuthenticated: data.isAuthenticated, userName: data.userName });
-                //this.context.store.dispatch(setAuthentication({type:'', isAuthenticated: data.isAuthenticated, userName: data.userName }));
             });
-    }
-
-    static contextTypes = {
-        //store: PropKeys.object.isRequired
     }
 }
 

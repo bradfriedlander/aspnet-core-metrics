@@ -16,7 +16,7 @@ const history = createBrowserHistory({ basename: baseUrl });
 
 // Get the application-wide store instance, pre-populating with state from the server where available.
 const initialState = window.initialReduxState;
-const store = configureStore(history, initialState);
+export const store = configureStore(history, initialState);
 
 const rootElement = document.getElementById('root');
 

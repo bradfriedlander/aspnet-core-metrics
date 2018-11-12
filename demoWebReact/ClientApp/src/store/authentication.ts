@@ -1,23 +1,49 @@
-﻿export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
+﻿export enum TypeKeys {
+    SET_AUTHENTICATION = 'SET_AUTHENTICATION',
+    OTHER_ACTION = 'any_other_action_type'
+}
 
-export class AuthenticationData {
-    type: string;
+export interface SetAuthentication {
+    type: TypeKeys.SET_AUTHENTICATION;
+    isAuthenticated: boolean;
+    userName: string;
+}
+
+export interface OtherAction {
+    type: TypeKeys.OTHER_ACTION;
+}
+
+export type ActionTypes = SetAuthentication | OtherAction;
+
+export class AuthenticationState {
     isAuthenticated: boolean = false;
     userName: string = '';
 }
 
-export const authentication = (state = [], action: AuthenticationData) => {
+export function authenticationReducer(s: AuthenticationState = {isAuthenticated:false, userName: 'unknown'}, action: ActionTypes) {
     switch (action.type) {
-        case SET_AUTHENTICATION:
-            console.log(SET_AUTHENTICATION + ': ' + action);
+        case TypeKeys.SET_AUTHENTICATION:
+            console.log(action.type);
+            console.log(JSON.stringify(action));
             return { isAuthenticated: action.isAuthenticated, userName: action.userName };
         default:
-            return state;
+            return s;
     }
 }
 
-export const setAuthentication = (action: AuthenticationData) => ({ type: SET_AUTHENTICATION, isAuthenticated: action.isAuthenticated, userName: action.userName });
+
+// action creator
+export const setAuthentication = (isAuthenticated: boolean, userName: string): SetAuthentication => ({
+    type: TypeKeys.SET_AUTHENTICATION,
+    isAuthenticated,
+    userName
+});
+
 
 export const mapStatetoProps = state => {
-    return { authetication: authentication };
+    return { authentication: AuthenticationState };
+}
+
+export const mapDispatchToProps = dispatch => {
+    dispatch(setAuthentication)
 }
