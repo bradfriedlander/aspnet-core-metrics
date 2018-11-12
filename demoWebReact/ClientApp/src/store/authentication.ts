@@ -31,7 +31,6 @@ export function authenticationReducer(s: AuthenticationState = {isAuthenticated:
     }
 }
 
-
 // action creator
 export const setAuthentication = (isAuthenticated: boolean, userName: string): SetAuthentication => ({
     type: TypeKeys.SET_AUTHENTICATION,

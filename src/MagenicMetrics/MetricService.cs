@@ -77,12 +77,21 @@ namespace MagenicMetrics
         /// <param name="pageNumber">This is the page number where <paramref name="pageSize" /> is the page size.</param>
         /// <param name="applicationFilter">This is the filter for the application name.</param>
         /// <returns>This is the matching collection of the records.</returns>
+        /// <remarks>
+        ///     <para>
+        ///         This method support inclusive and exclusive filtering for <paramref name="applicationFilter" />. If <paramref
+        ///         name="applicationFilter" /> begins with "!", the filtering is exclusive; otherwise, it is inclusive. In either case, the balance of
+        ///         the filter value has an implicit wild card at the beginning and end.
+        ///     </para>
+        /// </remarks>
         public async Task<IQueryable<IMetric>> GetLatest(int pageSize, int pageNumber, string applicationFilter)
         {
             var skipCount = (pageNumber - 1) * pageSize;
+            var isExclude = applicationFilter.StartsWith("!");
+            var actualFilter = isExclude ? applicationFilter.Substring(1) : applicationFilter;
             var pageOfMetrics = await Metrics
                 .OrderByDescending(m => m.StartTime)
-                .Where(m => m.Application.Contains(applicationFilter))
+                .Where(m => isExclude ? !m.Application.Contains(actualFilter) : m.Application.Contains(actualFilter))
                 .Skip(skipCount)
                 .Take(pageSize).ToListAsync();
             return pageOfMetrics.AsQueryable();

@@ -5,6 +5,7 @@ interface FetchMetricsDataState {
     metricList: MetricData[];
     loading: boolean;
     pageSize: number;
+    oldPageSize: number;
     pageNumber: number;
     applicationFilter: string;
     recordCount: number;
@@ -16,6 +17,7 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
         this.state = {
             loading: true,
             pageSize: 10,
+            oldPageSize: 10,
             pageNumber: 1,
             applicationFilter: '',
             recordCount: 0,
@@ -25,6 +27,7 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
         this.onChangeApplicationFilter = this.onChangeApplicationFilter.bind(this);
         this.onChangePageNumber = this.onChangePageNumber.bind(this);
         this.onChangePageSize = this.onChangePageSize.bind(this);
+        this.onLeavePageSize = this.onLeavePageSize.bind(this);
         this.getMetrics();
     }
 
@@ -88,13 +91,27 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
             this.setState({ pageSize: event.target.value });
         }
     }
+
+    private onLeavePageSize(event) {
+        console.log(event.target.value);
+        if (this.state.pageSize === this.state.oldPageSize) {
+            return;
+        }
+        this.setState({ oldPageSize: this.state.pageSize });
+        this.getMetrics();
+        this.forceUpdate();
+    }
+
     private onChangePageNumber(event) {
         if (event.target.value < 1) {
             this.setState({ pageNumber: 1 });
         } else {
             this.setState({ pageNumber: event.target.value });
         }
+        this.getMetrics();
+        this.forceUpdate();
     }
+
     private onChangeApplicationFilter(event) {
         this.setState({ applicationFilter: event.target.value });
     }
@@ -113,7 +130,7 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
                     </div>
                     <div className="form-group col-md-2">
                         <label className="control-label">Page Size</label>
-                        <input className="form-control" name="pageSize" type="number" value={this.state.pageSize} onChange={this.onChangePageSize} />
+                        <input className="form-control" name="pageSize" type="number" value={this.state.pageSize} onChange={this.onChangePageSize} onBlur={this.onLeavePageSize} />
                     </div>
                     <div className="form-group col-md-2">
                         <button type="submit" className="btn btn-default">Apply Filter</button>
@@ -186,7 +203,7 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
                                 {metric.metricId}
                             </td>
                             <td className="col-md-2">
-                                {metric.startTime.toString().slice(0,23)}
+                                {metric.startTime.toString().slice(0, 23)}
                             </td>
                             <td>
                                 {metric.application}

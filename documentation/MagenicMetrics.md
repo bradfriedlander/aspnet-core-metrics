@@ -555,6 +555,8 @@ This method gets the most recent [MagenicMetrics.IMetric](#magenicmetricsimetric
 
 **Returns:** This is the matching collection of the records.
 
+This method support inclusive and exclusive filtering for `applicationFilter`. If `applicationFilter` begins with "!", the filtering is exclusive; otherwise, it is inclusive. In either case, the balance of the filter value has an implicit wild card at the beginning and end.
+
 ---
 
 ### MagenicMetrics.MetricService.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)
