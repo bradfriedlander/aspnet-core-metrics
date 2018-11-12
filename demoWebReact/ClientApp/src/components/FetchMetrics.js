@@ -5,6 +5,7 @@ export class FetchMetrics extends React.Component {
         this.state = {
             loading: true,
             pageSize: 10,
+            oldPageSize: 10,
             pageNumber: 1,
             applicationFilter: '',
             recordCount: 0,
@@ -14,6 +15,7 @@ export class FetchMetrics extends React.Component {
         this.onChangeApplicationFilter = this.onChangeApplicationFilter.bind(this);
         this.onChangePageNumber = this.onChangePageNumber.bind(this);
         this.onChangePageSize = this.onChangePageSize.bind(this);
+        this.onLeavePageSize = this.onLeavePageSize.bind(this);
         this.getMetrics();
     }
     render() {
@@ -73,6 +75,15 @@ export class FetchMetrics extends React.Component {
             this.setState({ pageSize: event.target.value });
         }
     }
+    onLeavePageSize(event) {
+        console.log(event.target.value);
+        if (this.state.pageSize === this.state.oldPageSize) {
+            return;
+        }
+        this.setState({ oldPageSize: this.state.pageSize });
+        this.getMetrics();
+        this.forceUpdate();
+    }
     onChangePageNumber(event) {
         if (event.target.value < 1) {
             this.setState({ pageNumber: 1 });
@@ -80,6 +91,8 @@ export class FetchMetrics extends React.Component {
         else {
             this.setState({ pageNumber: event.target.value });
         }
+        this.getMetrics();
+        this.forceUpdate();
     }
     onChangeApplicationFilter(event) {
         this.setState({ applicationFilter: event.target.value });
@@ -96,7 +109,7 @@ export class FetchMetrics extends React.Component {
                         React.createElement("input", { className: "form-control", name: "pageNumber", type: "number", value: this.state.pageNumber, onChange: this.onChangePageNumber })),
                     React.createElement("div", { className: "form-group col-md-2" },
                         React.createElement("label", { className: "control-label" }, "Page Size"),
-                        React.createElement("input", { className: "form-control", name: "pageSize", type: "number", value: this.state.pageSize, onChange: this.onChangePageSize })),
+                        React.createElement("input", { className: "form-control", name: "pageSize", type: "number", value: this.state.pageSize, onChange: this.onChangePageSize, onBlur: this.onLeavePageSize })),
                     React.createElement("div", { className: "form-group col-md-2" },
                         React.createElement("button", { type: "submit", className: "btn btn-default" }, "Apply Filter")))));
     }

@@ -15,9 +15,8 @@ const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const history = createBrowserHistory({ basename: baseUrl });
 
 // Get the application-wide store instance, pre-populating with state from the server where available.
-//const initialState = window.initialReduxState;
-const initialState = 0;
-const store = configureStore(history, initialState);
+const initialState = window.initialReduxState;
+export const store = configureStore(history, initialState);
 
 const rootElement = document.getElementById('root');
 

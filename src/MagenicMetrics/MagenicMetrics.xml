@@ -433,6 +433,13 @@
             <param name="pageNumber">This is the page number where <paramref name="pageSize" /> is the page size.</param>
             <param name="applicationFilter">This is the filter for the application name.</param>
             <returns>This is the matching collection of the records.</returns>
+            <remarks>
+                <para>
+                    This method support inclusive and exclusive filtering for <paramref name="applicationFilter" />. If <paramref
+                    name="applicationFilter" /> begins with "!", the filtering is exclusive; otherwise, it is inclusive. In either case, the balance of
+                    the filter value has an implicit wild card at the beginning and end.
+                </para>
+            </remarks>
         </member>
         <member name="M:MagenicMetrics.MetricService.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>

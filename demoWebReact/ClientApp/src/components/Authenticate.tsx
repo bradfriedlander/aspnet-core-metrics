@@ -1,10 +1,6 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-
-interface AuthenticationState {
-    isAuthenticated: boolean;
-    userName: string;
-}
+import { AuthenticationState } from '../store/authentication';
 
 export class Authenticate extends React.Component<RouteComponentProps<{}>, AuthenticationState> {
     constructor(props) {
