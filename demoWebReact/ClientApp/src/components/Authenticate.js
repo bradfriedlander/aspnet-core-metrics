@@ -1,16 +1,13 @@
 import * as React from 'react';
+import { isUserAuthenticated } from './GetAuthentication';
 export class Authenticate extends React.Component {
     constructor(props) {
         super(props);
         this.state = { isAuthenticated: false, userName: '' };
-        this.handleErrors = this.handleErrors.bind(this);
-        this.getAuthentication = this.getAuthentication.bind(this);
-        this.isUserAuthenticated = this.isUserAuthenticated.bind(this);
-        this.getAuthentication();
-    }
-    isUserAuthenticated() {
-        this.getAuthentication();
-        return this.state.isAuthenticated;
+        isUserAuthenticated().then(userAuthentication => {
+            console.log(JSON.stringify(userAuthentication), 'Authenticate::constructor');
+            this.setState({ isAuthenticated: userAuthentication.isAuthenticated, userName: userAuthentication.userName });
+        });
     }
     render() {
         let content = this.state.isAuthenticated
@@ -29,27 +26,5 @@ export class Authenticate extends React.Component {
             React.createElement("h1", null, "Authentication"),
             content);
     }
-    handleErrors(response) {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response;
-    }
-    getAuthentication() {
-        fetch('api/Authentication/GetAuthentication', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(this.handleErrors)
-            .then(response => response.json())
-            .then(data => {
-            this.setState({ isAuthenticated: data.isAuthenticated, userName: data.userName });
-        });
-    }
-}
-export class AuthenticationData {
 }
 //# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/components/Authenticate.js.map
