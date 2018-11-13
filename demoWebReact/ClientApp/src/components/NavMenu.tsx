@@ -1,22 +1,22 @@
 ﻿import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthenticationState } from '../store/authentication';
+import { isUserAuthenticated } from './GetAuthentication';
 
-interface NavState {
-    hasUserAuthenticated: boolean;
-    userName: string;
-}
-
-export class NavMenu extends React.Component<{}, NavState> {
+export class NavMenu extends React.Component<{}, AuthenticationState> {
     constructor(props) {
         super(props);
-        this.state = { hasUserAuthenticated: true, userName: '' };
-        this.getAuthentication();
+        this.state = { isAuthenticated: true, userName: '' };
+        isUserAuthenticated().then(userAuthentication => {
+            //console.log(JSON.stringify(userAuthentication), 'NavMenu::constructor');
+            this.setState({ isAuthenticated: userAuthentication.isAuthenticated, userName: userAuthentication.userName });
+        });
     }
 
     public render() {
-        var isAuthenticated = this.state.hasUserAuthenticated;
-        let contentMetrics = this.renderMetricsLink(isAuthenticated);
-        let contentDefinitions = this.renderDefinitionsLink(isAuthenticated);
+        var hasUserAuthenticated = this.state.isAuthenticated;
+        let contentMetrics = this.renderMetricsLink(hasUserAuthenticated);
+        let contentDefinitions = this.renderDefinitionsLink(hasUserAuthenticated);
         return <div className='main-nav col-md-8'>
             <div className='navbar navbar-inverse'>
                 <div className='navbar-header'>
@@ -49,28 +49,6 @@ export class NavMenu extends React.Component<{}, NavState> {
         </div>;
     }
 
-    private getAuthentication() {
-        fetch('api/Authentication/GetAuthentication', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(this.handleErrors)
-            .then(response => response.json() as Promise<AuthenticationData>)
-            .then(data => {
-                this.setState({ hasUserAuthenticated: data.isAuthenticated, userName: data.userName });
-            });
-    }
-
-    private handleErrors(response) {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response;
-    }
-
     private renderMetricsLink(isAuthenticated: boolean) {
         return isAuthenticated
             ? <li>
@@ -94,9 +72,4 @@ export class NavMenu extends React.Component<{}, NavState> {
                 <span className='glyphicon glyphicon-th-list'></span> Definitions
                 </li>;
     }
-}
-
-export class AuthenticationData {
-    isAuthenticated: boolean;
-    userName: string;
 }

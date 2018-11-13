@@ -1,15 +1,19 @@
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { isUserAuthenticated } from './GetAuthentication';
 export class NavMenu extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { hasUserAuthenticated: true, userName: '' };
-        this.getAuthentication();
+        this.state = { isAuthenticated: true, userName: '' };
+        isUserAuthenticated().then(userAuthentication => {
+            //console.log(JSON.stringify(userAuthentication), 'NavMenu::constructor');
+            this.setState({ isAuthenticated: userAuthentication.isAuthenticated, userName: userAuthentication.userName });
+        });
     }
     render() {
-        var isAuthenticated = this.state.hasUserAuthenticated;
-        let contentMetrics = this.renderMetricsLink(isAuthenticated);
-        let contentDefinitions = this.renderDefinitionsLink(isAuthenticated);
+        var hasUserAuthenticated = this.state.isAuthenticated;
+        let contentMetrics = this.renderMetricsLink(hasUserAuthenticated);
+        let contentDefinitions = this.renderDefinitionsLink(hasUserAuthenticated);
         return React.createElement("div", { className: 'main-nav col-md-8' },
             React.createElement("div", { className: 'navbar navbar-inverse' },
                 React.createElement("div", { className: 'navbar-header' },
@@ -33,26 +37,6 @@ export class NavMenu extends React.Component {
                                 React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
                                 " Authentication"))))));
     }
-    getAuthentication() {
-        fetch('api/Authentication/GetAuthentication', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(this.handleErrors)
-            .then(response => response.json())
-            .then(data => {
-            this.setState({ hasUserAuthenticated: data.isAuthenticated, userName: data.userName });
-        });
-    }
-    handleErrors(response) {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response;
-    }
     renderMetricsLink(isAuthenticated) {
         return isAuthenticated
             ? React.createElement("li", null,
@@ -73,7 +57,5 @@ export class NavMenu extends React.Component {
                 React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
                 " Definitions");
     }
-}
-export class AuthenticationData {
 }
 //# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/components/NavMenu.js.map
