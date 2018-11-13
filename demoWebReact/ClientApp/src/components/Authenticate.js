@@ -5,7 +5,7 @@ export class Authenticate extends React.Component {
         super(props);
         this.state = { isAuthenticated: false, userName: '' };
         isUserAuthenticated().then(userAuthentication => {
-            console.log(JSON.stringify(userAuthentication), 'Authenticate::constructor');
+            //console.log(JSON.stringify(userAuthentication), 'Authenticate::constructor');
             this.setState({ isAuthenticated: userAuthentication.isAuthenticated, userName: userAuthentication.userName });
         });
     }

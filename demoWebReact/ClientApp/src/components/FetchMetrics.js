@@ -8,6 +8,7 @@ export class FetchMetrics extends React.Component {
             oldPageSize: 10,
             pageNumber: 1,
             applicationFilter: '',
+            oldApplicationFilter: '',
             recordCount: 0,
             metricList: []
         };
@@ -15,6 +16,7 @@ export class FetchMetrics extends React.Component {
         this.onChangeApplicationFilter = this.onChangeApplicationFilter.bind(this);
         this.onChangePageNumber = this.onChangePageNumber.bind(this);
         this.onChangePageSize = this.onChangePageSize.bind(this);
+        this.onLeaveApplicationFilter = this.onLeaveApplicationFilter.bind(this);
         this.onLeavePageSize = this.onLeavePageSize.bind(this);
         this.getMetrics();
     }
@@ -67,22 +69,8 @@ export class FetchMetrics extends React.Component {
         const data = new FormData(event.target);
         this.getMetrics();
     }
-    onChangePageSize(event) {
-        if (event.target.value < 1) {
-            this.setState({ pageSize: 10 });
-        }
-        else {
-            this.setState({ pageSize: event.target.value });
-        }
-    }
-    onLeavePageSize(event) {
-        console.log(event.target.value);
-        if (this.state.pageSize === this.state.oldPageSize) {
-            return;
-        }
-        this.setState({ oldPageSize: this.state.pageSize });
-        this.getMetrics();
-        this.forceUpdate();
+    onChangeApplicationFilter(event) {
+        this.setState({ applicationFilter: event.target.value });
     }
     onChangePageNumber(event) {
         if (event.target.value < 1) {
@@ -94,8 +82,31 @@ export class FetchMetrics extends React.Component {
         this.getMetrics();
         this.forceUpdate();
     }
-    onChangeApplicationFilter(event) {
-        this.setState({ applicationFilter: event.target.value });
+    onChangePageSize(event) {
+        if (event.target.value < 1) {
+            this.setState({ pageSize: 10 });
+        }
+        else {
+            this.setState({ pageSize: event.target.value });
+        }
+    }
+    onLeaveApplicationFilter(event) {
+        console.log(event.target.value);
+        if (this.state.applicationFilter === this.state.oldApplicationFilter) {
+            return;
+        }
+        this.setState({ oldApplicationFilter: this.state.applicationFilter });
+        this.getMetrics();
+        this.forceUpdate();
+    }
+    onLeavePageSize(event) {
+        console.log(event.target.value);
+        if (this.state.pageSize === this.state.oldPageSize) {
+            return;
+        }
+        this.setState({ oldPageSize: this.state.pageSize });
+        this.getMetrics();
+        this.forceUpdate();
     }
     renderQueryForm() {
         return React.createElement("div", null,
@@ -103,7 +114,7 @@ export class FetchMetrics extends React.Component {
                 React.createElement("div", { className: "form-group row" },
                     React.createElement("div", { className: "form-group col-md-4" },
                         React.createElement("label", { className: "control-label" }, "Application Filter"),
-                        React.createElement("input", { className: "form-control", name: "applicationFilter", value: this.state.applicationFilter, onChange: this.onChangeApplicationFilter })),
+                        React.createElement("input", { className: "form-control", name: "applicationFilter", value: this.state.applicationFilter, onChange: this.onChangeApplicationFilter, onBlur: this.onLeaveApplicationFilter })),
                     React.createElement("div", { className: "form-group col-md-2" },
                         React.createElement("label", { className: "control-label" }, "Page Number"),
                         React.createElement("input", { className: "form-control", name: "pageNumber", type: "number", value: this.state.pageNumber, onChange: this.onChangePageNumber })),

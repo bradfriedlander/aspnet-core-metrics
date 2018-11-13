@@ -1,7 +1,7 @@
 ﻿import { AuthenticationState } from '../store/authentication';
 
 export async function isUserAuthenticated(): Promise<AuthenticationState> {
-    var xxx = new AuthenticationState();
+    var authenticationState = new AuthenticationState();
     return await fetch('api/Authentication/GetAuthentication', {
         method: 'GET',
         headers: {
@@ -12,11 +12,10 @@ export async function isUserAuthenticated(): Promise<AuthenticationState> {
         .then(handleErrors)
         .then(response => response.json() as Promise<AuthenticationState>)
         .then(data => {
-            console.log(JSON.stringify(data), 'GetAuthentication::isUserAuthenticated');
-            //this.setState({ isAuthenticated: data.isAuthenticated, userName: data.userName });
-            xxx.isAuthenticated = data.isAuthenticated;
-            xxx.userName = data.userName;
-            return xxx;
+            //console.log(JSON.stringify(data), 'GetAuthentication::isUserAuthenticated');
+            authenticationState.isAuthenticated = data.isAuthenticated;
+            authenticationState.userName = data.userName;
+            return authenticationState;
         })
         .catch(error => {
             console.log(error, 'GetAuthentication::isUserAuthenticated');
