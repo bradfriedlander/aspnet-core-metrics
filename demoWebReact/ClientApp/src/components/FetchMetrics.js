@@ -2,6 +2,7 @@ import * as React from 'react';
 export class FetchMetrics extends React.Component {
     constructor(props) {
         super(props);
+        //uniqueId.enableUniqueIds(this);
         this.state = {
             loading: true,
             pageSize: 10,
@@ -113,8 +114,8 @@ export class FetchMetrics extends React.Component {
             React.createElement("form", { onSubmit: this.handleQuery },
                 React.createElement("div", { className: "form-group row" },
                     React.createElement("div", { className: "form-group col-md-4" },
-                        React.createElement("label", { className: "control-label" }, "Application Filter"),
-                        React.createElement("input", { className: "form-control", name: "applicationFilter", value: this.state.applicationFilter, onChange: this.onChangeApplicationFilter, onBlur: this.onLeaveApplicationFilter })),
+                        React.createElement("label", { htmlFor: "id-1", className: "control-label" }, "Application Filter"),
+                        React.createElement("input", { id: "id-1", className: "form-control", name: "applicationFilter", value: this.state.applicationFilter, onChange: this.onChangeApplicationFilter, onBlur: this.onLeaveApplicationFilter })),
                     React.createElement("div", { className: "form-group col-md-2" },
                         React.createElement("label", { className: "control-label" }, "Page Number"),
                         React.createElement("input", { className: "form-control", name: "pageNumber", type: "number", value: this.state.pageNumber, onChange: this.onChangePageNumber })),
