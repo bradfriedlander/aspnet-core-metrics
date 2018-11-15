@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+//import { uniqueId } from 'react-html-id';
 
 interface FetchMetricsDataState {
     metricList: MetricData[];
@@ -15,6 +16,7 @@ interface FetchMetricsDataState {
 export class FetchMetrics extends React.Component<RouteComponentProps<{}>, FetchMetricsDataState> {
     constructor(props) {
         super(props);
+        //uniqueId.enableUniqueIds(this);
         this.state = {
             loading: true,
             pageSize: 10,
@@ -134,16 +136,21 @@ export class FetchMetrics extends React.Component<RouteComponentProps<{}>, Fetch
             <form onSubmit={this.handleQuery} >
                 <div className="form-group row">
                     <div className="form-group col-md-4">
-                        <label className="control-label">Application Filter</label>
-                        <input className="form-control" name="applicationFilter" value={this.state.applicationFilter} onChange={this.onChangeApplicationFilter} onBlur={this.onLeaveApplicationFilter} />
+                        <label htmlFor="id-1" className="control-label">Application Filter</label>
+                        <input id="id-1" className="form-control" name="applicationFilter" value={this.state.applicationFilter}
+                            onChange={this.onChangeApplicationFilter}
+                            onBlur={this.onLeaveApplicationFilter} />
                     </div>
                     <div className="form-group col-md-2">
                         <label className="control-label">Page Number</label>
-                        <input className="form-control" name="pageNumber" type="number" value={this.state.pageNumber} onChange={this.onChangePageNumber} />
+                        <input className="form-control" name="pageNumber" type="number" value={this.state.pageNumber}
+                            onChange={this.onChangePageNumber} />
                     </div>
                     <div className="form-group col-md-2">
                         <label className="control-label">Page Size</label>
-                        <input className="form-control" name="pageSize" type="number" value={this.state.pageSize} onChange={this.onChangePageSize} onBlur={this.onLeavePageSize} />
+                        <input className="form-control" name="pageSize" type="number" value={this.state.pageSize}
+                            onChange={this.onChangePageSize}
+                            onBlur={this.onLeavePageSize} />
                     </div>
                     <div className="form-group col-md-2">
                         <button type="submit" className="btn btn-default">Apply Filter</button>
