@@ -1,9 +1,10 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
+import { DefinitionModel } from '../models/DefinitionModel';
 
 interface FetchDefinitionDataState {
-    definitionList: DefinitionData[];
+    definitionList: DefinitionModel[];
     loading: boolean;
 }
 
@@ -34,13 +35,13 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
     private getAll() {
         fetch('api/Definitions/GetAll')
             .then(this.handleErrors)
-            .then(response => response.json() as Promise<DefinitionData[]>)
+            .then(response => response.json() as Promise<DefinitionModel[]>)
             .then(data => {
                 this.setState({ definitionList: data, loading: false });
             });
     }
 
-    private handleDelete(definition: DefinitionData) {
+    private handleDelete(definition: DefinitionModel) {
         fetch('api/Definitions/Delete/', {
             method: 'DELETE',
             headers: {
@@ -50,7 +51,7 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
             body: JSON.stringify(definition)
         })
             .then(this.handleErrors)
-            .then(response => response.json() as Promise<DefinitionData>)
+            .then(response => response.json() as Promise<DefinitionModel>)
             .then(data => this.getAll());
     }
 
@@ -65,7 +66,7 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
         return response;
     }
 
-    private handleUndelete(definition: DefinitionData) {
+    private handleUndelete(definition: DefinitionModel) {
         fetch('api/Definitions/Undelete/', {
             method: 'PUT',
             headers: {
@@ -75,11 +76,11 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
             body: JSON.stringify(definition)
         })
             .then(this.handleErrors)
-            .then(response => response.json() as Promise<DefinitionData>)
+            .then(response => response.json() as Promise<DefinitionModel>)
             .then(data => this.getAll());
     }
 
-    private renderEmployeeTable(definitionList: DefinitionData[]) {
+    private renderEmployeeTable(definitionList: DefinitionModel[]) {
         return <table className='table'>
             <thead>
                 <tr>
@@ -106,7 +107,7 @@ export class FetchDefinition extends React.Component<RouteComponentProps<{}>, Fe
         </table>;
     }
 
-    private renderDeleteLink(definition: DefinitionData) {
+    private renderDeleteLink(definition: DefinitionModel) {
         return definition.isDeleted
             ? <a className="action" onClick={(id) => this.handleUndelete(definition)}>Undelete</a>
             : <a className="action" onClick={(id) => this.handleDelete(definition)}>Delete</a>

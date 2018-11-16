@@ -1,6 +1,6 @@
 ﻿namespace demoWebReact.Models
 {
-    public class Authentication
+    public class AuthenticationModel
     {
         public bool IsAuthenticated { get; set; }
 

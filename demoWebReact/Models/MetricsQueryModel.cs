@@ -5,7 +5,7 @@ namespace demoWebReact.Models
     /// <summary>
     ///     This is the input class for the APIs of the Metric controller.
     /// </summary>
-    public class MetricsQuery
+    public class MetricsQueryModel
     {
         /// <summary>
         ///     Gets or sets the application name filter.

@@ -31,7 +31,7 @@ namespace demoWebReact.Controllers
             baseUri = options.Value.BaseUrl;
         }
 
-        private static List<Definition> definitions;
+        private static List<DefinitionModel> definitions;
 
         /// <summary>
         ///     This is the logger instance for this controller.
@@ -45,7 +45,7 @@ namespace demoWebReact.Controllers
 
         [HttpPost("Create")]
         [MetricDetails(Source = "newDefinition")]
-        public async Task<ActionResult<Definition>> Create(Definition newDefinition)
+        public async Task<ActionResult<DefinitionModel>> Create(DefinitionModel newDefinition)
         {
             if (!ModelState.IsValid)
             {
@@ -62,7 +62,7 @@ namespace demoWebReact.Controllers
                     ModelState.AddModelError("", $"Could not create new definition, status code: '{response.StatusCode}'.");
                     return BadRequest(newDefinition);
                 }
-                var result = response.ContentAsType<Definition>();
+                var result = response.ContentAsType<DefinitionModel>();
                 _metric.ResultCount = 1;
                 return Ok(result);
             }
@@ -75,7 +75,7 @@ namespace demoWebReact.Controllers
 
         [HttpDelete("Delete")]
         [MetricDetails(Source = "definition")]
-        public async Task<ActionResult<Definition>> Delete(Definition definition)
+        public async Task<ActionResult<DefinitionModel>> Delete(DefinitionModel definition)
         {
             if (!ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace demoWebReact.Controllers
                     ModelState.AddModelError("", $"Could not delete definition {definition.DefinitionId}, status code: '{response.StatusCode}'.");
                     return NotFound(definition);
                 }
-                var result = response.ContentAsType<Definition>();
+                var result = response.ContentAsType<DefinitionModel>();
                 _metric.ResultCount = 1;
                 return Ok(result);
             }
@@ -110,7 +110,7 @@ namespace demoWebReact.Controllers
         /// <remarks>GET api/[controller]/Details/{id}</remarks>
         [HttpGet("Details/{id}")]
         [MetricDetails(Source = "id")]
-        public async Task<ActionResult<Definition>> Details(int id)
+        public async Task<ActionResult<DefinitionModel>> Details(int id)
         {
             var requestUri = $"{baseUri}/{id}";
             var response = await HttpRequestFactory.Get(requestUri);
@@ -120,7 +120,7 @@ namespace demoWebReact.Controllers
                 ModelState.AddModelError("", $"Could not get definition {id}, status code: '{response.StatusCode}'.");
                 return NotFound(id);
             }
-            var results = response.ContentAsType<Definition>();
+            var results = response.ContentAsType<DefinitionModel>();
             _metric.ResultCount = 1;
             return Ok(results);
         }
@@ -132,7 +132,7 @@ namespace demoWebReact.Controllers
         /// <remarks>GET api/[controller]/Get</remarks>
         [HttpGet("Get")]
         [MetricDetails(Source = "definition")]
-        public async Task<ActionResult<List<Definition>>> Get()
+        public async Task<ActionResult<List<DefinitionModel>>> Get()
         {
             var requestUri = $"{baseUri}/Get";
             var response = await HttpRequestFactory.Get(requestUri);
@@ -142,7 +142,7 @@ namespace demoWebReact.Controllers
                 ModelState.AddModelError("", $"Could not retrieve definitions, status code: '{response.StatusCode}'.");
                 return BadRequest(definitions);
             }
-            definitions = response.ContentAsType<List<Definition>>();
+            definitions = response.ContentAsType<List<DefinitionModel>>();
             _metric.ResultCount = definitions.Count;
             return Ok(definitions);
         }
@@ -150,10 +150,10 @@ namespace demoWebReact.Controllers
         /// <summary>
         ///     This retrieves all records, including logically deleted records, in the persistence store.
         /// </summary>
-        /// <returns>This is the current list of <see cref="Definition" />.</returns>
+        /// <returns>This is the current list of <see cref="DefinitionModel" />.</returns>
         /// <remarks>GET api/[controller]/GetAll</remarks>
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<Definition>>> GetAll()
+        public async Task<ActionResult<List<DefinitionModel>>> GetAll()
         {
             var requestUri = $"{baseUri}/GetAll";
             var response = await HttpRequestFactory.Get(requestUri);
@@ -163,14 +163,14 @@ namespace demoWebReact.Controllers
                 ModelState.AddModelError("", $"Could not retrieve definitions, status code: '{response.StatusCode}'.");
                 return BadRequest(definitions);
             }
-            definitions = response.ContentAsType<List<Definition>>();
+            definitions = response.ContentAsType<List<DefinitionModel>>();
             _metric.ResultCount = definitions.Count;
             return Ok(definitions);
         }
 
         [HttpPut("Undelete")]
         [MetricDetails(Source = "definition")]
-        public async Task<ActionResult<Definition>> Undelete(Definition definition)
+        public async Task<ActionResult<DefinitionModel>> Undelete(DefinitionModel definition)
         {
             if (!ModelState.IsValid)
             {
@@ -186,7 +186,7 @@ namespace demoWebReact.Controllers
                     ModelState.AddModelError("", $"Could not undelete definition {definition.DefinitionId}, status code: '{response.StatusCode}'.");
                     return BadRequest(definition);
                 }
-                var results = response.ContentAsType<Definition>();
+                var results = response.ContentAsType<DefinitionModel>();
                 _metric.ResultCount = 1;
                 return Ok(results);
             }
@@ -199,7 +199,7 @@ namespace demoWebReact.Controllers
 
         [HttpPut("Update")]
         [MetricDetails(Source = "definition")]
-        public async Task<ActionResult<Definition>> Update(Definition definition)
+        public async Task<ActionResult<DefinitionModel>> Update(DefinitionModel definition)
         {
             try
             {
@@ -215,7 +215,7 @@ namespace demoWebReact.Controllers
                     ModelState.AddModelError("", $"Could not edit definition {definition.DefinitionId}, status code: '{response.StatusCode}'.");
                     return BadRequest(definition);
                 }
-                var results = response.ContentAsType<Definition>();
+                var results = response.ContentAsType<DefinitionModel>();
                 _metric.ResultCount = 1;
                 return Ok(results);
             }

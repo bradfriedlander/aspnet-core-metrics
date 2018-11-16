@@ -18,7 +18,7 @@ namespace demoWebReact.Controllers
         public IActionResult GetAuthentication()
         {
             var userName = ControllerContext.HttpContext.User.Identity.Name ?? "";
-            var results = new Authentication { IsAuthenticated = !string.IsNullOrEmpty(userName), UserName = userName };
+            var results = new AuthenticationModel { IsAuthenticated = !string.IsNullOrEmpty(userName), UserName = userName };
             _metric.Details = JsonConvert.SerializeObject(results);
             return Ok(results);
         }
