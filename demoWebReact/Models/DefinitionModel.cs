@@ -5,7 +5,7 @@ namespace demoWebReact.Models
     /// <summary>
     ///     This is the view model for the retrieved definitions.
     /// </summary>
-    public class Definition
+    public class DefinitionModel
     {
         /// <summary>
         ///     Gets or sets the definition identifier.

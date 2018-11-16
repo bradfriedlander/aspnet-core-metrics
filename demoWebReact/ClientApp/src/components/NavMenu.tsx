@@ -8,7 +8,6 @@ export class NavMenu extends React.Component<{}, AuthenticationState> {
         super(props);
         this.state = { isAuthenticated: true, userName: '' };
         isUserAuthenticated().then(userAuthentication => {
-            //console.log(JSON.stringify(userAuthentication), 'NavMenu::constructor');
             this.setState({ isAuthenticated: userAuthentication.isAuthenticated, userName: userAuthentication.userName });
         });
     }
@@ -56,9 +55,7 @@ export class NavMenu extends React.Component<{}, AuthenticationState> {
                     <span className='glyphicon glyphicon-th-list'></span> Metrics
                             </NavLink>
             </li>
-            : <li>
-                <span className='glyphicon glyphicon-th-list'></span> Metrics
-                </li>;
+            : null;
     }
 
     private renderDefinitionsLink(isAuthenticated: boolean) {
@@ -68,8 +65,6 @@ export class NavMenu extends React.Component<{}, AuthenticationState> {
                     <span className='glyphicon glyphicon-th-list'></span> Definitions
                             </NavLink>
             </li>
-            : <li>
-                <span className='glyphicon glyphicon-th-list'></span> Definitions
-                </li>;
-    }
+             : null;
+   }
 }

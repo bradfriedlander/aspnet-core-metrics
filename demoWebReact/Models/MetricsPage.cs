@@ -8,7 +8,7 @@ namespace demoWebReact.Models
     ///     This is the view model for Admin Index.
     /// </summary>
     /// <seealso cref="AdminIndexInput" />
-    public class MetricsPage : MetricsQuery
+    public class MetricsPage : MetricsQueryModel
     {
         /// <summary>
         ///     Gets or sets the metrics.

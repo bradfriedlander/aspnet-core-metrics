@@ -24,7 +24,7 @@ namespace demoWebReact.Controllers
 
         [HttpPost("Get")]
         [MetricDetails(Source = "query")]
-        public async Task<ActionResult<MetricsPage>> Get([FromBody]MetricsQuery query)
+        public async Task<ActionResult<MetricsPage>> Get([FromBody]MetricsQueryModel query)
         {
             var metricsPage = new MetricsPage
             {
