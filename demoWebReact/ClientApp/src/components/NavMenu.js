@@ -6,7 +6,6 @@ export class NavMenu extends React.Component {
         super(props);
         this.state = { isAuthenticated: true, userName: '' };
         isUserAuthenticated().then(userAuthentication => {
-            //console.log(JSON.stringify(userAuthentication), 'NavMenu::constructor');
             this.setState({ isAuthenticated: userAuthentication.isAuthenticated, userName: userAuthentication.userName });
         });
     }
@@ -43,9 +42,7 @@ export class NavMenu extends React.Component {
                 React.createElement(NavLink, { to: '/fetchmetrics', activeClassName: 'active' },
                     React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
                     " Metrics"))
-            : React.createElement("li", null,
-                React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
-                " Metrics");
+            : null;
     }
     renderDefinitionsLink(isAuthenticated) {
         return isAuthenticated
@@ -53,9 +50,7 @@ export class NavMenu extends React.Component {
                 React.createElement(NavLink, { to: '/fetchdefinition', activeClassName: 'active' },
                     React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
                     " Definitions"))
-            : React.createElement("li", null,
-                React.createElement("span", { className: 'glyphicon glyphicon-th-list' }),
-                " Definitions");
+            : null;
     }
 }
 //# sourceMappingURL=C:/MagenicDev/aspnet-core-metrics/demoWebReact/ClientApp/components/NavMenu.js.map
